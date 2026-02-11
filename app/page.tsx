@@ -3,66 +3,86 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <>
-      <section className="hero" style={{paddingTop: '3.6rem'}}>
-        <div className="container hero-grid">
+      <section className="hero" style={{paddingTop: '3.8rem', paddingBottom: '2.2rem'}}>
+        <div className="container hero-grid" style={{alignItems: 'stretch'}}>
           <div className="reveal">
-            <span className="kicker">Local • 7 days/week • Clear diagnostics</span>
-            <h1>Professional device repair — without the runaround.</h1>
-            <p className="lead">Phone, laptop, and tablet repair in Hailey, Idaho. Straight answers, quality parts, and respectful handling of your data.</p>
+            <span className="kicker">Hailey • Wood River Valley • Open 7 days/week</span>
+            <h1 style={{letterSpacing: '-0.02em'}}>What’s broken?</h1>
+            <p className="lead">Pick a device, tell us what it’s doing, and we’ll give you a clear next step. If it’s something simple, try the Tech Helper first.</p>
 
-            <div className="hero-actions">
+            <div className="quick-grid" style={{marginTop: '1rem'}}>
+              <Link className="quick-tile" href="/contact">
+                <strong>Phone repair</strong>
+                <span>Screens • batteries • charging • troubleshooting</span>
+              </Link>
+              <Link className="quick-tile" href="/contact">
+                <strong>Laptop help</strong>
+                <span>Slow device • OS issues • IT support • data help</span>
+              </Link>
+              <Link className="quick-tile" href="/contact">
+                <strong>Tablet & accessories</strong>
+                <span>iPads/tablets • setup • small fixes</span>
+              </Link>
+            </div>
+
+            <div className="hero-actions" style={{marginTop: '1.25rem'}}>
               <Link className="btn btn-primary" href="/contact">Request a repair</Link>
-              <Link className="btn" href="/chat">Tech Helper</Link>
-              <a className="btn" href="#services">Services</a>
+              <Link className="btn" href="/chat">Try Tech Helper</Link>
+              <a className="btn" href="#how">How it works</a>
             </div>
 
             <div className="badges" aria-label="Service highlights">
-              <span className="badge">Fast, honest quotes</span>
+              <span className="badge">Straight answers</span>
               <span className="badge">Quality parts</span>
-              <span className="badge">One device at a time</span>
               <span className="badge">Privacy-respectful</span>
+              <span className="badge">Local, responsive</span>
             </div>
           </div>
 
-          <aside className="hero-card reveal" aria-label="Quick info">
-            <h2>Quick Contact</h2>
-            <p style={{marginBottom: '0.75rem'}}>Tell us your device model and what’s happening. We’ll reply with next steps.</p>
+          <aside className="hero-card reveal" aria-label="Quick info" style={{padding: '1.25rem'}}>
+            <h2 style={{marginTop: 0}}>Fast contact</h2>
+            <p style={{marginBottom: '0.75rem'}}>If you’d rather talk to a human, call/text or email.</p>
             <div className="meta">
               <div className="meta-row"><strong>Phone</strong><span><a href="tel:+12084503730">(208) 450-3730</a></span></div>
               <div className="meta-row"><strong>Email</strong><span><a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a></span></div>
               <div className="meta-row"><strong>Hours</strong><span>Open 7 days/week</span></div>
-              <div className="meta-row"><strong>Service area</strong><span>Hailey • Ketchum • Sun Valley • Bellevue</span></div>
+              <div className="meta-row"><strong>Area</strong><span>Hailey • Ketchum • Sun Valley • Bellevue</span></div>
             </div>
-            <div className="hero-actions" style={{marginTop: '0.9rem'}}>
-              <a className="btn" href="tel:+12084503730">Call now</a>
-              <Link className="btn" href="/faq">FAQ</Link>
+            <div className="hero-actions" style={{marginTop: '0.95rem'}}>
+              <a className="btn" href="tel:+12084503730">Call</a>
+              <a className="btn" href="mailto:samuel@haileyrepair.com">Email</a>
+            </div>
+
+            <div className="card" style={{marginTop: '1rem', padding: '1rem', background: 'rgba(14,165,233,0.06)', borderColor: 'rgba(14,165,233,0.18)'}}>
+              <h3 style={{margin: 0, fontSize: '1.05rem'}}>Quick tip for faster quotes</h3>
+              <p style={{margin: '0.35rem 0 0', color: 'var(--muted)'}}>Include your device model and what happened. If data recovery is the priority, say that up front.</p>
             </div>
           </aside>
         </div>
       </section>
 
-      <section id="services" className="section">
+      <section id="how" className="section" style={{paddingTop: '1.0rem'}}>
         <div className="container">
           <div className="section-title reveal">
-            <h2>Services</h2>
-            <p>Common repairs and tech help — if you’re unsure, ask. We’ll tell you what’s worth fixing.</p>
+            <h2>How it works</h2>
+            <p>Simple, transparent, and focused on doing it right the first time.</p>
           </div>
 
           <div className="grid-3">
             <article className="card step reveal">
-              <div className="num" aria-hidden="true">⚡</div>
-              <h3>Phones</h3>
-              <p>Screens, batteries, charging issues, speaker/mic problems, and troubleshooting.</p>
+              <div className="num" aria-hidden="true">1</div>
+              <h3>Diagnosis</h3>
+              <p>We start with a quick assessment and tell you what’s worth fixing and why.</p>
             </article>
             <article className="card step reveal">
-              <div className="num" aria-hidden="true">🧠</div>
-              <h3>Laptops</h3>
-              <p>Slow device cleanup, battery swaps, OS issues, data help, and general IT support.</p>
+              <div className="num" aria-hidden="true">2</div>
+              <h3>Approval</h3>
+              <p>You get a clear quote and options. No work begins until you say yes.</p>
             </article>
             <article className="card step reveal">
-              <div className="num" aria-hidden="true">🔧</div>
-              <h3>Tablets & accessories</h3>
-              <p>iPads/tablets, setup help, and accessory installation.</p>
+              <div className="num" aria-hidden="true">3</div>
+              <h3>Repair</h3>
+              <p>Quality parts + careful work. One device at a time, no rushed assembly line.</p>
             </article>
           </div>
         </div>
