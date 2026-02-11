@@ -1,52 +1,97 @@
-/* GPT Preview Theme Overrides — accessibility-forward, pro tech aesthetic */
+/* GPT Preview Theme Overrides — Option 2: Tech/Neon Pro (dark, "repair lab" vibe)
+   Goal: look modern/competent without hurting readability for older users.
+*/
 
 :root{
-  /* Slightly higher contrast + less transparency for readability */
   --text: rgba(255,255,255,0.96);
   --muted: rgba(255,255,255,0.82);
   --muted-2: rgba(255,255,255,0.68);
   --line: rgba(255,255,255,0.14);
   --card: rgba(255,255,255,0.055);
+  --card-solid: rgba(9, 20, 36, 0.92);
+
+  --neon: #00e5ff;
+  --neon-2: #00bcd4;
+  --violet: #8b5cf6;
 }
 
 html{ font-size: 17px; }
-body{ line-height: 1.62; }
+body{
+  line-height: 1.62;
+  background:
+    radial-gradient(900px 520px at 12% -10%, rgba(0,229,255,0.22), transparent 55%),
+    radial-gradient(900px 520px at 88% -10%, rgba(139,92,246,0.14), transparent 55%),
+    radial-gradient(900px 520px at 50% 120%, rgba(0,188,212,0.12), transparent 55%),
+    linear-gradient(180deg, #060c16, #081327 35%, #071121);
+}
 
-/* Make header/navigation feel more "business" and easier to click */
+/* Subtle tech grid */
+body:before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.10;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(800px 500px at 50% 0%, black 0%, transparent 70%);
+}
+
+/* Header: more "instrument panel" */
+.site-header{
+  background: rgba(6, 12, 22, 0.72);
+  border-bottom: 1px solid rgba(0,229,255,0.18);
+}
+
+.brand a span{ letter-spacing: 0.10em; }
+
 .nav a{
-  padding: 0.6rem 0.75rem;
-  font-weight: 750;
+  padding: 0.62rem 0.8rem;
+  font-weight: 760;
   font-size: 1.02rem;
 }
 
-/* Primary CTA buttons: larger targets */
+/* Buttons: neon highlight */
 .btn{
-  padding: 0.72rem 1.0rem;
+  padding: 0.74rem 1.02rem;
   border-radius: 999px;
   font-size: 1.02rem;
+  border-color: rgba(255,255,255,0.16);
 }
 
 .btn-primary{
-  background: linear-gradient(135deg, rgba(0,188,212,0.95), rgba(91,231,255,0.38));
+  background: linear-gradient(135deg, rgba(0,229,255,0.95), rgba(0,188,212,0.18));
+  border: 1px solid rgba(0,229,255,0.45);
+  color: #03121a;
 }
 
 /* Tech Helper pill in nav: extra emphasis */
 .nav a.nav-pill{
-  background: rgba(0,188,212,0.22);
-  border: 1px solid rgba(0,188,212,0.55);
-  box-shadow: 0 12px 22px rgba(0,188,212,0.14);
+  background: rgba(0,229,255,0.14);
+  border: 1px solid rgba(0,229,255,0.55);
+  box-shadow: 0 14px 26px rgba(0,229,255,0.10);
   font-size: 1.05rem;
 }
 
-/* Ensure sections don't rely on JS reveals (always visible) */
+/* Cards: slightly more solid / premium */
+.card, .hero-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border-color: rgba(255,255,255,0.14);
+}
+
+.callout{
+  background: linear-gradient(180deg, rgba(0,229,255,0.10), rgba(255,255,255,0.02));
+  border-color: rgba(0,229,255,0.22);
+}
+
+/* Ensure sections don't rely on JS reveals */
 .reveal{ opacity: 1; transform: none; }
 
-/* Improve focus rings for keyboard users */
-:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(0,188,212,0.30); border-radius: 12px; }
+:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(0,229,255,0.30); border-radius: 12px; }
 
-/* Mobile: keep CTAs readable */
 @media (max-width: 760px){
-  html{ font-size: 17px; }
   .header-inner{ gap: 0.9rem; }
   .header-cta .btn{ padding: 0.62rem 0.85rem; }
 }
