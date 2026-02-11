@@ -3,36 +3,17 @@ import Link from 'next/link'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Phone & Laptop Repair Hailey ID | Hailey Device Repair',
-  description: 'Hailey Device Repair provides honest phone, laptop, and tablet repairs in Hailey, Idaho and the Wood River Valley. Clear diagnostics, quality parts, and hassle-free hand-off.',
+  title: 'Hailey Device Repair | Phone, Laptop, Tablet Repair',
+  description: 'Professional phone, laptop, and tablet repair in Hailey, Idaho. Clear diagnostics, quality parts, and respectful service across the Wood River Valley.',
   metadataBase: new URL('https://haileyrepair.com'),
-  openGraph: {
-    type: 'website',
-    siteName: 'Hailey Device Repair',
-    title: 'Honest Repairs Done Right The First Time | Hailey Device Repair',
-    description: 'Phone, laptop, and tablet repair in Hailey, ID serving the Wood River Valley.',
-  },
-  icons: {
-    icon: [
-      { url: '/assets/favicon-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/assets/favicon-16.png', sizes: '16x16', type: 'image/png' },
-    ],
-    apple: '/assets/apple-touch-icon.png',
-  },
-  themeColor: '#0a1628',
+  themeColor: '#ffffff',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        {/* cache-bust stylesheets so updates propagate immediately */}
-        <link rel="stylesheet" href="/css/style.css?v=2026-02-11" />
-        <link rel="stylesheet" href="/css/gpt-theme.css?v=2026-02-11a" />
+        <link rel="stylesheet" href="/css/rebuild.css?v=2026-02-11b" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -66,14 +47,14 @@ export default function RootLayout({
       <body>
         <a className="skip-link" href="#main">Skip to content</a>
 
-        <header className="site-header">
+        <header className="header">
           <div className="container header-inner">
             <div className="brand">
-              <Link href="/" aria-label="Hailey Device Repair home">
-                <img className="brand-logo" src="/assets/logo-transparent.png" alt="Hailey Device Repair logo" />
-                <span>HAILEY DEVICE REPAIR</span>
-              </Link>
-              <small>Phone • Laptop • Tablet Repair — Wood River Valley</small>
+              <img className="brand-logo" src="/assets/logo-transparent.png" alt="Hailey Device Repair" />
+              <div>
+                <div className="brand-title">HAILEY DEVICE REPAIR</div>
+                <div className="brand-sub">Phone • Laptop • Tablet — Wood River Valley</div>
+              </div>
             </div>
 
             <nav className="nav" aria-label="Primary">
@@ -81,45 +62,44 @@ export default function RootLayout({
               <Link href="/about">About</Link>
               <Link href="/contact">Contact</Link>
               <Link href="/faq">FAQ</Link>
-              <Link href="/guide">Repair Guide</Link>
-              <Link className="nav-pill" href="/chat">Tech Helper</Link>
+              <Link href="/guide">Guide</Link>
+              <Link href="/chat">Tech Helper</Link>
             </nav>
 
-            <div className="header-cta">
-              <a className="btn" href="tel:+12084503730">Call</a>
-              <Link className="btn btn-primary" href="/chat">Tech Helper</Link>
+            <div className="cta">
+              <a className="btn btn-ghost" href="tel:+12084503730">Call</a>
+              <Link className="btn btn-primary" href="/contact">Request repair</Link>
+              <Link className="btn" href="/chat">Tech Helper</Link>
             </div>
           </div>
         </header>
 
-        <main id="main">
-          {children}
-        </main>
+        <main id="main">{children}</main>
 
-        <footer className="site-footer">
+        <footer className="footer">
           <div className="container footer-inner">
             <div>
               <h3>Hailey Device Repair</h3>
               <p>Locally owned electronics repair in Hailey, Idaho—serving the Wood River Valley with honesty, discretion, and quality workmanship.</p>
-              <div className="badges" style={{marginTop: '0.75rem'}}>
-                <span className="badge">Open 7 days/week</span>
-                <span className="badge">Hailey, ID</span>
-              </div>
             </div>
             <div>
               <h3>Contact</h3>
-              <p><a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a><br />
-                 <a href="tel:+12084503730">(208) 450-3730</a></p>
+              <p>
+                <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
+                <br />
+                <a href="tel:+12084503730">(208) 450-3730</a>
+              </p>
             </div>
             <div>
-              <h3>Service Area</h3>
-              <p>Hailey • Ketchum • Sun Valley • Bellevue<br />Wood River Valley, Idaho</p>
+              <h3>Service area</h3>
+              <p>Hailey • Ketchum • Sun Valley • Bellevue</p>
             </div>
           </div>
-
           <div className="container footer-bottom">
-            <span>© {new Date().getFullYear()} Hailey Device Repair. All rights reserved.</span>
-            <span><Link href="/faq">FAQ</Link> • <Link href="/contact">Contact</Link> • <Link href="/about">About</Link></span>
+            <span>© {new Date().getFullYear()} Hailey Device Repair</span>
+            <span>
+              <Link href="/faq">FAQ</Link> • <Link href="/contact">Contact</Link> • <Link href="/about">About</Link>
+            </span>
           </div>
         </footer>
       </body>
