@@ -1,0 +1,52 @@
+/* GPT Preview Theme Overrides — accessibility-forward, pro tech aesthetic */
+
+:root{
+  /* Slightly higher contrast + less transparency for readability */
+  --text: rgba(255,255,255,0.96);
+  --muted: rgba(255,255,255,0.82);
+  --muted-2: rgba(255,255,255,0.68);
+  --line: rgba(255,255,255,0.14);
+  --card: rgba(255,255,255,0.055);
+}
+
+html{ font-size: 17px; }
+body{ line-height: 1.62; }
+
+/* Make header/navigation feel more "business" and easier to click */
+.nav a{
+  padding: 0.6rem 0.75rem;
+  font-weight: 750;
+  font-size: 1.02rem;
+}
+
+/* Primary CTA buttons: larger targets */
+.btn{
+  padding: 0.72rem 1.0rem;
+  border-radius: 999px;
+  font-size: 1.02rem;
+}
+
+.btn-primary{
+  background: linear-gradient(135deg, rgba(0,188,212,0.95), rgba(91,231,255,0.38));
+}
+
+/* Tech Helper pill in nav: extra emphasis */
+.nav a.nav-pill{
+  background: rgba(0,188,212,0.22);
+  border: 1px solid rgba(0,188,212,0.55);
+  box-shadow: 0 12px 22px rgba(0,188,212,0.14);
+  font-size: 1.05rem;
+}
+
+/* Ensure sections don't rely on JS reveals (always visible) */
+.reveal{ opacity: 1; transform: none; }
+
+/* Improve focus rings for keyboard users */
+:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(0,188,212,0.30); border-radius: 12px; }
+
+/* Mobile: keep CTAs readable */
+@media (max-width: 760px){
+  html{ font-size: 17px; }
+  .header-inner{ gap: 0.9rem; }
+  .header-cta .btn{ padding: 0.62rem 0.85rem; }
+}
