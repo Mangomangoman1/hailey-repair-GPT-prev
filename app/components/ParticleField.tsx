@@ -31,14 +31,16 @@ export default function ParticleField() {
       canvas.style.height = `${h}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      const count = Math.min(95, Math.max(45, Math.floor((w * h) / 26000)))
+      // ~30% more particles than previous tuning
+      const count = Math.min(124, Math.max(58, Math.floor((w * h) / 20000)))
       dots = Array.from({ length: count }).map(() => ({
         x: Math.random() * w,
         y: Math.random() * h,
         vx: -0.16 + Math.random() * 0.32,
         vy: -0.12 + Math.random() * 0.24,
         r: 0.7 + Math.random() * 1.6,
-        a: 0.08 + Math.random() * 0.2,
+        // brighter particles for better visibility
+        a: 0.14 + Math.random() * 0.28,
       }))
     }
 
@@ -79,9 +81,10 @@ export default function ParticleField() {
           const dx = d.x - mouse.x
           const dy = d.y - mouse.y
           const dist2 = dx * dx + dy * dy
-          if (dist2 < 14000 && dist2 > 0.01) {
-            const strength = reduce ? 0.02 : 0.06
-            const f = (1 - dist2 / 14000) * strength
+          // ~35% larger pointer impact radius
+          if (dist2 < 18900 && dist2 > 0.01) {
+            const strength = reduce ? 0.025 : 0.08
+            const f = (1 - dist2 / 18900) * strength
             d.vx += (dx / Math.sqrt(dist2)) * f
             d.vy += (dy / Math.sqrt(dist2)) * f
           }
