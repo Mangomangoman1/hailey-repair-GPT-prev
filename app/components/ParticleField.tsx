@@ -31,16 +31,16 @@ export default function ParticleField() {
       canvas.style.height = `${h}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      // ~30% more particles than previous tuning
-      const count = Math.min(124, Math.max(58, Math.floor((w * h) / 20000)))
+      // +15% more than the last pass
+      const count = Math.min(142, Math.max(66, Math.floor((w * h) / 17400)))
       dots = Array.from({ length: count }).map(() => ({
         x: Math.random() * w,
         y: Math.random() * h,
         vx: -0.16 + Math.random() * 0.32,
         vy: -0.12 + Math.random() * 0.24,
         r: 0.7 + Math.random() * 1.6,
-        // brighter particles for better visibility
-        a: 0.14 + Math.random() * 0.28,
+        // ~30% brighter than last pass
+        a: 0.18 + Math.random() * 0.36,
       }))
     }
 
