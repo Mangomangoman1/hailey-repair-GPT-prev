@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -8,7 +9,7 @@ export default function Contact() {
     email: '',
     phone: '',
     device: '',
-    message: ''
+    message: '',
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -19,19 +20,15 @@ export default function Contact() {
   }
 
   return (
-    <section className="section" style={{ paddingTop: '2.2rem' }}>
+    <section className="page">
       <div className="container">
-        <div className="hgroup">
-          <div>
-            <h2>Contact</h2>
-            <p>Tell us your device model and what’s happening. We’ll reply with next steps.</p>
-          </div>
-        </div>
+        <h2>Contact</h2>
+        <p className="lead2">Tell us your device model and what’s happening. This form opens your email app—nothing is stored on the website.</p>
 
-        <div className="grid-3" style={{ gridTemplateColumns: '1.2fr 0.8fr 0.8fr' } as any}>
-          <div className="card panel">
-            <h3>Request a repair</h3>
-            <form onSubmit={handleSubmit}>
+        <div className="split">
+          <div className="card">
+            <h3 style={{ marginTop: 0 }}>Request a repair</h3>
+            <form className="form" onSubmit={handleSubmit}>
               <div className="form-grid">
                 <div>
                   <label htmlFor="name">Name</label>
@@ -48,7 +45,9 @@ export default function Contact() {
                 <div>
                   <label htmlFor="device">Device</label>
                   <select id="device" value={formData.device} onChange={(e) => setFormData({ ...formData, device: e.target.value })} required>
-                    <option value="" disabled>Select</option>
+                    <option value="" disabled>
+                      Select
+                    </option>
                     <option>Phone</option>
                     <option>Laptop</option>
                     <option>Tablet</option>
@@ -57,42 +56,60 @@ export default function Contact() {
                   </select>
                 </div>
               </div>
-              <div style={{ marginTop: '0.9rem' }}>
+
+              <div>
                 <label htmlFor="message">What’s happening?</label>
                 <textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} required />
               </div>
-              <div className="form-actions">
-                <button className="btn btn-primary" type="submit">Send</button>
-                <a className="btn" href="tel:+12084503730">Call</a>
-                <a className="btn btn-ghost" href="mailto:samuel@haileyrepair.com">Email</a>
+
+              <div className="actions">
+                <button className="btn btn-primary" type="submit">
+                  Send
+                </button>
+                <a className="btn" href="tel:+12084503730">
+                  Call
+                </a>
+                <Link className="btn btn-ghost" href="/chat">
+                  Tech Helper
+                </Link>
               </div>
-              <div className="note">This form opens your email app — no data is stored on the website.</div>
+
+              <div className="note">No appointment required to start a conversation.</div>
             </form>
           </div>
 
-          <aside className="card panel">
-            <h3>Prefer to talk?</h3>
-            <p>Call or text and we’ll figure out the best next step.</p>
-            <div className="meta">
-              <div className="meta-row"><strong>Phone</strong><span><a href="tel:+12084503730">(208) 450-3730</a></span></div>
-              <div className="meta-row"><strong>Email</strong><span><a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a></span></div>
+          <div>
+            <div className="big">
+              <h3>Fast contact</h3>
+              <p>
+                If you’d rather text/call: <a href="tel:+12084503730">(208) 450-3730</a>
+                <br />
+                Email: <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
+              </p>
+              <div className="badges" style={{ marginTop: '0.85rem' }}>
+                <span className="badge">Exact model</span>
+                <span className="badge">What happened</span>
+                <span className="badge">Power on?</span>
+                <span className="badge">Prior repairs?</span>
+              </div>
+              <div className="actions" style={{ marginTop: '0.95rem' }}>
+                <a className="btn btn-primary" href="tel:+12084503730">
+                  Call now
+                </a>
+                <Link className="btn" href="/chat">
+                  Tech Helper
+                </Link>
+              </div>
             </div>
-            <div className="hero-actions" style={{ marginTop: '0.95rem' }}>
-              <a className="btn btn-primary" href="tel:+12084503730">Call now</a>
-              <a className="btn" href="/chat">Tech Helper</a>
-            </div>
-          </aside>
 
-          <aside className="card panel">
-            <h3>For faster quotes</h3>
-            <p style={{ color: 'var(--muted)' }}>Include:</p>
-            <div className="trustbar">
-              <span className="chip">Device model</span>
-              <span className="chip">What happened</span>
-              <span className="chip">Does it power on?</span>
-              <span className="chip">Any prior repairs?</span>
+            <div className="big" style={{ marginTop: '1rem' }}>
+              <h3>What we’ll ask</h3>
+              <p>Just enough detail to quote accurately and order the right part.</p>
+              <p className="note" style={{ marginTop: '0.6rem' }}>
+                Tip: If your priority is data recovery, say that up front.
+              </p>
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </section>

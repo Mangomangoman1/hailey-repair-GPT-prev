@@ -2,49 +2,39 @@ import Link from 'next/link'
 
 export default function About() {
   return (
-    <>
-      <section className="section" style={{ paddingTop: '2.2rem' }}>
-        <div className="container">
-          <div className="hgroup">
-            <div>
-              <h2>About</h2>
-              <p>Locally owned repair and IT help in Hailey—focused on honesty, quality, and respect for your data.</p>
+    <section className="page">
+      <div className="container">
+        <h2>About</h2>
+        <p className="lead2">
+          Hailey Device Repair is a local repair and tech support shop serving the Wood River Valley. The focus is simple: be clear,
+          be careful, and treat your data with respect.
+        </p>
+
+        <div className="grid3">
+          <article className="card">
+            <h3>What we fix</h3>
+            <p>Phones, laptops, tablets, and accessories — screens, batteries, charging, troubleshooting, and practical IT help.</p>
+            <div className="linkrow">
+              <Link className="btn" href="/contact">Request repair</Link>
+              <Link className="btn btn-ghost" href="/chat">Tech Helper</Link>
             </div>
-          </div>
+          </article>
 
-          <div className="grid-3" style={{ gridTemplateColumns: '1.4fr 0.6fr 0.6fr' } as any}>
-            <article className="card panel">
-              <h3>What we do</h3>
-              <p>
-                Phones, laptops, tablets, accessories — screens, batteries, charging issues, troubleshooting, and practical IT help.
-                Every job starts with a clear diagnosis so you can decide what makes sense.
-              </p>
-              <div className="hero-actions" style={{ marginTop: '1rem' }}>
-                <Link className="btn btn-primary" href="/contact">Request a repair</Link>
-                <Link className="btn" href="/chat">Tech Helper</Link>
-              </div>
-            </article>
+          <article className="card">
+            <h3>How we work</h3>
+            <p>Diagnosis first, then a clear quote. No work starts until you approve. We test before it leaves.</p>
+          </article>
 
-            <aside className="card panel">
-              <h3>Values</h3>
-              <p style={{ marginTop: 0, color: 'var(--muted)' }}>Clear quotes. No pressure. No upsells.</p>
-              <div className="trustbar" style={{ marginTop: '0.8rem' }}>
-                <span className="chip">Honest diagnosis</span>
-                <span className="chip">Quality parts</span>
-                <span className="chip">Respectful service</span>
-              </div>
-            </aside>
-
-            <aside className="card panel">
-              <h3>Service area</h3>
-              <p>Hailey • Ketchum • Sun Valley • Bellevue</p>
-              <p style={{ marginTop: '0.6rem' }}>
-                <a className="btn" href="tel:+12084503730">Call (208) 450‑3730</a>
-              </p>
-            </aside>
-          </div>
+          <article className="card">
+            <h3>Service area</h3>
+            <p>Hailey • Ketchum • Sun Valley • Bellevue</p>
+            <div className="linkrow">
+              <a className="btn" href="tel:+12084503730">Call (208) 450-3730</a>
+              <Link className="btn btn-ghost" href="/faq">FAQ</Link>
+            </div>
+          </article>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

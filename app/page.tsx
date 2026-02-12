@@ -1,67 +1,116 @@
 import Link from 'next/link'
-import Particles from './components/Particles'
 
 export default function Home() {
   return (
     <>
       <section className="hero">
-        <Particles />
-        <div className="container">
-          <div className="hero-center">
-            <span className="kicker">Hailey • Wood River Valley • Open 7 days/week</span>
-            <h1>Honest repairs. Done right.</h1>
+        <div className="container hero-grid">
+          <div>
+            <span className="kicker">Open 7 days/week • Hailey, Idaho • Wood River Valley</span>
+            <h1>
+              Repairs with
+              <br />
+              real answers.
+            </h1>
             <p className="lead">
-              Phone, laptop, and tablet repair in Hailey, Idaho — with clear diagnostics, quality parts, and respectful handling of your data.
+              Phone, laptop, and tablet repair — with straightforward diagnostics, quality parts, and a calm hand-off.
+              No runaround. No pressure.
             </p>
 
-            <div className="hero-actions">
-              <Link className="btn btn-primary" href="/contact">Request a repair</Link>
-              <Link className="btn btn-secondary" href="/chat">Try Tech Helper</Link>
-              <a className="btn" href="#use-cases">Explore services</a>
+            <div className="actions">
+              <Link className="btn btn-primary" href="/contact">
+                Request a repair
+              </Link>
+              <Link className="btn" href="/chat">
+                Try Tech Helper
+              </Link>
+              <a className="btn btn-ghost" href="#services">
+                Explore services
+              </a>
             </div>
 
-            <div className="chips" aria-label="Highlights">
-              <span className="chip">Straight answers</span>
-              <span className="chip">No-pressure quotes</span>
-              <span className="chip">Quality parts</span>
-              <span className="chip">Local + responsive</span>
+            <div className="badges" aria-label="Highlights">
+              <span className="badge">Clear quote before work starts</span>
+              <span className="badge">Privacy-respectful</span>
+              <span className="badge">One device at a time</span>
+              <span className="badge">Quality parts</span>
             </div>
           </div>
+
+          <aside className="hero-card" aria-label="Quick info">
+            <h3>Quick info</h3>
+            <p>For fastest quotes, include the exact model + what happened.</p>
+
+            <div className="meta">
+              <div className="row">
+                <strong>Phone</strong>
+                <span>
+                  <a href="tel:+12084503730">(208) 450-3730</a>
+                </span>
+              </div>
+              <div className="row">
+                <strong>Email</strong>
+                <span>
+                  <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
+                </span>
+              </div>
+              <div className="row">
+                <strong>Service area</strong>
+                <span>Hailey • Ketchum • Sun Valley • Bellevue</span>
+              </div>
+            </div>
+
+            <div className="sig" aria-hidden="true" />
+          </aside>
         </div>
       </section>
 
-      <section id="use-cases" className="section">
+      <section id="services" className="section">
         <div className="container">
           <div className="section-head">
-            <h2>Services</h2>
-            <p>Pick a category. If you’re not sure, start with Tech Helper or send a quick message and we’ll point you in the right direction.</p>
+            <div>
+              <h2>Services</h2>
+              <p>Pick a lane, or just send a message. We’ll give you the most practical next step.</p>
+            </div>
           </div>
 
-          <div className="grid">
+          <div className="grid3">
             <article className="card">
               <h3>Phone repair</h3>
               <p>Screens, batteries, charging issues, speaker/mic problems, and troubleshooting.</p>
-              <div className="hero-actions" style={{ justifyContent: 'flex-start', marginTop: '0.85rem' }}>
-                <Link className="btn btn-secondary" href="/contact">Get a quote</Link>
-                <Link className="btn" href="/chat">Tech Helper</Link>
+              <div className="linkrow">
+                <Link className="btn" href="/contact">
+                  Get a quote
+                </Link>
+                <Link className="btn btn-ghost" href="/faq">
+                  Common questions
+                </Link>
               </div>
             </article>
 
             <article className="card">
               <h3>Laptops + IT help</h3>
-              <p>Slow device cleanup, OS issues, setup help, and practical tech support.</p>
-              <div className="hero-actions" style={{ justifyContent: 'flex-start', marginTop: '0.85rem' }}>
-                <Link className="btn btn-secondary" href="/contact">Request help</Link>
-                <Link className="btn" href="/chat">Tech Helper</Link>
+              <p>Slow devices, OS issues, setup help, and practical tech support.</p>
+              <div className="linkrow">
+                <Link className="btn" href="/chat">
+                  Tech Helper
+                </Link>
+                <Link className="btn btn-ghost" href="/contact">
+                  Request help
+                </Link>
               </div>
             </article>
 
             <article className="card">
               <h3>Tablets & accessories</h3>
-              <p>iPads/tablets, setup, accessories, and smaller fixes.</p>
-              <div className="hero-actions" style={{ justifyContent: 'flex-start', marginTop: '0.85rem' }}>
-                <Link className="btn btn-secondary" href="/contact">Contact</Link>
-                <Link className="btn" href="/faq">FAQ</Link>
+              <p>iPads/tablets, setup, and smaller fixes. If it powers on, we can usually help.</p>
+              <div className="linkrow">
+                <Link className="btn" href="/contact">
+                  Contact
+                </Link>
+                <Link className="btn btn-ghost" href="/guide">
+                  Before you come in
+                </Link>
               </div>
             </article>
           </div>
@@ -71,22 +120,24 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <h2>How it works</h2>
-            <p>A transparent process built for quality and clarity.</p>
+            <div>
+              <h2>How it works</h2>
+              <p>Quality and clarity, end-to-end.</p>
+            </div>
           </div>
 
-          <div className="grid">
+          <div className="grid3">
             <article className="card">
-              <h3>1) Diagnosis</h3>
-              <p>We assess the issue and tell you what’s worth fixing (and what isn’t).</p>
+              <h3>1) Diagnose</h3>
+              <p>We confirm what’s actually happening (and what’s worth fixing).</p>
             </article>
             <article className="card">
-              <h3>2) Approval</h3>
-              <p>You get a clear quote and options. No work begins until you say yes.</p>
+              <h3>2) Quote</h3>
+              <p>You get a clear price and options. No work starts until you approve.</p>
             </article>
             <article className="card">
               <h3>3) Repair</h3>
-              <p>Quality parts + careful work. One device at a time — no assembly line.</p>
+              <p>Careful work with quality parts — and we test before it leaves.</p>
             </article>
           </div>
         </div>
@@ -95,22 +146,37 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="split">
-            <div className="panel">
-              <h3>Not sure what you need?</h3>
-              <p>Try the Tech Helper for fast troubleshooting. If it needs hands-on work, it’ll tell you to call/text Sam.</p>
-              <div className="hero-actions" style={{ justifyContent: 'flex-start' }}>
-                <Link className="btn btn-primary" href="/chat">Open Tech Helper</Link>
-                <a className="btn" href="tel:+12084503730">Call (208) 450‑3730</a>
+            <div className="big">
+              <h3>Not sure it’s worth fixing?</h3>
+              <p>
+                Try Tech Helper for quick troubleshooting. If it needs hands-on service, it’ll point you to the right next step.
+              </p>
+              <div className="actions" style={{ marginTop: '0.95rem' }}>
+                <Link className="btn btn-primary" href="/chat">
+                  Open Tech Helper
+                </Link>
+                <a className="btn" href="tel:+12084503730">
+                  Call (208) 450-3730
+                </a>
               </div>
             </div>
 
-            <div className="panel">
-              <h3>Fast contact</h3>
-              <p>For the quickest quote, include your device model and what happened.</p>
-              <div className="meta">
-                <div className="meta-row"><strong>Phone</strong><span><a href="tel:+12084503730">(208) 450-3730</a></span></div>
-                <div className="meta-row"><strong>Email</strong><span><a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a></span></div>
-                <div className="meta-row"><strong>Area</strong><span>Hailey • Ketchum • Sun Valley • Bellevue</span></div>
+            <div className="big">
+              <h3>Fast quotes</h3>
+              <p>When you contact us, include:</p>
+              <div className="badges" style={{ marginTop: '0.85rem' }}>
+                <span className="badge">Exact model</span>
+                <span className="badge">What happened</span>
+                <span className="badge">Does it power on?</span>
+                <span className="badge">Any prior repairs?</span>
+              </div>
+              <div className="actions" style={{ marginTop: '0.95rem' }}>
+                <Link className="btn" href="/contact">
+                  Request repair
+                </Link>
+                <Link className="btn btn-ghost" href="/faq">
+                  Read FAQ
+                </Link>
               </div>
             </div>
           </div>
