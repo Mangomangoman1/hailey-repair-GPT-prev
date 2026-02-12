@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <section className="section concept concept-a" style={{ paddingTop: '5rem' }}>
         <div className="container">
-          <div className="concept-label">Hailey Device Repair // Console Mode</div>
+          <div className="concept-label">Hailey Device Repair // 7 days a week</div>
           <div className="console-shell">
             <aside className="console-rail">
               <div className="rail-title">repair://hailey</div>
