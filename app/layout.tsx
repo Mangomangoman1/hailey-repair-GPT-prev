@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* Preview/test site: Orbit chassis (fresh start) */}
-        <link rel="stylesheet" href="/css/orbit.css?v=2026-02-12b" />
+        <link rel="stylesheet" href="/css/orbit.css?v=2026-02-12c" />
       </head>
       <body>
         <div className="gridfx" aria-hidden="true" />
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="header">
           <div className="container header-inner">
             <Link className="brand" href="/" aria-label="Hailey Device Repair">
-              <div className="mark" aria-hidden="true" />
+              <img className="mark" src="/assets/hdr-mark.jpg" alt="Hailey Device Repair" />
               <div>
                 <div className="brand-title">Hailey Device Repair</div>
                 <div className="brand-sub">Phones • Laptops • Tablets — Wood River Valley</div>

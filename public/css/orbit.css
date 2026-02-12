@@ -71,11 +71,15 @@ a:hover{ text-decoration: underline; }
 
 .brand{ display:flex; align-items:center; gap: 0.75rem; color: var(--ink); min-width: 14rem; }
 .mark{
-  width: 34px; height: 34px; border-radius: 12px;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.30), rgba(255,255,255,0.05) 60%, transparent 70%),
-              linear-gradient(135deg, rgba(124,255,178,0.95), rgba(122,162,255,0.75));
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow: 0 18px 42px rgba(0,0,0,0.48);
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: rgba(255,255,255,0.06);
 }
 .brand-title{
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
