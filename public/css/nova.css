@@ -46,37 +46,31 @@ a:hover{text-decoration:underline}
   backdrop-filter: blur(8px);
   border-bottom:1px solid rgba(21,25,34,0.04);
 }
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
 
 .brand{display:flex;align-items:center;gap:.72rem;color:var(--ink)}
 .logo{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#2b59ff,#82a2ff);box-shadow:0 8px 18px rgba(43,89,255,.28)}
 .brand-title{
-  font-family: Georgia, 'Times New Roman', serif;
-  letter-spacing:.04em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing:.12em;
   text-transform:uppercase;
-  font-size:.98rem;
-  font-weight:700;
+  font-size:.92rem;
+  font-weight:760;
 }
 .brand-sub{font-size:.82rem;color:var(--muted)}
 
-.nav{display:flex;align-items:center;gap:.2rem}
-.nav a,.menu summary span{color:var(--ink);font-weight:620;padding:.5rem .72rem;border-radius:999px}
-.nav a:hover,.menu details[open] summary span,.menu summary span:hover{background:rgba(21,25,34,0.05);text-decoration:none}
-
-.menu{position:relative}
-.menu summary{list-style:none;cursor:pointer}
-.menu summary::-webkit-details-marker{display:none}
-.panel{
-  position:absolute;top:calc(100% + .45rem);left:0;
-  width:300px;padding:.4rem;border:1px solid var(--line-soft);
-  border-radius:16px;background:#fff;box-shadow:var(--shadow-soft)
+.nav{display:flex;align-items:center;justify-content:center;gap:.15rem;flex:1}
+.nav a{
+  color:var(--ink);
+  font-weight:640;
+  padding:.52rem .68rem;
+  border-radius:999px;
 }
-.item{display:block;padding:.72rem .82rem;border-radius:12px;color:var(--ink)}
-.item:hover{background:var(--accent-soft);text-decoration:none}
-.item strong{display:block}
-.item span{display:block;margin-top:.15rem;color:var(--muted);font-size:.92rem}
+.nav a:hover{background:rgba(21,25,34,0.05);text-decoration:none}
 
-.cta{display:flex;align-items:center;gap:.5rem}
+/* (Dropdowns removed in this iteration for simpler navigation) */
+
+.cta{display:flex;align-items:center;gap:.5rem;justify-content:flex-end}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
   padding:.66rem .95rem;border-radius:999px;border:1px solid var(--line);

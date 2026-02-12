@@ -59,55 +59,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <nav className="nav" aria-label="Primary">
               <Link href="/">Home</Link>
-
-              <div className="menu">
-                <details>
-                  <summary>
-                    <span>
-                      Services <span style={{ opacity: 0.7 }}>▾</span>
-                    </span>
-                  </summary>
-                  <div className="panel" role="menu">
-                    <Link className="item" href="/contact">
-                      <strong>Phone repair</strong>
-                      <span>Screens, batteries, charging, speakers/mics</span>
-                    </Link>
-                    <Link className="item" href="/contact">
-                      <strong>Laptop repair + IT help</strong>
-                      <span>Slow devices, OS issues, setup, data help</span>
-                    </Link>
-                    <Link className="item" href="/contact">
-                      <strong>Tablets & accessories</strong>
-                      <span>iPads/tablets, setup, smaller fixes</span>
-                    </Link>
-                  </div>
-                </details>
-              </div>
-
-              <div className="menu">
-                <details>
-                  <summary>
-                    <span>
-                      Learn <span style={{ opacity: 0.7 }}>▾</span>
-                    </span>
-                  </summary>
-                  <div className="panel" role="menu">
-                    <Link className="item" href="/faq">
-                      <strong>FAQ</strong>
-                      <span>Warranty, timing, pricing, what to expect</span>
-                    </Link>
-                    <Link className="item" href="/guide">
-                      <strong>Before you bring it in</strong>
-                      <span>Backups, model info, and what to tell us</span>
-                    </Link>
-                    <Link className="item" href="/about">
-                      <strong>About</strong>
-                      <span>Local, discreet, and quality-focused</span>
-                    </Link>
-                  </div>
-                </details>
-              </div>
-
+              <Link href="/#services">Services</Link>
+              <Link href="/faq">FAQ</Link>
+              <Link href="/guide">Guide</Link>
+              <Link href="/about">About</Link>
               <Link href="/contact">Contact</Link>
               <Link href="/chat">Tech Helper</Link>
             </nav>
