@@ -72,30 +72,33 @@ export default function ParticleField() {
         }
       }
 
-      if (!reduce) {
-        for (const d of dots) {
-          // pointer influence (very subtle)
-          if (mouse.active) {
-            const dx = d.x - mouse.x
-            const dy = d.y - mouse.y
-            const dist2 = dx * dx + dy * dy
-            if (dist2 < 14000 && dist2 > 0.01) {
-              const f = (1 - dist2 / 14000) * 0.06
-              d.vx += (dx / Math.sqrt(dist2)) * f
-              d.vy += (dy / Math.sqrt(dist2)) * f
-            }
+      for (const d of dots) {
+        // pointer influence (very subtle). If reduced-motion is enabled,
+        // keep pointer effect much lighter.
+        if (mouse.active) {
+          const dx = d.x - mouse.x
+          const dy = d.y - mouse.y
+          const dist2 = dx * dx + dy * dy
+          if (dist2 < 14000 && dist2 > 0.01) {
+            const strength = reduce ? 0.02 : 0.06
+            const f = (1 - dist2 / 14000) * strength
+            d.vx += (dx / Math.sqrt(dist2)) * f
+            d.vy += (dy / Math.sqrt(dist2)) * f
           }
-
-          d.vx *= 0.992
-          d.vy *= 0.992
-          d.x += d.vx
-          d.y += d.vy
-
-          if (d.x < -20) d.x = w + 20
-          if (d.x > w + 20) d.x = -20
-          if (d.y < -20) d.y = h + 20
-          if (d.y > h + 20) d.y = -20
         }
+
+        // keep a tiny ambient drift so particles never fully "freeze"
+        const driftX = reduce ? 0.008 : 0.015
+        const driftY = reduce ? 0.006 : 0.012
+        d.vx = d.vx * 0.998 + (-driftX + Math.random() * (driftX * 2))
+        d.vy = d.vy * 0.998 + (-driftY + Math.random() * (driftY * 2))
+        d.x += d.vx
+        d.y += d.vy
+
+        if (d.x < -20) d.x = w + 20
+        if (d.x > w + 20) d.x = -20
+        if (d.y < -20) d.y = h + 20
+        if (d.y > h + 20) d.y = -20
       }
 
       raf = window.requestAnimationFrame(draw)
