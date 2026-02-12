@@ -11,8 +11,8 @@
   --line: rgba(255,255,255,0.10);
   --line2: rgba(255,255,255,0.07);
 
-  --accent: #7CFFB2; /* electric mint */
-  --accent2:#7aa2ff;
+  --accent: #cbd5e1; /* restrained slate */
+  --accent2:#94a3b8;
   --warn:#ffdd7c;
 
   --radius: 18px;
@@ -101,9 +101,9 @@ a:hover{ text-decoration: underline; }
 .btn:hover{ background: rgba(255,255,255,0.09); text-decoration:none; }
 .btn:focus{ outline:none; box-shadow: var(--focus); }
 .btn-primary{
-  background: linear-gradient(135deg, rgba(124,255,178,0.92), rgba(122,162,255,0.82));
-  color: #071018;
-  border-color: rgba(255,255,255,0.18);
+  background: linear-gradient(135deg, #1f2937, #111827);
+  color: #f8fafc;
+  border-color: rgba(255,255,255,0.14);
 }
 .btn-ghost{ background: transparent; }
 
