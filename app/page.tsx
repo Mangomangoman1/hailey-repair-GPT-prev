@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import FlowLabel from './components/FlowLabel'
 
 export default function Home() {
   return (
@@ -6,7 +7,7 @@ export default function Home() {
       <section className="section concept concept-a" style={{ paddingTop: '5rem' }}>
         <div className="container">
           <div className="concept-label">
-            <span className="flow-label">Hailey Device Repair // 7 days a week</span>
+            <FlowLabel text="Hailey Device Repair // 7 days a week" />
           </div>
           <div className="console-shell">
             <aside className="console-rail">

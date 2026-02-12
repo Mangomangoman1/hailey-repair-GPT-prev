@@ -209,7 +209,7 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: metallicTextShift 2.2s linear infinite;
+  will-change: background-position;
 }
 .concept{ border-top: 1px solid var(--line2); }
 
