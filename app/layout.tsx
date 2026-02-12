@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* Preview/test site: Orbit chassis (fresh start) */}
-        <link rel="stylesheet" href="/css/orbit.css?v=2026-02-12a" />
+        <link rel="stylesheet" href="/css/orbit.css?v=2026-02-12b" />
       </head>
       <body>
         <div className="gridfx" aria-hidden="true" />
@@ -38,20 +38,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="nav" aria-label="Primary">
               <Link href="/">Home</Link>
               <Link href="/#services">Services</Link>
-              <Link href="/#process">Process</Link>
               <Link href="/faq">FAQ</Link>
-              <Link href="/prep">Repair Prep</Link>
               <Link href="/contact">Contact</Link>
+              <Link href="/prep">Repair Prep</Link>
               <Link href="/chat">Tech Helper</Link>
             </nav>
 
             <div className="cta">
-              <a className="btn btn-ghost" href="tel:+12084503730">
-                Call
-              </a>
-              <Link className="btn btn-primary" href="/contact">
-                Request repair
-              </Link>
+              <a className="btn btn-call" href="tel:+12084503730">Call</a>
             </div>
           </div>
         </header>
