@@ -61,32 +61,44 @@ export default function Home() {
 
           <div className="grid3">
             <article className="card">
-              <h3>Phone repair</h3>
-              <p>Screens, batteries, charging, audio, and everyday device issues.</p>
+              <h3>Apple & Mac repair</h3>
+              <p>iPhone, iPad, and Mac-focused repair workflow and pre-check requirements.</p>
               <div className="pills">
                 <span className="pill">Screens</span>
                 <span className="pill">Batteries</span>
                 <span className="pill">Charging</span>
+                <span className="pill">Mac diagnostics</span>
+              </div>
+              <div className="actions" style={{ marginTop: '0.9rem' }}>
+                <Link className="btn btn-primary" href="/prep#apple">Open Apple & Mac prep</Link>
+              </div>
+            </article>
+
+            <article className="card">
+              <h3>Android repair</h3>
+              <p>Samsung, Pixel, and other Android devices with model-specific prep steps.</p>
+              <div className="pills">
+                <span className="pill">Screens</span>
+                <span className="pill">Batteries</span>
+                <span className="pill">Charging ports</span>
+                <span className="pill">Data-safe intake</span>
+              </div>
+              <div className="actions" style={{ marginTop: '0.9rem' }}>
+                <Link className="btn btn-primary" href="/prep#android">Open Android prep</Link>
               </div>
             </article>
 
             <article className="card">
               <h3>Laptop + IT help</h3>
-              <p>Slow systems, setup problems, account issues, and practical troubleshooting.</p>
+              <p>Performance, OS issues, startup failures, account recovery, and troubleshooting prep.</p>
               <div className="pills">
                 <span className="pill">Performance</span>
-                <span className="pill">Setup</span>
                 <span className="pill">OS issues</span>
+                <span className="pill">Startup errors</span>
+                <span className="pill">Account/login</span>
               </div>
-            </article>
-
-            <article className="card">
-              <h3>Tablets & accessories</h3>
-              <p>iPads/tablets, configuration help, and smaller repairs.</p>
-              <div className="pills">
-                <span className="pill">Tablet repair</span>
-                <span className="pill">Config</span>
-                <span className="pill">Accessories</span>
+              <div className="actions" style={{ marginTop: '0.9rem' }}>
+                <Link className="btn btn-primary" href="/prep#laptop-it">Open Laptop + IT prep</Link>
               </div>
             </article>
           </div>

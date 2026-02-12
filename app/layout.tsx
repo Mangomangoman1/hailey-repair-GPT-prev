@@ -40,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/#services">Services</Link>
               <Link href="/#process">Process</Link>
               <Link href="/faq">FAQ</Link>
+              <Link href="/prep">Repair Prep</Link>
               <Link href="/contact">Contact</Link>
               <Link href="/chat">Tech Helper</Link>
             </nav>
