@@ -2,18 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 
-type Dot = {
-  x0: number
-  y0: number
-  phase: number
-  speed: number
-  ampX: number
-  ampY: number
-  r: number
-  a: number
-  x: number
-  y: number
-}
+type Dot = { x: number; y: number; vx: number; vy: number; r: number; a: number }
 
 export default function ParticleField() {
   const ref = useRef<HTMLCanvasElement | null>(null)
@@ -25,11 +14,9 @@ export default function ParticleField() {
     if (!ctx) return
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
     let w = 0
     let h = 0
     let raf = 0
-    let t = 0
 
     const mouse = { x: -9999, y: -9999, active: false }
     let dots: Dot[] = []
@@ -44,62 +31,28 @@ export default function ParticleField() {
       canvas.style.height = `${h}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      const count = Math.min(85, Math.max(42, Math.floor((w * h) / 30000)))
-      dots = Array.from({ length: count }).map(() => {
-        const x0 = Math.random() * w
-        const y0 = Math.random() * h
-        return {
-          x0,
-          y0,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.35 + Math.random() * 0.65,
-          ampX: 6 + Math.random() * 16,
-          ampY: 4 + Math.random() * 12,
-          r: 0.8 + Math.random() * 1.8,
-          a: 0.08 + Math.random() * 0.22,
-          x: x0,
-          y: y0,
-        }
-      })
+      const count = Math.min(95, Math.max(45, Math.floor((w * h) / 26000)))
+      dots = Array.from({ length: count }).map(() => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: -0.16 + Math.random() * 0.32,
+        vy: -0.12 + Math.random() * 0.24,
+        r: 0.7 + Math.random() * 1.6,
+        a: 0.08 + Math.random() * 0.2,
+      }))
     }
 
     const draw = () => {
-      t += reduce ? 0.004 : 0.01
       ctx.clearRect(0, 0, w, h)
 
-      // update positions: guaranteed motion from sinusoidal drift
       for (const d of dots) {
-        const waveX = Math.sin(t * d.speed + d.phase) * d.ampX
-        const waveY = Math.cos(t * d.speed * 0.9 + d.phase) * d.ampY
-
-        let x = d.x0 + waveX
-        let y = d.y0 + waveY
-
-        // loose pointer interaction (subtle repulsion)
-        if (mouse.active) {
-          const dx = x - mouse.x
-          const dy = y - mouse.y
-          const dist2 = dx * dx + dy * dy
-          if (dist2 < 18000 && dist2 > 0.001) {
-            const strength = reduce ? 6 : 12
-            const m = (1 - dist2 / 18000) * strength
-            const inv = 1 / Math.sqrt(dist2)
-            x += dx * inv * m
-            y += dy * inv * m
-          }
-        }
-
-        // wrap around bounds softly
-        if (x < -30) x = w + 30
-        if (x > w + 30) x = -30
-        if (y < -30) y = h + 30
-        if (y > h + 30) y = -30
-
-        d.x = x
-        d.y = y
+        ctx.beginPath()
+        ctx.fillStyle = `rgba(255,255,255,${d.a})`
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
+        ctx.fill()
       }
 
-      // draw lines first
+      // very light near-line connections
       for (let i = 0; i < dots.length; i++) {
         const a = dots[i]
         for (let j = i + 1; j < dots.length; j++) {
@@ -107,8 +60,8 @@ export default function ParticleField() {
           const dx = a.x - b.x
           const dy = a.y - b.y
           const dist2 = dx * dx + dy * dy
-          if (dist2 < 6200) {
-            const op = 0.07 * (1 - dist2 / 6200)
+          if (dist2 < 5600) {
+            const op = 0.06 * (1 - dist2 / 5600)
             ctx.strokeStyle = `rgba(255,255,255,${op})`
             ctx.lineWidth = 1
             ctx.beginPath()
@@ -119,12 +72,33 @@ export default function ParticleField() {
         }
       }
 
-      // draw dots
       for (const d of dots) {
-        ctx.beginPath()
-        ctx.fillStyle = `rgba(255,255,255,${d.a})`
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
-        ctx.fill()
+        // pointer influence (very subtle). If reduced-motion is enabled,
+        // keep pointer effect much lighter.
+        if (mouse.active) {
+          const dx = d.x - mouse.x
+          const dy = d.y - mouse.y
+          const dist2 = dx * dx + dy * dy
+          if (dist2 < 14000 && dist2 > 0.01) {
+            const strength = reduce ? 0.02 : 0.06
+            const f = (1 - dist2 / 14000) * strength
+            d.vx += (dx / Math.sqrt(dist2)) * f
+            d.vy += (dy / Math.sqrt(dist2)) * f
+          }
+        }
+
+        // keep a tiny ambient drift so particles never fully "freeze"
+        const driftX = reduce ? 0.008 : 0.015
+        const driftY = reduce ? 0.006 : 0.012
+        d.vx = d.vx * 0.998 + (-driftX + Math.random() * (driftX * 2))
+        d.vy = d.vy * 0.998 + (-driftY + Math.random() * (driftY * 2))
+        d.x += d.vx
+        d.y += d.vy
+
+        if (d.x < -20) d.x = w + 20
+        if (d.x > w + 20) d.x = -20
+        if (d.y < -20) d.y = h + 20
+        if (d.y > h + 20) d.y = -20
       }
 
       raf = window.requestAnimationFrame(draw)
