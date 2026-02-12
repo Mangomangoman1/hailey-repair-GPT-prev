@@ -71,12 +71,12 @@ a:hover{ text-decoration: underline; }
 
 .brand{ display:flex; align-items:center; gap: 0.75rem; color: var(--ink); min-width: 14rem; }
 .mark{
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow: 0 18px 42px rgba(0,0,0,0.48);
-  object-fit: contain;
+  object-fit: cover; /* zoom/crop to eliminate built-in padding */
   object-position: center;
   display: block;
   background: transparent;
