@@ -3,147 +3,116 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <div className="container hero-grid">
-          <div>
-            <span className="kicker">Hailey • Wood River Valley • Open 7 days/week</span>
-            <h1>Device repair with integrity.</h1>
-            <p className="lead">
-              Straight diagnostics. Clear options. Careful work.
-              <br />
-              Phones, laptops, and tablets — without the runaround.
-            </p>
-
-            <div className="actions">
-              <Link className="btn btn-primary" href="/contact">Request a repair</Link>
-              <Link className="btn" href="/chat">Try Tech Helper</Link>
-              <a className="btn btn-ghost" href="#services">Explore services</a>
-            </div>
-
-            <div className="pills" aria-label="Highlights">
-              <span className="pill">Clear quote before work starts</span>
-              <span className="pill">Privacy-respectful</span>
-              <span className="pill">Quality parts</span>
-              <span className="pill">One device at a time</span>
-            </div>
-          </div>
-
-          <aside className="code" aria-label="A repair request, like an API">
-            <div className="code-top">
-              <div className="dots" aria-hidden="true">
-                <span className="dot" />
-                <span className="dot" />
-                <span className="dot" />
-              </div>
-              <div className="code-title">repair.request</div>
-            </div>
-            <pre>
-              <code>{`POST /repair/request
-{
-  "device": "iPhone 15 Pro",
-  "issue": "Screen cracked, touch works",
-  "priority": "same-week",
-  "goal": "reliable daily use"
-}
-
-→ reply: quote + next step`}</code>
-            </pre>
-          </aside>
-        </div>
-      </section>
-
-      <section id="services" className="section">
+      <section className="concept-intro section">
         <div className="container">
-          <div className="section-head">
-            <div>
-              <h2>Services</h2>
-              <p>Pick a category. If you’re not sure, start with Tech Helper or send a quick message.</p>
-            </div>
-          </div>
-
-          <div className="grid3">
-            <article className="card">
-              <h3>Phone repair</h3>
-              <p>Screens, batteries, charging issues, speakers/mics, and troubleshooting.</p>
-              <div className="pills">
-                <span className="pill">Screen</span>
-                <span className="pill">Battery</span>
-                <span className="pill">Charging</span>
-              </div>
-            </article>
-
-            <article className="card">
-              <h3>Laptop repair + IT help</h3>
-              <p>Slow devices, setup, OS issues, accounts, Wi‑Fi, and practical support.</p>
-              <div className="pills">
-                <span className="pill">Slow</span>
-                <span className="pill">Setup</span>
-                <span className="pill">Wi‑Fi</span>
-              </div>
-            </article>
-
-            <article className="card">
-              <h3>Tablets & accessories</h3>
-              <p>iPads/tablets, setup help, and smaller repairs.</p>
-              <div className="pills">
-                <span className="pill">iPad</span>
-                <span className="pill">Setup</span>
-                <span className="pill">Fixes</span>
-              </div>
-            </article>
+          <span className="kicker">Design study mode</span>
+          <h1>Three completely different homepage bones.</h1>
+          <p className="lead">
+            Pick a structure first. We can add/refine content after. These are intentionally different in layout grammar.
+          </p>
+          <div className="actions">
+            <a className="btn" href="#concept-a">Concept A</a>
+            <a className="btn" href="#concept-b">Concept B</a>
+            <a className="btn" href="#concept-c">Concept C</a>
           </div>
         </div>
       </section>
 
-      <section id="process" className="section">
+      {/* CONCEPT A — Left Rail / Product Console */}
+      <section id="concept-a" className="section concept concept-a">
         <div className="container">
-          <div className="section-head">
-            <div>
-              <h2>Process</h2>
-              <p>Quality is a workflow. We keep it simple and transparent.</p>
-            </div>
-          </div>
-
-          <div className="steps">
-            <article className="step">
-              <div className="n">1</div>
-              <h3>Diagnose</h3>
-              <p>We confirm what failed and what’s worth doing next.</p>
-            </article>
-            <article className="step">
-              <div className="n">2</div>
-              <h3>Approve</h3>
-              <p>You get a clear quote. No work starts until you say yes.</p>
-            </article>
-            <article className="step">
-              <div className="n">3</div>
-              <h3>Repair</h3>
-              <p>Quality parts + careful work + testing before it leaves.</p>
-            </article>
-          </div>
-
-          <div className="split" style={{ marginTop: '1rem' }}>
-            <div className="big">
-              <h3>Not sure what you need?</h3>
-              <p>Tech Helper can triage slow devices, Wi‑Fi, email, and “what should I do next?” questions.</p>
-              <div className="actions" style={{ marginTop: '0.95rem' }}>
-                <Link className="btn btn-primary" href="/chat">Open Tech Helper</Link>
-                <Link className="btn" href="/faq">Read FAQ</Link>
-              </div>
-            </div>
-            <div className="big">
-              <h3>Fast contact</h3>
+          <div className="concept-label">Concept A — Command Console (left rail)</div>
+          <div className="console-shell">
+            <aside className="console-rail">
+              <div className="rail-title">repair://hailey</div>
+              <nav>
+                <a>Overview</a>
+                <a>Intake</a>
+                <a>Queue</a>
+                <a>Status</a>
+                <a>Support</a>
+              </nav>
+            </aside>
+            <div className="console-main">
+              <h2>Device Repair With Integrity</h2>
               <p>
-                <a href="tel:+12084503730">(208) 450-3730</a>
-                <br />
-                <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
-                <br />
-                Service area: Hailey • Ketchum • Sun Valley • Bellevue
+                A dashboard-like first screen that feels more like a service interface than a brochure site.
               </p>
-              <div className="actions" style={{ marginTop: '0.95rem' }}>
-                <Link className="btn" href="/contact">Request repair</Link>
-                <a className="btn btn-ghost" href="tel:+12084503730">Call now</a>
+              <div className="actions">
+                <Link className="btn btn-primary" href="/contact">Open intake</Link>
+                <Link className="btn" href="/chat">Run quick triage</Link>
               </div>
+              <div className="console-grid">
+                <div className="mini">Avg. quote response<br /><strong>&lt; 2 hours</strong></div>
+                <div className="mini">Common fixes<br /><strong>Screen / Battery / Charging</strong></div>
+                <div className="mini">Service zone<br /><strong>Wood River Valley</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONCEPT B — Editorial / Brand Story */}
+      <section id="concept-b" className="section concept concept-b">
+        <div className="container">
+          <div className="concept-label">Concept B — Editorial Flow (story first)</div>
+          <div className="editorial-hero">
+            <div>
+              <p className="eyebrow">Hailey, Idaho</p>
+              <h2>Repair is personal.</h2>
+              <p>
+                This version opens like a brand story, then flows into practical information as you scroll.
+              </p>
+            </div>
+            <div className="editorial-aside">
+              <p>“Clear communication, quality parts, no pressure.”</p>
+              <div className="actions">
+                <Link className="btn btn-primary" href="/contact">Start a request</Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="editorial-columns">
+            <article>
+              <h3>What we fix</h3>
+              <p>Phones, laptops, tablets, and small-device issues that disrupt daily life.</p>
+            </article>
+            <article>
+              <h3>How we work</h3>
+              <p>Diagnosis first. Quote second. Repair third. No surprise work.</p>
+            </article>
+            <article>
+              <h3>Where we help</h3>
+              <p>Hailey, Ketchum, Sun Valley, Bellevue.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* CONCEPT C — Bold Blocks / Asymmetric */}
+      <section id="concept-c" className="section concept concept-c">
+        <div className="container">
+          <div className="concept-label">Concept C — Asymmetric Blocks (bold + minimal text)</div>
+          <div className="blocks">
+            <div className="blk blk-main">
+              <h2>Device Repair With Integrity</h2>
+              <p>No fluff. Just clear diagnosis and clean execution.</p>
+              <div className="actions">
+                <Link className="btn btn-primary" href="/contact">Request repair</Link>
+                <Link className="btn" href="/chat">Tech Helper</Link>
+              </div>
+            </div>
+            <div className="blk blk-stat">
+              <small>Signal</small>
+              <strong>Human support, fast</strong>
+            </div>
+            <div className="blk blk-note">
+              <small>Best for</small>
+              <strong>People who hate cluttered websites</strong>
+            </div>
+            <div className="blk blk-call">
+              <small>Direct line</small>
+              <a href="tel:+12084503730">(208) 450-3730</a>
             </div>
           </div>
         </div>
