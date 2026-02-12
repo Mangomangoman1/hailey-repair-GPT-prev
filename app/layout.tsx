@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* Test site: Nova chassis */}
-        <link rel="stylesheet" href="/css/nova.css?v=2026-02-12a" />
+        <link rel="stylesheet" href="/css/nova.css?v=2026-02-12b" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -68,15 +68,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
 
             <div className="cta">
-              <a className="btn btn-ghost" href="tel:+12084503730">
-                Call
-              </a>
-              <Link className="btn" href="/chat">
-                Tech Helper
-              </Link>
-              <Link className="btn btn-primary" href="/contact">
-                Request repair
-              </Link>
+              <a className="btn btn-ghost" href="tel:+12084503730">Call</a>
+              <Link className="btn btn-primary" href="/contact">Request repair</Link>
             </div>
           </div>
         </header>
