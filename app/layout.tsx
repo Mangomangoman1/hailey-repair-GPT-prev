@@ -13,36 +13,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        {/* Test site: Nova chassis */}
-        <link rel="stylesheet" href="/css/nova.css?v=2026-02-12b" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'LocalBusiness',
-              name: 'Hailey Device Repair',
-              url: 'https://haileyrepair.com/',
-              telephone: '+1-208-450-3730',
-              email: 'samuel@haileyrepair.com',
-              address: {
-                '@type': 'PostalAddress',
-                addressLocality: 'Hailey',
-                addressRegion: 'ID',
-                postalCode: '83333',
-                addressCountry: 'US',
-              },
-              areaServed: [
-                { '@type': 'City', name: 'Hailey' },
-                { '@type': 'City', name: 'Ketchum' },
-                { '@type': 'City', name: 'Sun Valley' },
-                { '@type': 'City', name: 'Bellevue' },
-              ],
-            }),
-          }}
-        />
+        {/* Preview/test site: Orbit chassis (fresh start) */}
+        <link rel="stylesheet" href="/css/orbit.css?v=2026-02-12a" />
       </head>
       <body>
+        <div className="gridfx" aria-hidden="true" />
+
         <a className="skip" href="#main">
           Skip to content
         </a>
@@ -50,9 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="header">
           <div className="container header-inner">
             <Link className="brand" href="/" aria-label="Hailey Device Repair">
-              <div className="logo" aria-hidden="true" />
+              <div className="mark" aria-hidden="true" />
               <div>
-                <div className="brand-title">HAILEY DEVICE REPAIR</div>
+                <div className="brand-title">Hailey Device Repair</div>
                 <div className="brand-sub">Phones • Laptops • Tablets — Wood River Valley</div>
               </div>
             </Link>
@@ -60,16 +36,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="nav" aria-label="Primary">
               <Link href="/">Home</Link>
               <Link href="/#services">Services</Link>
+              <Link href="/#process">Process</Link>
               <Link href="/faq">FAQ</Link>
-              <Link href="/guide">Guide</Link>
-              <Link href="/about">About</Link>
               <Link href="/contact">Contact</Link>
               <Link href="/chat">Tech Helper</Link>
             </nav>
 
             <div className="cta">
-              <a className="btn btn-ghost" href="tel:+12084503730">Call</a>
-              <Link className="btn btn-primary" href="/contact">Request repair</Link>
+              <a className="btn btn-ghost" href="tel:+12084503730">
+                Call
+              </a>
+              <Link className="btn btn-primary" href="/contact">
+                Request repair
+              </Link>
             </div>
           </div>
         </header>
@@ -100,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="container footer-bottom">
             <span>© {new Date().getFullYear()} Hailey Device Repair</span>
             <span>
-              <Link href="/contact">Contact</Link> • <Link href="/faq">FAQ</Link> • <Link href="/about">About</Link>
+              <Link href="/faq">FAQ</Link> • <Link href="/contact">Contact</Link> • <Link href="/chat">Tech Helper</Link>
             </span>
           </div>
         </footer>
