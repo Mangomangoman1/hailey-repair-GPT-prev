@@ -189,10 +189,12 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 .concept-label{
   font-family: ui-monospace, Menlo, Consolas, monospace;
   margin-bottom: .8rem;
-  background: linear-gradient(90deg, #cfd4dc 0%, #f8fafc 35%, #b8c0cc 60%, #eef2f7 100%);
+  background: linear-gradient(100deg, #aeb7c4 0%, #f8fafc 22%, #b7c2d1 45%, #ffffff 58%, #a7b2c0 78%, #e6ebf2 100%);
+  background-size: 240% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: metallicFlow 5.5s linear infinite;
 }
 .concept{ border-top: 1px solid var(--line2); }
 
@@ -235,5 +237,13 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   .hero-grid, .grid3, .steps, .split, .footer-inner,
   .console-shell, .console-grid, .editorial-hero, .editorial-columns, .blocks { grid-template-columns: 1fr; }
 }
+@keyframes metallicFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 240% 50%; }
+}
+
 @media (max-width: 760px){ .nav{ display:none; } }
-@media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .concept-label{ animation: none; }
+}
