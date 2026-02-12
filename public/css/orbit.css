@@ -189,12 +189,12 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 .concept-label{
   font-family: ui-monospace, Menlo, Consolas, monospace;
   margin-bottom: .8rem;
-  background: linear-gradient(100deg, #aeb7c4 0%, #f8fafc 22%, #b7c2d1 45%, #ffffff 58%, #a7b2c0 78%, #e6ebf2 100%);
-  background-size: 240% 100%;
+  background: linear-gradient(100deg, #aeb7c4 0%, #f8fafc 20%, #cfc8ff 34%, #b7c2d1 48%, #ffffff 60%, #c9c2ff 76%, #e6ebf2 100%);
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: metallicFlow 5.5s linear infinite;
+  animation: metallicFlow 4.2s linear infinite;
 }
 .concept{ border-top: 1px solid var(--line2); }
 
