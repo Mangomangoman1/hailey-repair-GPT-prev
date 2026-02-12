@@ -19,12 +19,18 @@ export default function Chat() {
   const [loading, setLoading] = useState(false)
   const MAX_USER_MESSAGES = 50
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const hasMountedRef = useRef(false)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }
 
   useEffect(() => {
+    // Prevent auto-scroll on initial page load so chat page behaves like a normal page.
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      return
+    }
     scrollToBottom()
   }, [messages])
 
@@ -125,21 +131,24 @@ export default function Chat() {
 
       <style jsx>{`
         .chat-container {
-          background: var(--card);
+          background: rgba(8, 12, 22, 0.84);
           border: 1px solid var(--line);
           border-radius: var(--radius);
           overflow: hidden;
-          max-width: 700px;
+          max-width: 740px;
           margin: 0 auto;
+          box-shadow: var(--shadow2);
+          backdrop-filter: blur(8px);
         }
 
         .chat-messages {
-          height: 400px;
+          height: 430px;
           overflow-y: auto;
           padding: 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 1rem;
+          background: rgba(6, 10, 18, 0.78);
         }
 
         .chat-message {
@@ -155,19 +164,20 @@ export default function Chat() {
         }
 
         .chat-bubble {
-          max-width: 80%;
+          max-width: 82%;
           padding: 0.75rem 1rem;
           border-radius: 12px;
           line-height: 1.5;
         }
 
         .chat-message.user .chat-bubble {
-          background: var(--cyan);
-          color: #000;
+          background: linear-gradient(135deg, #7c3aed, #5b21b6);
+          color: #f8fafc;
+          border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .chat-message.assistant .chat-bubble {
-          background: var(--bg-2);
+          background: rgba(255, 255, 255, 0.06);
           border: 1px solid var(--line);
         }
 
@@ -176,26 +186,28 @@ export default function Chat() {
           gap: 0.75rem;
           padding: 1rem 1.5rem;
           border-top: 1px solid var(--line);
-          background: var(--bg-2);
+          background: rgba(10, 14, 24, 0.92);
+          backdrop-filter: blur(6px);
         }
 
         .chat-input-form input {
           flex: 1;
           padding: 0.75rem 1rem;
-          border-radius: 8px;
+          border-radius: 10px;
           border: 1px solid var(--line);
-          background: var(--bg);
-          color: var(--text);
+          background: rgba(0, 0, 0, 0.26);
+          color: var(--ink);
           font-size: 1rem;
         }
 
         .chat-input-form input:focus {
           outline: none;
-          border-color: var(--cyan);
+          border-color: #7c3aed;
+          box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
         }
 
         .chat-input-form input::placeholder {
-          color: var(--muted-2);
+          color: var(--muted2);
         }
 
         .chat-footer {
@@ -205,7 +217,7 @@ export default function Chat() {
         }
 
         .chat-footer a {
-          color: var(--cyan-2);
+          color: var(--accent);
         }
       `}</style>
     </>
