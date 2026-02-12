@@ -3,116 +3,145 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <>
-      <section className="concept-intro section">
+      <section className="section concept concept-a" style={{ paddingTop: '5rem' }}>
         <div className="container">
-          <span className="kicker">Design study mode</span>
-          <h1>Three completely different homepage bones.</h1>
-          <p className="lead">
-            Pick a structure first. We can add/refine content after. These are intentionally different in layout grammar.
-          </p>
-          <div className="actions">
-            <a className="btn" href="#concept-a">Concept A</a>
-            <a className="btn" href="#concept-b">Concept B</a>
-            <a className="btn" href="#concept-c">Concept C</a>
-          </div>
-        </div>
-      </section>
-
-      {/* CONCEPT A — Left Rail / Product Console */}
-      <section id="concept-a" className="section concept concept-a">
-        <div className="container">
-          <div className="concept-label">Concept A — Command Console (left rail)</div>
+          <div className="concept-label">Hailey Device Repair // Console Mode</div>
           <div className="console-shell">
             <aside className="console-rail">
               <div className="rail-title">repair://hailey</div>
               <nav>
-                <a>Overview</a>
-                <a>Intake</a>
-                <a>Queue</a>
-                <a>Status</a>
-                <a>Support</a>
+                <a href="#overview">Overview</a>
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#contact-fast">Contact</a>
               </nav>
             </aside>
-            <div className="console-main">
+
+            <div className="console-main" id="overview">
               <h2>Device Repair With Integrity</h2>
               <p>
-                A dashboard-like first screen that feels more like a service interface than a brochure site.
+                Straight diagnostics, practical options, and careful repair for phones, laptops, and tablets in the Wood River Valley.
               </p>
+
               <div className="actions">
                 <Link className="btn btn-primary" href="/contact">Open intake</Link>
                 <Link className="btn" href="/chat">Run quick triage</Link>
               </div>
+
               <div className="console-grid">
-                <div className="mini">Avg. quote response<br /><strong>&lt; 2 hours</strong></div>
-                <div className="mini">Common fixes<br /><strong>Screen / Battery / Charging</strong></div>
-                <div className="mini">Service zone<br /><strong>Wood River Valley</strong></div>
+                <div className="mini">
+                  Typical first response<br />
+                  <strong>&lt; 2 hours</strong>
+                </div>
+                <div className="mini">
+                  Most common requests<br />
+                  <strong>Screen / Battery / Charging</strong>
+                </div>
+                <div className="mini">
+                  Service area<br />
+                  <strong>Hailey • Ketchum • Sun Valley • Bellevue</strong>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CONCEPT B — Editorial / Brand Story */}
-      <section id="concept-b" className="section concept concept-b">
+      <section id="services" className="section">
         <div className="container">
-          <div className="concept-label">Concept B — Editorial Flow (story first)</div>
-          <div className="editorial-hero">
+          <div className="section-head">
             <div>
-              <p className="eyebrow">Hailey, Idaho</p>
-              <h2>Repair is personal.</h2>
-              <p>
-                This version opens like a brand story, then flows into practical information as you scroll.
-              </p>
-            </div>
-            <div className="editorial-aside">
-              <p>“Clear communication, quality parts, no pressure.”</p>
-              <div className="actions">
-                <Link className="btn btn-primary" href="/contact">Start a request</Link>
-              </div>
+              <h2>Services</h2>
+              <p>Start with the category that matches your issue. If you're unsure, use Tech Helper and we’ll route you.</p>
             </div>
           </div>
 
-          <div className="editorial-columns">
-            <article>
-              <h3>What we fix</h3>
-              <p>Phones, laptops, tablets, and small-device issues that disrupt daily life.</p>
+          <div className="grid3">
+            <article className="card">
+              <h3>Phone repair</h3>
+              <p>Screens, batteries, charging, audio, and everyday device issues.</p>
+              <div className="pills">
+                <span className="pill">Screens</span>
+                <span className="pill">Batteries</span>
+                <span className="pill">Charging</span>
+              </div>
             </article>
-            <article>
-              <h3>How we work</h3>
-              <p>Diagnosis first. Quote second. Repair third. No surprise work.</p>
+
+            <article className="card">
+              <h3>Laptop + IT help</h3>
+              <p>Slow systems, setup problems, account issues, and practical troubleshooting.</p>
+              <div className="pills">
+                <span className="pill">Performance</span>
+                <span className="pill">Setup</span>
+                <span className="pill">OS issues</span>
+              </div>
             </article>
-            <article>
-              <h3>Where we help</h3>
-              <p>Hailey, Ketchum, Sun Valley, Bellevue.</p>
+
+            <article className="card">
+              <h3>Tablets & accessories</h3>
+              <p>iPads/tablets, configuration help, and smaller repairs.</p>
+              <div className="pills">
+                <span className="pill">Tablet repair</span>
+                <span className="pill">Config</span>
+                <span className="pill">Accessories</span>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      {/* CONCEPT C — Bold Blocks / Asymmetric */}
-      <section id="concept-c" className="section concept concept-c">
+      <section id="process" className="section">
         <div className="container">
-          <div className="concept-label">Concept C — Asymmetric Blocks (bold + minimal text)</div>
-          <div className="blocks">
-            <div className="blk blk-main">
-              <h2>Device Repair With Integrity</h2>
-              <p>No fluff. Just clear diagnosis and clean execution.</p>
-              <div className="actions">
-                <Link className="btn btn-primary" href="/contact">Request repair</Link>
-                <Link className="btn" href="/chat">Tech Helper</Link>
+          <div className="section-head">
+            <div>
+              <h2>Process</h2>
+              <p>Clear workflow, no surprise work orders.</p>
+            </div>
+          </div>
+
+          <div className="steps">
+            <article className="step">
+              <div className="n">1</div>
+              <h3>Diagnose</h3>
+              <p>We verify root cause and what’s worth fixing.</p>
+            </article>
+            <article className="step">
+              <div className="n">2</div>
+              <h3>Approve</h3>
+              <p>You get a quote and options before work begins.</p>
+            </article>
+            <article className="step">
+              <div className="n">3</div>
+              <h3>Repair</h3>
+              <p>Careful repair, quality parts, and final testing.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact-fast" className="section">
+        <div className="container">
+          <div className="split">
+            <div className="big">
+              <h3>Need help deciding?</h3>
+              <p>Use Tech Helper first for fast triage. If it needs hands-on service, we’ll point you to the next move.</p>
+              <div className="actions" style={{ marginTop: '0.9rem' }}>
+                <Link className="btn btn-primary" href="/chat">Open Tech Helper</Link>
+                <Link className="btn" href="/faq">Read FAQ</Link>
               </div>
             </div>
-            <div className="blk blk-stat">
-              <small>Signal</small>
-              <strong>Human support, fast</strong>
-            </div>
-            <div className="blk blk-note">
-              <small>Best for</small>
-              <strong>People who hate cluttered websites</strong>
-            </div>
-            <div className="blk blk-call">
-              <small>Direct line</small>
-              <a href="tel:+12084503730">(208) 450-3730</a>
+
+            <div className="big">
+              <h3>Direct contact</h3>
+              <p>
+                <a href="tel:+12084503730">(208) 450-3730</a>
+                <br />
+                <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
+              </p>
+              <div className="actions" style={{ marginTop: '0.9rem' }}>
+                <Link className="btn" href="/contact">Request repair</Link>
+                <a className="btn btn-ghost" href="tel:+12084503730">Call now</a>
+              </div>
             </div>
           </div>
         </div>
