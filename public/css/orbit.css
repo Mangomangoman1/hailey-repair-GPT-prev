@@ -76,7 +76,7 @@ a:hover{ text-decoration: underline; }
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow: 0 18px 42px rgba(0,0,0,0.48);
-  object-fit: cover; /* zoom/crop to eliminate built-in padding */
+  object-fit: contain;
   object-position: center;
   display: block;
   background: transparent;
