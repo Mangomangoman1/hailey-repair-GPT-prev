@@ -15,6 +15,11 @@
   --accent2:#a8b4c6;
   --warn:#ffdd7c;
 
+  /* Brand (pulled toward the logo tile’s blue-gray) */
+  --brand1: #b6c9d8;
+  --brand2: #7f9bb4;
+  --brand3: #5f7f9c;
+
   --radius: 18px;
   --radius2: 26px;
   --shadow: 0 24px 70px rgba(0,0,0,0.55);
@@ -120,19 +125,20 @@ a:hover{ text-decoration: underline; }
   box-shadow: 0 12px 28px rgba(0,0,0,0.22);
 }
 .btn:hover{ background: rgba(255,255,255,0.09); text-decoration:none; }
+.btn-primary:hover, .btn-call:hover{ filter: brightness(1.04) saturate(1.04); }
 .btn:focus{ outline:none; box-shadow: var(--focus); }
 .btn-primary{
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  color: #f8fafc;
-  border-color: rgba(255,255,255,0.18);
-  box-shadow: 0 14px 30px rgba(79,70,229,0.35);
+  background: linear-gradient(135deg, var(--brand1), var(--brand3));
+  color: #07111b;
+  border-color: rgba(255,255,255,0.16);
+  box-shadow: 0 14px 30px rgba(127,155,180,0.28);
 }
 .btn-ghost{ background: transparent; }
 .btn-call{
-  background: linear-gradient(135deg, #7c3aed, #5b21b6);
-  color: #f8fafc;
-  border-color: rgba(255,255,255,0.18);
-  box-shadow: 0 12px 28px rgba(124,58,237,0.35);
+  background: linear-gradient(135deg, var(--brand2), var(--brand3));
+  color: #07111b;
+  border-color: rgba(255,255,255,0.16);
+  box-shadow: 0 12px 28px rgba(127,155,180,0.26);
 }
 
 .hero{ padding: 5.2rem 0 2.6rem; }
