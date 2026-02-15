@@ -164,51 +164,7 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   overflow:hidden;
 }
 
-/* moving border highlight (first hero box) — true "crawl around the border" via SVG strokes */
-.console-shell{ position: relative; }
-.console-scan .scanBorders{
-  position:absolute;
-  inset: -1px;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  pointer-events:none;
-  z-index: 2;
-}
-
-.console-scan .scanBase{
-  fill: none;
-  vector-effect: non-scaling-stroke;
-  stroke: rgba(255,255,255,0.14);
-  stroke-width: 1.0;
-}
-
-.console-scan .scanStroke{
-  fill: none;
-  vector-effect: non-scaling-stroke;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
-
-  /* normalized rect pathLength=100: one dash (highlight) + one gap */
-  stroke-dasharray: 12 88;
-  animation: dashCrawl 4.8s linear infinite;
-}
-
-.console-scan .scanStroke.s1{
-  stroke: rgba(182,201,216,0.95);
-  opacity: .95;
-}
-
-.console-scan .scanStroke.s2{
-  stroke: rgba(95,127,156,0.92);
-  opacity: .78;
-  animation-delay: -2.4s; /* opposite side */
-}
-
-@keyframes dashCrawl{
-  from{ stroke-dashoffset: 0; }
-  to{ stroke-dashoffset: -100; }
-}
+/* (disabled) border highlight experiment */
 
 @keyframes scanRing{
   from{ transform: rotate(0deg); }

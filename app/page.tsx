@@ -9,28 +9,7 @@ export default function Home() {
           <div className="concept-label">
             <FlowLabel text="Hailey Device Repair // 7 days a week" />
           </div>
-          <div className="console-shell console-scan">
-            <svg className="scanBorders" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <filter id="scanGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="1.6" result="b" />
-                  <feMerge>
-                    <feMergeNode in="b" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* base border */}
-              <rect className="scanBase" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" />
-
-              {/* highlight 1 */}
-              <rect className="scanStroke s1" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="100" filter="url(#scanGlow)" />
-
-              {/* highlight 2 (opposite) */}
-              <rect className="scanStroke s2" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="100" filter="url(#scanGlow)" />
-            </svg>
-
+          <div className="console-shell">
             <aside className="console-rail">
               <div className="rail-title">repair://hailey</div>
               <nav>
