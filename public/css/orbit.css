@@ -300,6 +300,11 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   pointer-events:none;
   z-index: 1;
 
+  display:block;
+  transform-origin: 50% 50%;
+  transform: translateZ(0) rotate(0deg);
+  will-change: transform;
+
   /* one moving highlight segment; rest transparent */
   background:
     conic-gradient(
@@ -328,7 +333,7 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   animation: beamSpin 6.5s linear infinite;
 }
 
-@keyframes beamSpin{ to{ transform: rotate(360deg); } }
+@keyframes beamSpin{ to{ transform: translateZ(0) rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce){
   .console-beam::before{ animation: none; }
