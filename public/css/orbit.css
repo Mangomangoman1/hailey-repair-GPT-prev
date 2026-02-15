@@ -287,6 +287,53 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 
 /* A */
 .console-shell{ display:grid; grid-template-columns: 220px 1fr; border:1px solid var(--line); border-radius: 20px; overflow:hidden; background: rgba(255,255,255,0.03); }
+
+/* Border Beam (CodeWiki-style): conic-gradient beam + mask punch-out */
+.console-beam{ position: relative; isolation: isolate; }
+.console-beam > *{ position: relative; z-index: 2; }
+.console-beam::before{
+  content:"";
+  position:absolute;
+  inset: -2px; /* overscan to avoid corner artifacts */
+  border-radius: inherit;
+  padding: 2px; /* beam thickness */
+  pointer-events:none;
+  z-index: 1;
+
+  /* one moving highlight segment; rest transparent */
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 300deg,
+      rgba(182,201,216,0.05) 300deg,
+      rgba(182,201,216,0.95) 325deg,
+      rgba(95,127,156,0.95) 345deg,
+      rgba(182,201,216,0.05) 356deg,
+      transparent 360deg
+    );
+
+  /* punch out center so only border ring remains */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  filter:
+    blur(0.2px)
+    drop-shadow(0 0 10px rgba(182,201,216,0.14))
+    drop-shadow(0 0 22px rgba(127,155,180,0.10));
+
+  animation: beamSpin 6.5s linear infinite;
+}
+
+@keyframes beamSpin{ to{ transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce){
+  .console-beam::before{ animation: none; }
+}
+
 .console-rail{ border-right:1px solid var(--line2); padding:1rem; background: rgba(255,255,255,0.02); }
 .console-rail .rail-title{
   font-family: ui-monospace, Menlo, Consolas, monospace;
