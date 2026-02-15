@@ -164,56 +164,56 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   overflow:hidden;
 }
 
-/* moving dual gradient border (first hero box) — “follows the border” style */
-.console-shell{ position: relative; }
-.console-shell::before,
+/* moving border highlight (first hero box) — Safari-safe (no mask-composite) */
+.console-shell{
+  position: relative;
+  border-radius: 20px;
+}
+
+/* Outer moving gradient ring */
+.console-shell::before{
+  content:"";
+  position:absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events:none;
+  z-index: 0;
+
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(182,201,216,0.10),
+      rgba(182,201,216,0.95),
+      rgba(127,155,180,0.18),
+      rgba(95,127,156,0.95),
+      rgba(182,201,216,0.10)
+    );
+
+  animation: scanRing 5.2s linear infinite;
+  filter:
+    drop-shadow(0 0 10px rgba(182,201,216,0.16))
+    drop-shadow(0 0 22px rgba(127,155,180,0.10));
+}
+
+/* Inner cover that creates the "hole" so only a border ring shows */
 .console-shell::after{
   content:"";
   position:absolute;
-  inset: -1px;
-  border-radius: calc(20px + 1px);
-  padding: var(--ringW, 3px); /* border thickness */
+  inset: var(--ringW, 3px);
+  border-radius: calc(20px - var(--ringW, 3px));
+  background: rgba(255,255,255,0.03); /* match .console-shell base */
   pointer-events:none;
-  opacity: 0.95;
-
-  /* show only the border ring */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  /* full ring gradient that rotates, like a moving highlight around the outline */
-  background:
-    conic-gradient(
-      from 0deg,
-      rgba(182,201,216,0.15),
-      rgba(182,201,216,0.92),
-      rgba(127,155,180,0.25),
-      rgba(95,127,156,0.92),
-      rgba(182,201,216,0.15)
-    );
-
-  filter:
-    drop-shadow(0 0 10px rgba(182,201,216,0.18))
-    drop-shadow(0 0 22px rgba(127,155,180,0.10));
-
-  animation: scanRing 5.2s linear infinite;
+  z-index: 1;
 }
 
-.console-shell::after{
-  opacity: 0.70;
-  padding: var(--ringW2, 2px);
-  animation-delay: -2.6s; /* opposite side, same direction */
-  background:
-    conic-gradient(
-      from 0deg,
-      rgba(127,155,180,0.10),
-      rgba(127,155,180,0.88),
-      rgba(182,201,216,0.18),
-      rgba(95,127,156,0.88),
-      rgba(127,155,180,0.10)
-    );
+/* keep content above the overlays */
+.console-shell > *{ position: relative; z-index: 2; }
+
+/* subtle second (inner) border line */
+.console-shell{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.10),
+    inset 0 0 0 calc(var(--ringW, 3px) + 1px) rgba(95,127,156,0.10);
 }
 
 @keyframes scanRing{
