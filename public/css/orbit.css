@@ -162,6 +162,67 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   background: rgba(10,14,24,0.76);
   box-shadow: var(--shadow);
   overflow:hidden;
+  position: relative;
+}
+
+/* moving dual gradient “scanner” borders (hero first box) */
+.code::before,
+.code::after{
+  content:"";
+  position:absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius2) + 1px);
+  padding: var(--scanW, 16px);
+  pointer-events:none;
+  opacity: 0.95;
+
+  /* show only the border ring */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  /* static colored arc that we rotate */
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0 290deg,
+      rgba(182,201,216,0.00) 290deg,
+      rgba(182,201,216,0.95) 310deg,
+      rgba(95,127,156,0.95) 335deg,
+      rgba(182,201,216,0.00) 352deg,
+      transparent 360deg
+    );
+
+  filter:
+    drop-shadow(0 0 10px rgba(182,201,216,0.20))
+    drop-shadow(0 0 22px rgba(127,155,180,0.12));
+
+  animation: scanRing 4.8s linear infinite;
+}
+
+.code::after{
+  opacity: 0.78;
+  inset: -1px;
+  padding: var(--scanW2, 12px);
+  animation-duration: 4.8s;
+  animation-delay: -2.4s; /* opposite side of the box */
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0 292deg,
+      rgba(127,155,180,0.00) 292deg,
+      rgba(127,155,180,0.92) 312deg,
+      rgba(182,201,216,0.85) 338deg,
+      rgba(127,155,180,0.00) 354deg,
+      transparent 360deg
+    );
+}
+
+@keyframes scanRing{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
 }
 .code-top{ display:flex; align-items:center; justify-content:space-between; gap: 1rem; padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.10); }
 .dots{ display:flex; gap: 0.38rem; }
