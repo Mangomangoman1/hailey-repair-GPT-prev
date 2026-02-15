@@ -164,7 +164,7 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   overflow:hidden;
 }
 
-/* moving dual gradient “scanner” borders (first hero box) */
+/* moving dual gradient border (first hero box) — “follows the border” style */
 .console-shell{ position: relative; }
 .console-shell::before,
 .console-shell::after{
@@ -172,9 +172,9 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   position:absolute;
   inset: -1px;
   border-radius: calc(20px + 1px);
-  padding: var(--scanW, 18px);
+  padding: var(--ringW, 3px); /* border thickness */
   pointer-events:none;
-  opacity: 0.92;
+  opacity: 0.95;
 
   /* show only the border ring */
   -webkit-mask:
@@ -183,37 +183,36 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 
+  /* full ring gradient that rotates, like a moving highlight around the outline */
   background:
     conic-gradient(
       from 0deg,
-      transparent 0 288deg,
-      rgba(182,201,216,0.00) 288deg,
-      rgba(182,201,216,0.92) 310deg,
-      rgba(95,127,156,0.92) 336deg,
-      rgba(182,201,216,0.00) 352deg,
-      transparent 360deg
+      rgba(182,201,216,0.15),
+      rgba(182,201,216,0.92),
+      rgba(127,155,180,0.25),
+      rgba(95,127,156,0.92),
+      rgba(182,201,216,0.15)
     );
 
   filter:
-    drop-shadow(0 0 10px rgba(182,201,216,0.20))
-    drop-shadow(0 0 22px rgba(127,155,180,0.12));
+    drop-shadow(0 0 10px rgba(182,201,216,0.18))
+    drop-shadow(0 0 22px rgba(127,155,180,0.10));
 
-  animation: scanRing 4.8s linear infinite;
+  animation: scanRing 5.2s linear infinite;
 }
 
 .console-shell::after{
-  opacity: 0.72;
-  padding: var(--scanW2, 12px);
-  animation-delay: -2.4s; /* opposite side */
+  opacity: 0.70;
+  padding: var(--ringW2, 2px);
+  animation-delay: -2.6s; /* opposite side, same direction */
   background:
     conic-gradient(
       from 0deg,
-      transparent 0 290deg,
-      rgba(127,155,180,0.00) 290deg,
-      rgba(127,155,180,0.88) 312deg,
-      rgba(182,201,216,0.82) 338deg,
-      rgba(127,155,180,0.00) 354deg,
-      transparent 360deg
+      rgba(127,155,180,0.10),
+      rgba(127,155,180,0.88),
+      rgba(182,201,216,0.18),
+      rgba(95,127,156,0.88),
+      rgba(127,155,180,0.10)
     );
 }
 
