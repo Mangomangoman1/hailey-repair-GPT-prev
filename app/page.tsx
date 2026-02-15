@@ -12,21 +12,23 @@ export default function Home() {
           <div className="console-shell console-scan">
             <svg className="scanBorders" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
               <defs>
-                <linearGradient id="scanGrad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="rgba(182,201,216,0)" />
-                  <stop offset="35%" stopColor="rgba(182,201,216,0.92)" />
-                  <stop offset="65%" stopColor="rgba(95,127,156,0.92)" />
-                  <stop offset="100%" stopColor="rgba(182,201,216,0)" />
-                </linearGradient>
-                <linearGradient id="scanGrad2" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="rgba(127,155,180,0)" />
-                  <stop offset="35%" stopColor="rgba(127,155,180,0.88)" />
-                  <stop offset="65%" stopColor="rgba(182,201,216,0.85)" />
-                  <stop offset="100%" stopColor="rgba(127,155,180,0)" />
-                </linearGradient>
+                <filter id="scanGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.6" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
-              <rect className="scanStroke s1" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="1000" />
-              <rect className="scanStroke s2" x="3.5" y="3.5" width="93" height="93" rx="8" ry="8" pathLength="1000" />
+
+              {/* base border */}
+              <rect className="scanBase" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" />
+
+              {/* highlight 1 */}
+              <rect className="scanStroke s1" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="100" filter="url(#scanGlow)" />
+
+              {/* highlight 2 (opposite) */}
+              <rect className="scanStroke s2" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="100" filter="url(#scanGlow)" />
             </svg>
 
             <aside className="console-rail">

@@ -175,32 +175,39 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   z-index: 2;
 }
 
+.console-scan .scanBase{
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke: rgba(255,255,255,0.14);
+  stroke-width: 1.0;
+}
+
 .console-scan .scanStroke{
   fill: none;
   vector-effect: non-scaling-stroke;
   stroke-linecap: round;
-  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 
-  /* one "comet" highlight segment (make the gap enormous so it doesn't repeat) */
-  stroke-dasharray: 140 2000;
-  animation: dashCrawl 5.4s linear infinite;
-
-  filter:
-    drop-shadow(0 0 10px rgba(182,201,216,0.14))
-    drop-shadow(0 0 22px rgba(127,155,180,0.10));
+  /* normalized rect pathLength=100: one dash (highlight) + one gap */
+  stroke-dasharray: 12 88;
+  animation: dashCrawl 4.8s linear infinite;
 }
 
-.console-scan .scanStroke.s1{ stroke: url(#scanGrad); opacity: .95; }
+.console-scan .scanStroke.s1{
+  stroke: rgba(182,201,216,0.95);
+  opacity: .95;
+}
+
 .console-scan .scanStroke.s2{
-  stroke: url(#scanGrad2);
-  opacity: .65;
-  stroke-width: 1.2;
-  animation-delay: -2.7s; /* opposite side, same direction (half of 5.4s) */
+  stroke: rgba(95,127,156,0.92);
+  opacity: .78;
+  animation-delay: -2.4s; /* opposite side */
 }
 
 @keyframes dashCrawl{
   from{ stroke-dashoffset: 0; }
-  to{ stroke-dashoffset: -2140; }
+  to{ stroke-dashoffset: -100; }
 }
 
 @keyframes scanRing{
