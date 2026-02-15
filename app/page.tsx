@@ -9,7 +9,26 @@ export default function Home() {
           <div className="concept-label">
             <FlowLabel text="Hailey Device Repair // 7 days a week" />
           </div>
-          <div className="console-shell">
+          <div className="console-shell console-scan">
+            <svg className="scanBorders" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="scanGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="rgba(182,201,216,0)" />
+                  <stop offset="35%" stopColor="rgba(182,201,216,0.92)" />
+                  <stop offset="65%" stopColor="rgba(95,127,156,0.92)" />
+                  <stop offset="100%" stopColor="rgba(182,201,216,0)" />
+                </linearGradient>
+                <linearGradient id="scanGrad2" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="rgba(127,155,180,0)" />
+                  <stop offset="35%" stopColor="rgba(127,155,180,0.88)" />
+                  <stop offset="65%" stopColor="rgba(182,201,216,0.85)" />
+                  <stop offset="100%" stopColor="rgba(127,155,180,0)" />
+                </linearGradient>
+              </defs>
+              <rect className="scanStroke s1" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" />
+              <rect className="scanStroke s2" x="3.5" y="3.5" width="93" height="93" rx="8" ry="8" />
+            </svg>
+
             <aside className="console-rail">
               <div className="rail-title">repair://hailey</div>
               <nav>

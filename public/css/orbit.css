@@ -164,56 +164,40 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   overflow:hidden;
 }
 
-/* moving border highlight (first hero box) — Safari-safe (no mask-composite) */
-.console-shell{
-  position: relative;
-  border-radius: 20px;
+/* moving border highlight (first hero box) — true "crawl around the border" via SVG strokes */
+.console-shell{ position: relative; }
+.console-scan .scanBorders{
+  position:absolute;
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  pointer-events:none;
+  z-index: 2;
 }
 
-/* Outer moving gradient ring */
-.console-shell::before{
-  content:"";
-  position:absolute;
-  inset: 0;
-  border-radius: 20px;
-  pointer-events:none;
-  z-index: 0;
-
-  background:
-    conic-gradient(
-      from 0deg,
-      rgba(182,201,216,0.10),
-      rgba(182,201,216,0.95),
-      rgba(127,155,180,0.18),
-      rgba(95,127,156,0.95),
-      rgba(182,201,216,0.10)
-    );
-
-  animation: scanRing 5.2s linear infinite;
+.console-scan .scanStroke{
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-width: 1.6;
+  stroke-dasharray: 18 320; /* short highlight + long gap */
+  animation: dashCrawl 4.8s linear infinite;
   filter:
-    drop-shadow(0 0 10px rgba(182,201,216,0.16))
+    drop-shadow(0 0 10px rgba(182,201,216,0.14))
     drop-shadow(0 0 22px rgba(127,155,180,0.10));
 }
 
-/* Inner cover that creates the "hole" so only a border ring shows */
-.console-shell::after{
-  content:"";
-  position:absolute;
-  inset: var(--ringW, 3px);
-  border-radius: calc(20px - var(--ringW, 3px));
-  background: rgba(255,255,255,0.03); /* match .console-shell base */
-  pointer-events:none;
-  z-index: 1;
+.console-scan .scanStroke.s1{ stroke: url(#scanGrad); opacity: .95; }
+.console-scan .scanStroke.s2{
+  stroke: url(#scanGrad2);
+  opacity: .70;
+  stroke-width: 1.2;
+  animation-delay: -2.4s; /* opposite side, same direction */
 }
 
-/* keep content above the overlays */
-.console-shell > *{ position: relative; z-index: 2; }
-
-/* subtle second (inner) border line */
-.console-shell{
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.10),
-    inset 0 0 0 calc(var(--ringW, 3px) + 1px) rgba(95,127,156,0.10);
+@keyframes dashCrawl{
+  from{ stroke-dashoffset: 0; }
+  to{ stroke-dashoffset: -340; }
 }
 
 @keyframes scanRing{
