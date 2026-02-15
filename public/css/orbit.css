@@ -181,9 +181,9 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   stroke-linecap: round;
   stroke-width: 1.6;
 
-  /* one "comet" segment that travels the full perimeter */
-  stroke-dasharray: 120 880; /* sums to pathLength=1000 */
-  animation: dashCrawl 3.8s linear infinite;
+  /* one "comet" highlight segment (make the gap enormous so it doesn't repeat) */
+  stroke-dasharray: 140 2000;
+  animation: dashCrawl 5.4s linear infinite;
 
   filter:
     drop-shadow(0 0 10px rgba(182,201,216,0.14))
@@ -195,12 +195,12 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   stroke: url(#scanGrad2);
   opacity: .65;
   stroke-width: 1.2;
-  animation-delay: -1.9s; /* opposite side, same direction (half of 3.8s) */
+  animation-delay: -2.7s; /* opposite side, same direction (half of 5.4s) */
 }
 
 @keyframes dashCrawl{
   from{ stroke-dashoffset: 0; }
-  to{ stroke-dashoffset: -1000; }
+  to{ stroke-dashoffset: -2140; }
 }
 
 @keyframes scanRing{
