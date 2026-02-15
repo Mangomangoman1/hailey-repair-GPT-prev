@@ -25,8 +25,8 @@ export default function Home() {
                   <stop offset="100%" stopColor="rgba(127,155,180,0)" />
                 </linearGradient>
               </defs>
-              <rect className="scanStroke s1" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" />
-              <rect className="scanStroke s2" x="3.5" y="3.5" width="93" height="93" rx="8" ry="8" />
+              <rect className="scanStroke s1" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="1000" />
+              <rect className="scanStroke s2" x="3.5" y="3.5" width="93" height="93" rx="8" ry="8" pathLength="1000" />
             </svg>
 
             <aside className="console-rail">

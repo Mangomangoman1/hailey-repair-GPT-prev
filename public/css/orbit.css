@@ -180,8 +180,11 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
   vector-effect: non-scaling-stroke;
   stroke-linecap: round;
   stroke-width: 1.6;
-  stroke-dasharray: 18 320; /* short highlight + long gap */
-  animation: dashCrawl 4.8s linear infinite;
+
+  /* one "comet" segment that travels the full perimeter */
+  stroke-dasharray: 120 880; /* sums to pathLength=1000 */
+  animation: dashCrawl 3.8s linear infinite;
+
   filter:
     drop-shadow(0 0 10px rgba(182,201,216,0.14))
     drop-shadow(0 0 22px rgba(127,155,180,0.10));
@@ -190,14 +193,14 @@ h1{ margin: 1.05rem 0 0.8rem; font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-heig
 .console-scan .scanStroke.s1{ stroke: url(#scanGrad); opacity: .95; }
 .console-scan .scanStroke.s2{
   stroke: url(#scanGrad2);
-  opacity: .70;
+  opacity: .65;
   stroke-width: 1.2;
-  animation-delay: -2.4s; /* opposite side, same direction */
+  animation-delay: -1.9s; /* opposite side, same direction (half of 3.8s) */
 }
 
 @keyframes dashCrawl{
   from{ stroke-dashoffset: 0; }
-  to{ stroke-dashoffset: -340; }
+  to{ stroke-dashoffset: -1000; }
 }
 
 @keyframes scanRing{
