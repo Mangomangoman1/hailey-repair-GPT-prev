@@ -25,7 +25,7 @@ export default function Home() {
             </aside>
 
             <div className="console-main" id="overview">
-              <h2>Device Repair With Integrity</h2>
+              <h2>No appointment needed, text us today</h2>
               <p>
                 Straight diagnostics, practical options, and careful repair for phones, laptops, and tablets in the Wood River Valley.
               </p>
@@ -159,7 +159,7 @@ export default function Home() {
               </p>
               <div className="actions" style={{ marginTop: '0.9rem' }}>
                 <Link className="btn" href="/contact">Request repair</Link>
-                <a className="btn btn-ghost" href="tel:+12084503730">Call now</a>
+                <a className="btn btn-ghost" href="sms:+12084503730">Text now</a>
               </div>
             </div>
           </div>

@@ -124,7 +124,7 @@ export default function Chat() {
           </div>
 
           <div className="chat-footer">
-            <p>Can't fix it remotely? <a href="tel:+12084503730">Call Sam at (208) 450-3730</a> or <Link href="/contact">request a repair</Link>.</p>
+            <p>Can't fix it remotely? <a href="sms:+12084503730">Text Sam at (208) 450-3730</a> or <Link href="/contact">request a repair</Link>.</p>
           </div>
         </div>
       </section>

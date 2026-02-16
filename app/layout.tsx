@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
 
             <div className="cta">
-              <a className="btn btn-call" href="tel:+12084503730">Call</a>
+              <a className="btn btn-call" href="sms:+12084503730">Text</a>
             </div>
           </div>
         </header>
