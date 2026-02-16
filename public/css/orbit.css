@@ -296,37 +296,34 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 .console-beam > *{ position: relative; z-index: 1; }
 
 .console-beam::before{
-  --beamW: 2px;
+  --beamW: 3px;
   content: "";
   position: absolute;
-  inset: -2px;           /* overscan helps avoid corner artifacts */
+  inset: calc(var(--beamW) * -1); /* overscan helps avoid corner artifacts */
   border-radius: inherit;
+  padding: var(--beamW);          /* border thickness */
   pointer-events: none;
   z-index: 0;
 
-  /* define the border thickness */
-  border: var(--beamW) solid transparent;
-
-  /* paint the conic gradient into the border-box */
+  /* The beam: mostly transparent with a bright blue-gray segment */
   background: conic-gradient(
     from 0deg,
-    transparent 0deg,
-    transparent 302deg,
-    rgba(182,201,216,0.00) 302deg,
+    transparent 0deg 300deg,
+    rgba(182,201,216,0.00) 300deg,
     rgba(182,201,216,0.95) 322deg,
     rgba(95,127,156,0.95) 340deg,
     rgba(182,201,216,0.00) 352deg,
     transparent 360deg
-  ) border-box;
+  );
 
-  /* Punch-out mask: keep only the border ring (padding-box is the inner hole) */
+  /* Punch-out mask: keep only the border ring (content-box is the inner hole) */
   -webkit-mask:
-    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
 
   mask:
-    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
 
@@ -334,10 +331,10 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   transform: translateZ(0) rotate(0deg);
   will-change: transform;
 
+  /* keep the glow tight so it doesn't wash into the center */
   filter:
-    blur(0.15px)
-    drop-shadow(0 0 10px rgba(182,201,216,0.14))
-    drop-shadow(0 0 22px rgba(127,155,180,0.10));
+    drop-shadow(0 0 8px rgba(182,201,216,0.12))
+    drop-shadow(0 0 16px rgba(127,155,180,0.10));
 
   animation: beamSpin 6.5s linear infinite;
 }
