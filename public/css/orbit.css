@@ -288,13 +288,15 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 /* A */
 .console-shell{ display:grid; grid-template-columns: 220px 1fr; border:1px solid var(--line); border-radius: 20px; overflow:hidden; background: rgba(255,255,255,0.03); }
 
-/* Border Beam (CodeWiki-style) — cross-browser (no mask-composite)
-   Draw conic-gradient on ::before and cover center with ::after so only border shows.
+/* Border Beam (CodeWiki-style) — cross-browser pattern
+   Use two backgrounds + background-clip so the conic gradient only shows in the border.
+   This avoids mask-composite (Chrome issues) and avoids an inner-cover layer (triangle leaks).
 */
 .console-beam{ position: relative; isolation: isolate; }
-.console-beam > *{ position: relative; z-index: 3; }
+.console-beam > *{ position: relative; z-index: 2; }
 
 .console-beam::before{
+  --beamW: 2px;
   content:"";
   position:absolute;
   inset: -2px; /* overscan to avoid corner artifacts */
@@ -302,18 +304,24 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   pointer-events:none;
   z-index: 1;
 
-  /* one moving highlight segment; rest transparent */
-  background:
+  border: var(--beamW) solid transparent;
+
+  /* layer 1 fills the center; layer 2 paints the beam in the border box */
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 0 0),
     conic-gradient(
       from 0deg,
       transparent 0deg,
       transparent 300deg,
-      rgba(182,201,216,0.04) 300deg,
+      rgba(182,201,216,0.06) 300deg,
       rgba(182,201,216,0.95) 325deg,
       rgba(95,127,156,0.95) 345deg,
-      rgba(182,201,216,0.04) 356deg,
+      rgba(182,201,216,0.06) 356deg,
       transparent 360deg
     );
+
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
 
   transform-origin: 50% 50%;
   transform: translateZ(0) rotate(0deg);
@@ -327,20 +335,10 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   animation: beamSpin 6.5s linear infinite;
 }
 
-.console-beam::after{
-  content:"";
-  position:absolute;
-  inset: 2px; /* beam thickness */
-  border-radius: calc(20px - 2px);
-  background: rgba(255,255,255,0.03); /* match .console-shell background */
-  pointer-events:none;
-  z-index: 2;
-}
-
 @keyframes beamSpin{ to{ transform: translateZ(0) rotate(360deg); } }
 
 /* Note: if your OS has Reduce Motion enabled, animations may pause.
-   If you want to respect that setting, re-enable this block.
+   If you want to respect that setting, add a prefers-reduced-motion rule.
 */
 
 .console-rail{ border-right:1px solid var(--line2); padding:1rem; background: rgba(255,255,255,0.02); }
