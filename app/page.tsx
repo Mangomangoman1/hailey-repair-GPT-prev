@@ -9,6 +9,9 @@ export default function Home() {
         <div className="container">
           <div className="concept-label">
             <FlowLabel text="Hailey Device Repair // 7 days a week" />
+            <div className="text-first-pill">
+              Texting is the fastest way to reach us: <a href="sms:+12084503730">(208) 450-3730</a>
+            </div>
           </div>
           <ConsoleShellBeam>
             <aside className="console-rail">
