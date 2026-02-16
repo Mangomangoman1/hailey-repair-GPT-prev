@@ -296,34 +296,37 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 .console-beam > *{ position: relative; z-index: 1; }
 
 .console-beam::before{
+  --beamW: 2px;
   content: "";
   position: absolute;
   inset: -2px;           /* overscan helps avoid corner artifacts */
   border-radius: inherit;
-  padding: 2px;          /* border thickness */
   pointer-events: none;
   z-index: 0;
 
-  /* The beam: mostly transparent with a bright blue-gray segment */
+  /* define the border thickness */
+  border: var(--beamW) solid transparent;
+
+  /* paint the conic gradient into the border-box */
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 300deg,
-    rgba(182,201,216,0.06) 300deg,
-    rgba(182,201,216,0.95) 325deg,
-    rgba(95,127,156,0.95) 345deg,
-    rgba(182,201,216,0.06) 356deg,
+    transparent 302deg,
+    rgba(182,201,216,0.00) 302deg,
+    rgba(182,201,216,0.95) 322deg,
+    rgba(95,127,156,0.95) 340deg,
+    rgba(182,201,216,0.00) 352deg,
     transparent 360deg
-  );
+  ) border-box;
 
-  /* Punch-out mask: keep only the border ring */
+  /* Punch-out mask: keep only the border ring (padding-box is the inner hole) */
   -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0) padding-box,
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
 
   mask:
-    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0) padding-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
 
