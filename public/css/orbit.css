@@ -339,9 +339,9 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 
 @keyframes beamSpin{ to{ transform: translateZ(0) rotate(360deg); } }
 
-@media (prefers-reduced-motion: reduce){
-  .console-beam::before{ animation: none; }
-}
+/* Note: if your OS has Reduce Motion enabled, animations may pause.
+   If you want to respect that setting, re-enable this block.
+*/
 
 .console-rail{ border-right:1px solid var(--line2); padding:1rem; background: rgba(255,255,255,0.02); }
 .console-rail .rail-title{
