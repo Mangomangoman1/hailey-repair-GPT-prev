@@ -288,60 +288,7 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 /* A */
 .console-shell{ display:grid; grid-template-columns: 220px 1fr; border:1px solid var(--line); border-radius: 20px; overflow:hidden; background: rgba(255,255,255,0.03); }
 
-/* Border Beam (CodeWiki/MagicUI style) — conic-gradient + mask punch-out
-   One pseudo-element only. Rotates via transform. Includes both standard + webkit mask syntaxes.
-   NOTE: This intentionally ignores prefers-reduced-motion for this attempt.
-*/
-.console-beam{ position: relative; isolation: isolate; }
-.console-beam > *{ position: relative; z-index: 1; }
-
-.console-beam::before{
-  --beamW: 3px;
-  content: "";
-  position: absolute;
-  inset: calc(var(--beamW) * -1); /* overscan helps avoid corner artifacts */
-  border-radius: inherit;
-  padding: var(--beamW);          /* border thickness */
-  pointer-events: none;
-  z-index: 0;
-
-  /* The beam: mostly transparent with a bright blue-gray segment */
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg 300deg,
-    rgba(182,201,216,0.00) 300deg,
-    rgba(182,201,216,0.95) 322deg,
-    rgba(95,127,156,0.95) 340deg,
-    rgba(182,201,216,0.00) 352deg,
-    transparent 360deg
-  );
-
-  /* Punch-out mask: keep only the border ring (content-box is the inner hole) */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-
-  transform-origin: 50% 50%;
-  transform: translateZ(0) rotate(0deg);
-  will-change: transform;
-
-  /* keep the glow tight so it doesn't wash into the center */
-  filter:
-    drop-shadow(0 0 8px rgba(182,201,216,0.12))
-    drop-shadow(0 0 16px rgba(127,155,180,0.10));
-
-  animation: beamSpin 6.5s linear infinite;
-}
-
-@keyframes beamSpin{
-  to{ transform: translateZ(0) rotate(360deg); }
-}
+/* (removed border beam experiment) */
 
 .console-rail{ border-right:1px solid var(--line2); padding:1rem; background: rgba(255,255,255,0.02); }
 .console-rail .rail-title{
