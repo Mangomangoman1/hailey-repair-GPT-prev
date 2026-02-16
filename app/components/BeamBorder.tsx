@@ -71,6 +71,32 @@ export default function BeamBorder({
         </filter>
       </defs>
 
+      {/* glow layer (behind) */}
+      <rect
+        x={x}
+        y={y}
+        width={rw}
+        height={rh}
+        rx={cr}
+        ry={cr}
+        pathLength={pathLength}
+        className="beam-path beam-glow"
+        filter={`url(#beamGlow-${uid})`}
+      />
+      <rect
+        x={x}
+        y={y}
+        width={rw}
+        height={rh}
+        rx={cr}
+        ry={cr}
+        pathLength={pathLength}
+        className="beam-path beam-glow beam-path2"
+        style={{ animationDelay: `-${Math.round(durationMs / 2)}ms` }}
+        filter={`url(#beamGlow-${uid})`}
+      />
+
+      {/* sharp layer (front) */}
       <rect
         x={x}
         y={y}
@@ -80,9 +106,7 @@ export default function BeamBorder({
         ry={cr}
         pathLength={pathLength}
         className="beam-path"
-        filter={`url(#beamGlow-${uid})`}
       />
-
       <rect
         x={x}
         y={y}
@@ -93,7 +117,6 @@ export default function BeamBorder({
         pathLength={pathLength}
         className="beam-path beam-path2"
         style={{ animationDelay: `-${Math.round(durationMs / 2)}ms` }}
-        filter={`url(#beamGlow-${uid})`}
       />
     </svg>
   )

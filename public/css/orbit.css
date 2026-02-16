@@ -331,7 +331,13 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   /* single spear + gap; values sum to pathLength=1000 */
   stroke-dasharray: var(--beamDash, 72) var(--beamGap, 928);
   animation: beamRun var(--beamDur, 14000ms) linear infinite;
-  /* filter is applied via the SVG element attribute (per-instance id) */
+}
+
+/* glow layer: thicker + softer */
+.beam-glow{
+  stroke-width: calc(var(--beamStroke, 1.05) * 3.2);
+  opacity: 0.18;
+  filter: blur(0.25px);
 }
 
 .beam-path2{
