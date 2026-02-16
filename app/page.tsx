@@ -9,7 +9,26 @@ export default function Home() {
           <div className="concept-label">
             <FlowLabel text="Hailey Device Repair // 7 days a week" />
           </div>
-          <div className="console-shell">
+          <div className="console-shell beam-card">
+            <svg className="beam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="rgba(182,201,216,0)" />
+                  <stop offset="35%" stopColor="rgba(182,201,216,0.95)" />
+                  <stop offset="65%" stopColor="rgba(95,127,156,0.95)" />
+                  <stop offset="100%" stopColor="rgba(182,201,216,0)" />
+                </linearGradient>
+                <filter id="beamGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.8" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <rect className="beam-path" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="1000" />
+            </svg>
+
             <aside className="console-rail">
               <div className="rail-title">repair://hailey</div>
               <nav>
