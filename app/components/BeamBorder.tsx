@@ -63,40 +63,15 @@ export default function BeamBorder({
     >
       <defs>
         <filter id={`beamGlow-${uid}`} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="1.1" result="b" />
+          <feGaussianBlur stdDeviation="2.2" result="b" />
           <feMerge>
+            <feMergeNode in="b" />
             <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
 
-      {/* glow layer (behind) */}
-      <rect
-        x={x}
-        y={y}
-        width={rw}
-        height={rh}
-        rx={cr}
-        ry={cr}
-        pathLength={pathLength}
-        className="beam-path beam-glow"
-        filter={`url(#beamGlow-${uid})`}
-      />
-      <rect
-        x={x}
-        y={y}
-        width={rw}
-        height={rh}
-        rx={cr}
-        ry={cr}
-        pathLength={pathLength}
-        className="beam-path beam-glow beam-path2"
-        style={{ animationDelay: `-${Math.round(durationMs / 2)}ms` }}
-        filter={`url(#beamGlow-${uid})`}
-      />
-
-      {/* sharp layer (front) */}
       <rect
         x={x}
         y={y}
@@ -106,7 +81,9 @@ export default function BeamBorder({
         ry={cr}
         pathLength={pathLength}
         className="beam-path"
+        filter={`url(#beamGlow-${uid})`}
       />
+
       <rect
         x={x}
         y={y}
@@ -117,6 +94,7 @@ export default function BeamBorder({
         pathLength={pathLength}
         className="beam-path beam-path2"
         style={{ animationDelay: `-${Math.round(durationMs / 2)}ms` }}
+        filter={`url(#beamGlow-${uid})`}
       />
     </svg>
   )

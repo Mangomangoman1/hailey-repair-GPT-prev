@@ -333,12 +333,7 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   animation: beamRun var(--beamDur, 14000ms) linear infinite;
 }
 
-/* glow layer: thicker + softer */
-.beam-glow{
-  stroke-width: calc(var(--beamStroke, 1.05) * 3.2);
-  opacity: 0.18;
-  filter: blur(0.25px);
-}
+/* (glow-layer experiment removed) */
 
 .beam-path2{
   opacity: 0.75; /* slightly dimmer so the effect doesn't look busy */
