@@ -14,6 +14,8 @@ export default function ParticleField() {
     if (!ctx) return
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const ua = navigator.userAgent
+    const isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/CriOS\//.test(ua) && !/FxiOS\//.test(ua)
     let w = 0
     let h = 0
     let raf = 0
@@ -31,8 +33,9 @@ export default function ParticleField() {
       canvas.style.height = `${h}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      // +15% more than the last pass
-      const count = Math.min(142, Math.max(66, Math.floor((w * h) / 17400)))
+      // Safari struggles with lots of particles + connections; keep it lighter there.
+      const countBase = Math.floor((w * h) / (isSafari ? 23500 : 17400))
+      const count = Math.min(isSafari ? 96 : 142, Math.max(isSafari ? 42 : 66, countBase))
       dots = Array.from({ length: count }).map(() => ({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -54,7 +57,9 @@ export default function ParticleField() {
         ctx.fill()
       }
 
-      // very light near-line connections
+      // very light near-line connections (Safari: fewer + smaller radius)
+      const linkR2 = isSafari ? 3600 : 5600
+      const linkOp = isSafari ? 0.045 : 0.06
       for (let i = 0; i < dots.length; i++) {
         const a = dots[i]
         for (let j = i + 1; j < dots.length; j++) {
@@ -62,8 +67,8 @@ export default function ParticleField() {
           const dx = a.x - b.x
           const dy = a.y - b.y
           const dist2 = dx * dx + dy * dy
-          if (dist2 < 5600) {
-            const op = 0.06 * (1 - dist2 / 5600)
+          if (dist2 < linkR2) {
+            const op = linkOp * (1 - dist2 / linkR2)
             ctx.strokeStyle = `rgba(255,255,255,${op})`
             ctx.lineWidth = 1
             ctx.beginPath()

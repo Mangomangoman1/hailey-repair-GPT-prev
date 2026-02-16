@@ -11,6 +11,7 @@ type BeamBorderProps = {
   dash?: number
   gap?: number
   durationMs?: number
+  glow?: boolean
   className?: string
 }
 
@@ -23,6 +24,7 @@ export default function BeamBorder({
   dash = 80,
   gap = 920,
   durationMs = 9500,
+  glow = true,
   className,
 }: BeamBorderProps) {
   const [uid] = useState(() => Math.random().toString(36).slice(2))
@@ -87,7 +89,7 @@ export default function BeamBorder({
         ry={cr}
         pathLength={pathLength}
         className="beam-path"
-        filter={`url(#beamGlow-${uid})`}
+        filter={glow ? `url(#beamGlow-${uid})` : undefined}
       />
 
       <rect
@@ -100,7 +102,7 @@ export default function BeamBorder({
         pathLength={pathLength}
         className="beam-path beam-path2"
         style={{ animationDelay: `-${Math.round(durationMs / 2)}ms` }}
-        filter={`url(#beamGlow-${uid})`}
+        filter={glow ? `url(#beamGlow-${uid})` : undefined}
       />
     </svg>
   )

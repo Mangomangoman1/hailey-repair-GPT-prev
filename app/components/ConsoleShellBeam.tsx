@@ -6,8 +6,14 @@ import BeamBorder from './BeamBorder'
 export default function ConsoleShellBeam({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement | null>(null)
   const [size, setSize] = useState({ w: 0, h: 0 })
+  const [isSafari, setIsSafari] = useState(false)
 
   useEffect(() => {
+    // Safari detection (exclude Chrome iOS which is still WebKit but reports CriOS)
+    const ua = navigator.userAgent
+    const safari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/CriOS\//.test(ua) && !/FxiOS\//.test(ua)
+    setIsSafari(safari)
+
     const el = ref.current
     if (!el) return
 
@@ -44,7 +50,8 @@ export default function ConsoleShellBeam({ children }: { children: ReactNode }) 
           strokeWidth={1.05}
           dash={144}
           gap={856}
-          durationMs={14000}
+          durationMs={isSafari ? Math.round(14000 * 1.3) : 14000}
+          glow={!isSafari}
         />
       ) : null}
       {children}
