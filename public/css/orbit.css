@@ -288,20 +288,19 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 /* A */
 .console-shell{ display:grid; grid-template-columns: 220px 1fr; border:1px solid var(--line); border-radius: 20px; overflow:hidden; background: rgba(255,255,255,0.03); }
 
-/* Border Beam (CodeWiki-style): conic-gradient beam + mask punch-out */
+/* Border Beam (CodeWiki-style) — cross-browser (no mask-composite)
+   Draw conic-gradient on ::before and cover center with ::after so only border shows.
+*/
 .console-beam{ position: relative; isolation: isolate; }
-.console-beam > *{ position: relative; z-index: 2; }
+.console-beam > *{ position: relative; z-index: 3; }
+
 .console-beam::before{
   content:"";
   position:absolute;
   inset: -2px; /* overscan to avoid corner artifacts */
   border-radius: inherit;
-  padding: 2px; /* beam thickness */
   pointer-events:none;
   z-index: 1;
-
-  transform-origin: 50% 50%;
-  will-change: transform;
 
   /* one moving highlight segment; rest transparent */
   background:
@@ -309,29 +308,36 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
       from 0deg,
       transparent 0deg,
       transparent 300deg,
-      rgba(182,201,216,0.05) 300deg,
+      rgba(182,201,216,0.04) 300deg,
       rgba(182,201,216,0.95) 325deg,
       rgba(95,127,156,0.95) 345deg,
-      rgba(182,201,216,0.05) 356deg,
+      rgba(182,201,216,0.04) 356deg,
       transparent 360deg
     );
 
-  /* punch out center so only border ring remains */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  transform-origin: 50% 50%;
+  transform: translateZ(0) rotate(0deg);
+  will-change: transform;
 
   filter:
-    blur(0.2px)
-    drop-shadow(0 0 10px rgba(182,201,216,0.14))
+    blur(0.15px)
+    drop-shadow(0 0 10px rgba(182,201,216,0.12))
     drop-shadow(0 0 22px rgba(127,155,180,0.10));
 
   animation: beamSpin 6.5s linear infinite;
 }
 
-@keyframes beamSpin{ to{ transform: rotate(360deg); } }
+.console-beam::after{
+  content:"";
+  position:absolute;
+  inset: 2px; /* beam thickness */
+  border-radius: calc(20px - 2px);
+  background: rgba(255,255,255,0.03); /* match .console-shell background */
+  pointer-events:none;
+  z-index: 2;
+}
+
+@keyframes beamSpin{ to{ transform: translateZ(0) rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce){
   .console-beam::before{ animation: none; }
