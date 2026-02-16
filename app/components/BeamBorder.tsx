@@ -62,11 +62,17 @@ export default function BeamBorder({
       aria-hidden="true"
     >
       <defs>
-        <filter id={`beamGlow-${uid}`} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.2" result="b" />
+        <filter id={`beamGlow-${uid}`} x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="3.4" result="b" />
+          <feColorMatrix
+            in="b"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1.35 0"
+            result="g"
+          />
           <feMerge>
-            <feMergeNode in="b" />
-            <feMergeNode in="b" />
+            <feMergeNode in="g" />
+            <feMergeNode in="g" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
