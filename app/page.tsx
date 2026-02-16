@@ -19,14 +19,14 @@ export default function Home() {
                   <stop offset="100%" stopColor="rgba(182,201,216,0)" />
                 </linearGradient>
                 <filter id="beamGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="1.8" result="b" />
+                  <feGaussianBlur stdDeviation="1.2" result="b" />
                   <feMerge>
                     <feMergeNode in="b" />
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
               </defs>
-              <rect className="beam-path" x="1.5" y="1.5" width="97" height="97" rx="9" ry="9" pathLength="1000" />
+              <rect className="beam-path" x="1" y="1" width="98" height="98" rx="20" ry="20" pathLength="1000" />
             </svg>
 
             <aside className="console-rail">
