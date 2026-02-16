@@ -313,6 +313,11 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   animation: beamRun var(--beamDur, 14000ms) linear infinite;
   /* filter is applied via the SVG element attribute (per-instance id) */
 }
+
+.beam-path2{
+  opacity: 0.75; /* slightly dimmer so the effect doesn't look busy */
+}
+
 @keyframes beamRun{ to{ stroke-dashoffset: -1000; } }
 
 /* (removed border beam experiment) */
