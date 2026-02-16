@@ -9,7 +9,7 @@ export default function Home() {
           <div className="concept-label">
             <FlowLabel text="Hailey Device Repair // 7 days a week" />
           </div>
-          <div className="console-shell console-beam">
+          <div className="console-shell">
             <aside className="console-rail">
               <div className="rail-title">repair://hailey</div>
               <nav>
