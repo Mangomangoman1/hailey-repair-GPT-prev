@@ -16,14 +16,18 @@ export default function ConsoleShellBeam({ children }: { children: ReactNode }) 
       setSize({ w: r.width, h: r.height })
     }
 
-    update()
+    // Safari sometimes reports 0x0 on first tick; re-measure a couple times.
+    const raf1 = requestAnimationFrame(update)
+    const raf2 = requestAnimationFrame(update)
 
-    const ro = new ResizeObserver(() => update())
-    ro.observe(el)
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => update()) : null
+    ro?.observe(el)
 
     window.addEventListener('resize', update)
     return () => {
-      ro.disconnect()
+      cancelAnimationFrame(raf1)
+      cancelAnimationFrame(raf2)
+      ro?.disconnect()
       window.removeEventListener('resize', update)
     }
   }, [])

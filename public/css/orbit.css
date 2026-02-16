@@ -311,7 +311,7 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   /* single spear + gap; values sum to pathLength=1000 */
   stroke-dasharray: var(--beamDash, 72) var(--beamGap, 928);
   animation: beamRun var(--beamDur, 14000ms) linear infinite;
-  filter: url(#beamGlow);
+  /* filter is applied via the SVG element attribute (per-instance id) */
 }
 @keyframes beamRun{ to{ stroke-dashoffset: -1000; } }
 
