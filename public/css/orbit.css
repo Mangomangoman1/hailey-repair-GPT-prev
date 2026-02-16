@@ -288,7 +288,60 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 /* A */
 .console-shell{ display:grid; grid-template-columns: 220px 1fr; border:1px solid var(--line); border-radius: 20px; overflow:hidden; background: rgba(255,255,255,0.03); }
 
-/* (removed border beam experiment) */
+/* Border Beam (CodeWiki/MagicUI style) — conic-gradient + mask punch-out
+   One pseudo-element only. Rotates via transform. Includes both standard + webkit mask syntaxes.
+   NOTE: This intentionally ignores prefers-reduced-motion for this attempt.
+*/
+.console-beam{ position: relative; isolation: isolate; }
+.console-beam > *{ position: relative; z-index: 1; }
+
+.console-beam::before{
+  content: "";
+  position: absolute;
+  inset: -2px;           /* overscan helps avoid corner artifacts */
+  border-radius: inherit;
+  padding: 2px;          /* border thickness */
+  pointer-events: none;
+  z-index: 0;
+
+  /* The beam: mostly transparent with a bright blue-gray segment */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 300deg,
+    rgba(182,201,216,0.06) 300deg,
+    rgba(182,201,216,0.95) 325deg,
+    rgba(95,127,156,0.95) 345deg,
+    rgba(182,201,216,0.06) 356deg,
+    transparent 360deg
+  );
+
+  /* Punch-out mask: keep only the border ring */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  transform-origin: 50% 50%;
+  transform: translateZ(0) rotate(0deg);
+  will-change: transform;
+
+  filter:
+    blur(0.15px)
+    drop-shadow(0 0 10px rgba(182,201,216,0.14))
+    drop-shadow(0 0 22px rgba(127,155,180,0.10));
+
+  animation: beamSpin 6.5s linear infinite;
+}
+
+@keyframes beamSpin{
+  to{ transform: translateZ(0) rotate(360deg); }
+}
 
 .console-rail{ border-right:1px solid var(--line2); padding:1rem; background: rgba(255,255,255,0.02); }
 .console-rail .rail-title{
