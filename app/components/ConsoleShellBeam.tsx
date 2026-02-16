@@ -38,8 +38,8 @@ export default function ConsoleShellBeam({ children }: { children: ReactNode }) 
           radius={20}
           inset={1}
           strokeWidth={1.05}
-          dash={72}
-          gap={928}
+          dash={144}
+          gap={856}
           durationMs={14000}
         />
       ) : null}
