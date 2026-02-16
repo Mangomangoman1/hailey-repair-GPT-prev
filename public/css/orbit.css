@@ -300,13 +300,13 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   pointer-events:none;
   z-index: 1;
 
-  /* animate the gradient angle directly (more reliable than transform + masks in Safari) */
-  --beamAngle: 0deg;
+  transform-origin: 50% 50%;
+  will-change: transform;
 
   /* one moving highlight segment; rest transparent */
   background:
     conic-gradient(
-      from var(--beamAngle),
+      from 0deg,
       transparent 0deg,
       transparent 300deg,
       rgba(182,201,216,0.05) 300deg,
@@ -328,19 +328,10 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
     drop-shadow(0 0 10px rgba(182,201,216,0.14))
     drop-shadow(0 0 22px rgba(127,155,180,0.10));
 
-  animation: beamAngle 6.5s linear infinite;
+  animation: beamSpin 6.5s linear infinite;
 }
 
-/* typed custom property helps Chrome animate smoothly; Safari will still step through keyframes fine */
-@property --beamAngle{
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@keyframes beamAngle{
-  to{ --beamAngle: 360deg; }
-}
+@keyframes beamSpin{ to{ transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce){
   .console-beam::before{ animation: none; }
