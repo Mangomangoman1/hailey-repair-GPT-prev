@@ -298,19 +298,20 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
   height: 100%;
   pointer-events: none;
   z-index: 0;
+  overflow: visible;
 }
 .beam-path{
   fill: none;
-  stroke: url(#beamGrad);
-  stroke-width: 1.2; /* thinner */
+  stroke: rgba(182,201,216,0.92); /* solid so it doesn't vanish on vertical sides */
+  stroke-width: var(--beamStroke, 1.05);
   stroke-linejoin: round;
   stroke-linecap: round;
-  filter: url(#beamGlow);
-  opacity: 0.85;
+  opacity: 0.92;
 
   /* single spear + gap; values sum to pathLength=1000 */
-  stroke-dasharray: 80 920;
-  animation: beamRun 9.5s linear infinite; /* slower */
+  stroke-dasharray: var(--beamDash, 72) var(--beamGap, 928);
+  animation: beamRun var(--beamDur, 14000ms) linear infinite;
+  filter: url(#beamGlow);
 }
 @keyframes beamRun{ to{ stroke-dashoffset: -1000; } }
 
