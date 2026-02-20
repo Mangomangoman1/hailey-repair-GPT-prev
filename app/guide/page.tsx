@@ -28,7 +28,7 @@ export default function Guide() {
             <p>Send the model + what happened and we’ll reply with next steps.</p>
             <div className="actions" style={{ marginTop: '0.9rem' }}>
               <Link className="btn btn-primary" href="/contact">Request repair</Link>
-              <a className="btn" href="sms:+12084503730">Text (208) 450-3730</a>
+              <a className="btn" href="sms:+12083666111">Text (208) 366-6111</a>
             </div>
           </div>
           <div className="big">

@@ -66,7 +66,7 @@ export default function Contact() {
                 <button className="btn btn-primary" type="submit">
                   Send
                 </button>
-                <a className="btn" href="sms:+12084503730">
+                <a className="btn" href="sms:+12083666111">
                   Text
                 </a>
                 <Link className="btn btn-ghost" href="/chat">
@@ -82,7 +82,7 @@ export default function Contact() {
             <div className="big">
               <h3>Fast contact</h3>
               <p>
-                Text us: <a href="sms:+12084503730">(208) 450-3730</a>
+                Text us: <a href="sms:+12083666111">(208) 366-6111</a>
                 <br />
                 Email: <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
               </p>
@@ -93,7 +93,7 @@ export default function Contact() {
                 <span className="badge">Prior repairs?</span>
               </div>
               <div className="actions" style={{ marginTop: '0.95rem' }}>
-                <a className="btn btn-primary" href="sms:+12084503730">
+                <a className="btn btn-primary" href="sms:+12083666111">
                   Text now
                 </a>
                 <Link className="btn" href="/chat">

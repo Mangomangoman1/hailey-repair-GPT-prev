@@ -10,7 +10,7 @@ export default function Home() {
           <div className="concept-label">
             <FlowLabel text="Hailey Device Repair // 7 days a week" />
             <div className="text-first-pill">
-              Texting is the fastest way to reach us: <a href="sms:+12084503730">(208) 450-3730</a>
+              Texting is the fastest way to reach us: <a href="sms:+12083666111">(208) 366-6111</a>
             </div>
           </div>
           <ConsoleShellBeam>
@@ -153,13 +153,13 @@ export default function Home() {
             <div className="big">
               <h3>Direct contact</h3>
               <p>
-                <a href="tel:+12084503730">(208) 450-3730</a>
+                <a href="tel:+12083666111">(208) 366-6111</a>
                 <br />
                 <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
               </p>
               <div className="actions" style={{ marginTop: '0.9rem' }}>
                 <Link className="btn" href="/contact">Request repair</Link>
-                <a className="btn btn-ghost" href="sms:+12084503730">Text now</a>
+                <a className="btn btn-ghost" href="sms:+12083666111">Text now</a>
               </div>
             </div>
           </div>

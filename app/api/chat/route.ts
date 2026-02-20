@@ -30,7 +30,7 @@ When to Escalate to Sam:
 - You've tried 3+ things and nothing worked
 - It's clearly beyond remote troubleshooting
 
-Say: "This one might need hands-on help. Sam can take a look — call or text him at (208) 450-3730."
+Say: "This one might need hands-on help. Sam can take a look — call or text him at (208) 366-6111."
 
 Don't diagnose hardware you can't verify, don't upsell, and if unsure say "Sam would know better."
 
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "You've hit the chat limit for this session. If you still need help, please call or text Sam at (208) 450-3730."
+            "You've hit the chat limit for this session. If you still need help, please call or text Sam at (208) 366-6111."
         },
         { status: 200 }
       )
@@ -129,20 +129,20 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "I'm a little overloaded right now. Please try again in a few seconds—or call/text Sam at (208) 450-3730 and he'll help you directly."
+            "I'm a little overloaded right now. Please try again in a few seconds—or call/text Sam at (208) 366-6111 and he'll help you directly."
         },
         { status: 200 }
       )
     }
 
     return NextResponse.json(
-      { message: 'Sorry — something went wrong. Please call or text Sam at (208) 450-3730.' },
+      { message: 'Sorry — something went wrong. Please call or text Sam at (208) 366-6111.' },
       { status: 200 }
     )
   } catch (error) {
     console.error('Chat API error:', error)
     return NextResponse.json(
-      { message: 'Sorry — something went wrong. Please call or text Sam at (208) 450-3730.' },
+      { message: 'Sorry — something went wrong. Please call or text Sam at (208) 366-6111.' },
       { status: 200 }
     )
   }

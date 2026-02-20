@@ -42,7 +42,7 @@ export default function Chat() {
     if (userMsgCount >= MAX_USER_MESSAGES) {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: "You've hit the chat limit for this session. If you still need help, please call or text Sam at (208) 450-3730."
+        content: "You've hit the chat limit for this session. If you still need help, please call or text Sam at (208) 366-6111."
       }])
       return
     }
@@ -68,7 +68,7 @@ export default function Chat() {
     } catch (error) {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: "Sorry, I'm having trouble connecting right now. Please call or text Sam directly at (208) 450-3730 for help."
+        content: "Sorry, I'm having trouble connecting right now. Please call or text Sam directly at (208) 366-6111 for help."
       }])
     } finally {
       setLoading(false)
@@ -124,7 +124,7 @@ export default function Chat() {
           </div>
 
           <div className="chat-footer">
-            <p>Can't fix it remotely? <a href="sms:+12084503730">Text Sam at (208) 450-3730</a> or <Link href="/contact">request a repair</Link>.</p>
+            <p>Can't fix it remotely? <a href="sms:+12083666111">Text Sam at (208) 366-6111</a> or <Link href="/contact">request a repair</Link>.</p>
           </div>
         </div>
       </section>

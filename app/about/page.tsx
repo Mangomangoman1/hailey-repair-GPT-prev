@@ -29,7 +29,7 @@ export default function About() {
             <h3>Service area</h3>
             <p>Hailey • Ketchum • Sun Valley • Bellevue</p>
             <div className="linkrow">
-              <a className="btn" href="sms:+12084503730">Text (208) 450-3730</a>
+              <a className="btn" href="sms:+12083666111">Text (208) 366-6111</a>
               <Link className="btn btn-ghost" href="/faq">FAQ</Link>
             </div>
           </article>
