@@ -322,7 +322,7 @@ input:focus, select:focus, textarea:focus{ outline:none; box-shadow: var(--focus
 }
 .beam-path{
   fill: none;
-  stroke: rgba(160,140,255,0.88); /* slight purple/blue */
+  stroke: rgba(190, 228, 255, 0.92); /* icy white-blue */
   stroke-width: var(--beamStroke, 1.05);
   stroke-linejoin: round;
   stroke-linecap: round;

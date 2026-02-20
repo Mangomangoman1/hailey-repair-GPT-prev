@@ -23,7 +23,7 @@ export default function BeamBorder({
   strokeWidth = 1.2,
   dash = 80,
   gap = 920,
-  durationMs = 9500,
+  durationMs = 19000,
   glow = true,
   className,
 }: BeamBorderProps) {

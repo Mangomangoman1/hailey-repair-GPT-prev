@@ -50,7 +50,7 @@ export default function ConsoleShellBeam({ children }: { children: ReactNode }) 
           strokeWidth={1.05}
           dash={144}
           gap={856}
-          durationMs={isSafari ? Math.round(14000 * 1.3) : 14000}
+          durationMs={isSafari ? Math.round(28000 * 1.3) : 28000}
           glow={!isSafari}
         />
       ) : null}
