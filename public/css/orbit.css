@@ -3,10 +3,10 @@
 */
 
 :root{
-  --bg: #f4ebdd;
-  --bg2: #fbf5eb;
-  --surface: rgba(255, 249, 241, 0.82);
-  --surface-strong: rgba(255, 252, 247, 0.94);
+  --bg: #eee0cb;
+  --bg2: #f5e8d8;
+  --surface: rgba(250, 242, 231, 0.84);
+  --surface-strong: rgba(252, 246, 238, 0.95);
   --ink: rgba(37, 29, 20, 0.94);
   --muted: rgba(61, 48, 34, 0.74);
   --muted2: rgba(61, 48, 34, 0.58);
@@ -35,7 +35,7 @@
 html{
   font-size: 16.5px;
   scroll-behavior: smooth;
-  background: #fdf9f3;
+  background: #f7eee2;
 }
 body{
   margin: 0;
@@ -45,7 +45,7 @@ body{
   background:
     radial-gradient(900px 520px at 18% -10%, rgba(209,173,122,0.34), transparent 56%),
     radial-gradient(900px 560px at 86% 0%, rgba(121,145,165,0.15), transparent 58%),
-    linear-gradient(180deg, #fdf9f3 0%, var(--bg2) 44%, var(--bg) 100%);
+    linear-gradient(180deg, #f7eee2 0%, var(--bg2) 44%, var(--bg) 100%);
 }
 
 ::selection{
@@ -122,7 +122,7 @@ textarea{
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(250, 244, 235, 0.82);
+  background: rgba(245, 236, 223, 0.88);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(109, 88, 60, 0.12);
   box-shadow: 0 8px 28px rgba(82, 62, 38, 0.06);
