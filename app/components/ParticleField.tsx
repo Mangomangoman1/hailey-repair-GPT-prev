@@ -19,6 +19,8 @@ export default function ParticleField() {
     let w = 0
     let h = 0
     let raf = 0
+    const dotRgb = '118, 137, 152'
+    const linkRgb = '139, 111, 79'
 
     const mouse = { x: -9999, y: -9999, active: false }
     let dots: Dot[] = []
@@ -52,7 +54,7 @@ export default function ParticleField() {
 
       for (const d of dots) {
         ctx.beginPath()
-        ctx.fillStyle = `rgba(255,255,255,${d.a})`
+        ctx.fillStyle = `rgba(${dotRgb},${d.a})`
         ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
         ctx.fill()
       }
@@ -69,7 +71,7 @@ export default function ParticleField() {
           const dist2 = dx * dx + dy * dy
           if (dist2 < linkR2) {
             const op = linkOp * (1 - dist2 / linkR2)
-            ctx.strokeStyle = `rgba(255,255,255,${op})`
+            ctx.strokeStyle = `rgba(${linkRgb},${op})`
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)

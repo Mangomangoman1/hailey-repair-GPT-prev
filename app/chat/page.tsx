@@ -131,14 +131,14 @@ export default function Chat() {
 
       <style jsx>{`
         .chat-container {
-          background: rgba(8, 12, 22, 0.84);
+          background: rgba(255, 250, 243, 0.82);
           border: 1px solid var(--line);
           border-radius: var(--radius);
           overflow: hidden;
           max-width: 740px;
           margin: 0 auto;
-          box-shadow: var(--shadow2);
-          backdrop-filter: blur(8px);
+          box-shadow: var(--shadow);
+          backdrop-filter: blur(12px);
         }
 
         .chat-messages {
@@ -148,7 +148,7 @@ export default function Chat() {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          background: rgba(6, 10, 18, 0.78);
+          background: linear-gradient(180deg, rgba(255, 252, 247, 0.78), rgba(244, 235, 221, 0.62));
         }
 
         .chat-message {
@@ -168,16 +168,17 @@ export default function Chat() {
           padding: 0.75rem 1rem;
           border-radius: 12px;
           line-height: 1.5;
+          box-shadow: 0 10px 24px rgba(82, 62, 38, 0.07);
         }
 
         .chat-message.user .chat-bubble {
-          background: linear-gradient(135deg, #7c3aed, #5b21b6);
-          color: #f8fafc;
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: linear-gradient(135deg, #efdfc5, #cf9e68);
+          color: #2b1a0f;
+          border: 1px solid rgba(171, 124, 77, 0.18);
         }
 
         .chat-message.assistant .chat-bubble {
-          background: rgba(255, 255, 255, 0.06);
+          background: rgba(255, 255, 255, 0.72);
           border: 1px solid var(--line);
         }
 
@@ -186,8 +187,8 @@ export default function Chat() {
           gap: 0.75rem;
           padding: 1rem 1.5rem;
           border-top: 1px solid var(--line);
-          background: rgba(10, 14, 24, 0.92);
-          backdrop-filter: blur(6px);
+          background: rgba(248, 241, 232, 0.92);
+          backdrop-filter: blur(10px);
         }
 
         .chat-input-form input {
@@ -195,15 +196,15 @@ export default function Chat() {
           padding: 0.75rem 1rem;
           border-radius: 10px;
           border: 1px solid var(--line);
-          background: rgba(0, 0, 0, 0.26);
+          background: rgba(255, 255, 255, 0.9);
           color: var(--ink);
           font-size: 1rem;
         }
 
         .chat-input-form input:focus {
           outline: none;
-          border-color: #7c3aed;
-          box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+          border-color: #ab7c4d;
+          box-shadow: 0 0 0 3px rgba(171, 124, 77, 0.18);
         }
 
         .chat-input-form input::placeholder {
