@@ -43,15 +43,24 @@ html{
 }
 body{
   margin: 0;
+  position: relative;
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   line-height: 1.6;
   background:
     radial-gradient(900px 520px at 18% -10%, rgba(209,173,122,0.34), transparent 56%),
     radial-gradient(900px 560px at 86% 0%, rgba(121,145,165,0.15), transparent 58%),
-    radial-gradient(1280px 920px at 108% 102%, var(--crimson-glow), transparent 50%),
-    radial-gradient(720px 560px at 100% 100%, var(--crimson-glow-deep), transparent 46%),
     linear-gradient(180deg, #f7eee2 0%, var(--bg2) 44%, var(--bg) 100%);
+}
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(1280px 920px at 108% 102%, var(--crimson-glow), transparent 50%),
+    radial-gradient(720px 560px at 100% 100%, var(--crimson-glow-deep), transparent 46%);
 }
 
 ::selection{
@@ -107,7 +116,7 @@ textarea{
   inset: 0;
   pointer-events: none;
   opacity: 0.34;
-  z-index: 0;
+  z-index: 1;
   background-image:
     linear-gradient(to right, rgba(109, 88, 60, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(109, 88, 60, 0.08) 1px, transparent 1px);
@@ -118,11 +127,11 @@ textarea{
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
   opacity: 0.72;
 }
 
-.header, main, .footer{ position: relative; z-index: 2; }
+.header, main, .footer{ position: relative; z-index: 3; }
 
 .header{
   position: sticky;
