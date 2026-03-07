@@ -16,8 +16,9 @@
   --accent: #5f7485;
   --accent2: #8fa2b2;
   --warn: #c79749;
-  --cool-glow: rgba(143, 162, 178, 0.16);
-  --cool-glow-soft: rgba(143, 162, 178, 0.08);
+  --cool-glow: rgba(143, 162, 178, 0.20);
+  --cool-glow-soft: rgba(143, 162, 178, 0.11);
+  --crimson-glow: rgba(129, 34, 58, 0.11);
 
   --brand1: #efdfc5;
   --brand2: #d1ad7a;
@@ -47,6 +48,7 @@ body{
   background:
     radial-gradient(900px 520px at 18% -10%, rgba(209,173,122,0.34), transparent 56%),
     radial-gradient(900px 560px at 86% 0%, rgba(121,145,165,0.15), transparent 58%),
+    radial-gradient(980px 680px at 100% 100%, var(--crimson-glow), transparent 60%),
     linear-gradient(180deg, #f7eee2 0%, var(--bg2) 44%, var(--bg) 100%);
 }
 
@@ -360,7 +362,7 @@ code{ color: inherit; }
   border-radius: var(--radius);
   border: 1px solid rgba(109, 88, 60, 0.12);
   background:
-    radial-gradient(circle at top right, rgba(143, 162, 178, 0.14), transparent 44%),
+    radial-gradient(circle at top right, rgba(143, 162, 178, 0.17), transparent 44%),
     linear-gradient(180deg, rgba(252, 246, 238, 0.96), rgba(246, 238, 227, 0.93));
   box-shadow: var(--shadow2);
   padding: 1.15rem;
@@ -383,7 +385,7 @@ code{ color: inherit; }
   border-radius: var(--radius2);
   border: 1px solid rgba(109, 88, 60, 0.12);
   background:
-    radial-gradient(circle at top right, rgba(143, 162, 178, 0.18), transparent 46%),
+    radial-gradient(circle at top right, rgba(143, 162, 178, 0.21), transparent 46%),
     linear-gradient(135deg, rgba(252, 246, 238, 0.96), rgba(239, 223, 197, 0.74));
   box-shadow: var(--shadow);
   padding: 1.25rem;
@@ -561,7 +563,7 @@ textarea:focus{
   border-radius: 20px;
   overflow:hidden;
   background:
-    radial-gradient(circle at top right, rgba(143, 162, 178, 0.18), transparent 38%),
+    radial-gradient(circle at top right, rgba(143, 162, 178, 0.22), transparent 38%),
     linear-gradient(180deg, rgba(250, 242, 231, 0.88), rgba(244, 233, 220, 0.82));
   box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
