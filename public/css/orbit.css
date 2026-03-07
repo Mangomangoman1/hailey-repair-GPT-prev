@@ -59,8 +59,13 @@ body::before{
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(1280px 920px at 108% 102%, var(--crimson-glow), transparent 50%),
-    radial-gradient(720px 560px at 100% 100%, var(--crimson-glow-deep), transparent 46%);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0) 8%,
+      rgba(173, 28, 66, 0.06) 36%,
+      rgba(150, 10, 46, 0.14) 64%,
+      rgba(90, 3, 24, 0.26) 100%
+    );
 }
 
 ::selection{
