@@ -19,8 +19,8 @@ export default function ParticleField() {
     let w = 0
     let h = 0
     let raf = 0
-    const dotRgb = '118, 137, 152'
-    const linkRgb = '139, 111, 79'
+    const dotRgb = '89, 107, 121'
+    const linkRgb = '118, 92, 64'
 
     const mouse = { x: -9999, y: -9999, active: false }
     let dots: Dot[] = []
