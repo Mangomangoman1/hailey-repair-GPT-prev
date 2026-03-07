@@ -18,7 +18,8 @@
   --warn: #c79749;
   --cool-glow: rgba(143, 162, 178, 0.20);
   --cool-glow-soft: rgba(143, 162, 178, 0.11);
-  --crimson-glow: rgba(129, 34, 58, 0.11);
+  --crimson-glow: rgba(143, 12, 48, 0.32);
+  --crimson-glow-deep: rgba(88, 6, 26, 0.24);
 
   --brand1: #efdfc5;
   --brand2: #d1ad7a;
@@ -48,7 +49,8 @@ body{
   background:
     radial-gradient(900px 520px at 18% -10%, rgba(209,173,122,0.34), transparent 56%),
     radial-gradient(900px 560px at 86% 0%, rgba(121,145,165,0.15), transparent 58%),
-    radial-gradient(980px 680px at 100% 100%, var(--crimson-glow), transparent 60%),
+    radial-gradient(980px 720px at 102% 102%, var(--crimson-glow), transparent 52%),
+    radial-gradient(520px 390px at 100% 100%, var(--crimson-glow-deep), transparent 54%),
     linear-gradient(180deg, #f7eee2 0%, var(--bg2) 44%, var(--bg) 100%);
 }
 
