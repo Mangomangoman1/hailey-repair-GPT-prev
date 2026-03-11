@@ -33,6 +33,11 @@
   --shadow2: 0 14px 36px rgba(82, 62, 38, 0.10);
   --container: 1160px;
   --focus: 0 0 0 4px rgba(171, 124, 77, 0.18);
+  --home-header-opacity: 1;
+  --home-header-translate: 0px;
+  --home-header-blur: 0px;
+  --home-main-scale: 1;
+  --home-main-translate: 0px;
 }
 
 *{ box-sizing: border-box; }
@@ -137,6 +142,11 @@ textarea{
 }
 
 .header, main, .footer{ position: relative; z-index: 3; }
+
+.home-scroll-stage{
+  transform: none;
+  transform-origin: top center;
+}
 
 .header{
   position: sticky;
@@ -669,6 +679,25 @@ textarea:focus{
 .blk strong{ display:block; margin-top:.35rem; font-size:1.1rem; }
 .blk-call a{ display:block; margin-top:.35rem; font-size:1.2rem; font-weight:800; }
 
+@media (min-width: 981px){
+  body[data-home-scroll="active"] .header{
+    opacity: var(--home-header-opacity);
+    transform: translateY(var(--home-header-translate));
+    filter: blur(var(--home-header-blur));
+    transition:
+      opacity 140ms linear,
+      transform 140ms linear,
+      filter 140ms linear;
+    will-change: opacity, transform, filter;
+  }
+
+  body[data-home-scroll="active"] .home-scroll-stage{
+    transform: translateY(var(--home-main-translate)) scale(var(--home-main-scale));
+    transition: transform 140ms linear;
+    will-change: transform;
+  }
+}
+
 @media (max-width: 980px){
   .hero-grid,
   .grid3,
@@ -700,6 +729,13 @@ textarea:focus{
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   .flow-label{ animation: none; }
+  .home-scroll-stage,
+  .header{
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
   .btn,
   .nav a,
   .card,

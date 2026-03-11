@@ -8,6 +8,17 @@ export const metadata: Metadata = {
   description:
     'Professional phone, laptop, and tablet repair in Hailey, Idaho. Clear diagnostics, quality parts, and respectful service across the Wood River Valley.',
   metadataBase: new URL('https://haileyrepair.com'),
+  icons: {
+    icon: [
+      { url: '/assets/favicon-32.png?v=2026-03-11a', sizes: '32x32', type: 'image/png' },
+      { url: '/assets/favicon-16.png?v=2026-03-11a', sizes: '16x16', type: 'image/png' },
+      { url: '/assets/favicon-192.png?v=2026-03-11a', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/assets/favicon-32.png?v=2026-03-11a',
+    apple: [
+      { url: '/assets/apple-touch-icon.png?v=2026-03-11a', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -16,6 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Preview/test site: Orbit chassis (fresh start) */}
         <link rel="stylesheet" href="/css/orbit.css?v=2026-03-06a" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=2026-03-11a" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png?v=2026-03-11a" />
+        <link rel="shortcut icon" href="/assets/favicon-32.png?v=2026-03-11a" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=2026-03-11a" />
       </head>
       <body>
         <div className="gridfx" aria-hidden="true" />
