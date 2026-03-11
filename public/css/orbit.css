@@ -157,10 +157,11 @@ textarea{
     linear-gradient(180deg, rgba(251, 245, 236, 0.94), rgba(241, 231, 217, 0.90));
   backdrop-filter: blur(18px) saturate(1.08);
   -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  border-bottom: 1px solid rgba(109, 88, 60, 0.18);
+  border-bottom: 1px solid rgba(109, 88, 60, 0.26);
   box-shadow:
-    inset 0 1px 0 rgba(255, 252, 246, 0.72),
-    0 10px 30px rgba(82, 62, 38, 0.08);
+    inset 0 1px 0 rgba(255, 252, 246, 0.76),
+    0 0 0 1px rgba(122, 96, 67, 0.08),
+    0 12px 34px rgba(82, 62, 38, 0.10);
 }
 .header::before{
   content: "";
@@ -178,9 +179,12 @@ textarea{
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(89, 70, 47, 0.12) 0.65px, transparent 0.75px);
-  background-size: 10px 10px;
-  opacity: 0.16;
+  background-image:
+    radial-gradient(rgba(89, 70, 47, 0.18) 0.7px, transparent 0.82px),
+    radial-gradient(rgba(255, 255, 255, 0.16) 0.55px, transparent 0.72px);
+  background-position: 0 0, 5px 5px;
+  background-size: 9px 9px, 11px 11px;
+  opacity: 0.24;
 }
 .header-inner{
   position: relative;
