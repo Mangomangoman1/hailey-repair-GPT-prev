@@ -117,8 +117,8 @@ export default function HoverBeamFrame({
           gap={gap}
           durationMs={isSafari ? Math.round(durationMs * 1.2) : durationMs}
           glow
-          glowBlur={isSafari ? 0.8 : 1.15}
-          glowStrength={isSafari ? 0.18 : 0.34}
+          glowBlur={isSafari ? 0.95 : 1.35}
+          glowStrength={isSafari ? 0.22 : 0.42}
         />
       ) : null}
       {children}
@@ -129,7 +129,7 @@ export default function HoverBeamFrame({
     return (
       <article
         ref={articleRef}
-        className={`${className ?? ''} hover-beam-frame${isBeamActive ? ' is-beam-active' : ''}`.trim()}
+        className={`${className ?? ''} hover-beam-frame${isBeamActive ? ' is-beam-active' : ''}${isSafari ? ' is-safari-beam' : ''}`.trim()}
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
       >
@@ -141,7 +141,7 @@ export default function HoverBeamFrame({
   return (
     <div
       ref={divRef}
-      className={`${className ?? ''} hover-beam-frame${isBeamActive ? ' is-beam-active' : ''}`.trim()}
+      className={`${className ?? ''} hover-beam-frame${isBeamActive ? ' is-beam-active' : ''}${isSafari ? ' is-safari-beam' : ''}`.trim()}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
     >
