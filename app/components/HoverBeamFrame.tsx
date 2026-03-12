@@ -26,7 +26,8 @@ export default function HoverBeamFrame({
   gap = 786,
   durationMs = 10800,
 }: HoverBeamFrameProps) {
-  const ref = useRef<HTMLElement | null>(null)
+  const divRef = useRef<HTMLDivElement | null>(null)
+  const articleRef = useRef<HTMLElement | null>(null)
   const [size, setSize] = useState({ w: 0, h: 0 })
   const [isSafari, setIsSafari] = useState(false)
 
@@ -35,7 +36,7 @@ export default function HoverBeamFrame({
     const safari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/CriOS\//.test(ua) && !/FxiOS\//.test(ua)
     setIsSafari(safari)
 
-    const el = ref.current
+    const el = as === 'article' ? articleRef.current : divRef.current
     if (!el) return
 
     const update = () => {
@@ -56,12 +57,10 @@ export default function HoverBeamFrame({
       ro?.disconnect()
       window.removeEventListener('resize', update)
     }
-  }, [])
+  }, [as])
 
-  const Tag = as
-
-  return (
-    <Tag ref={ref} className={`${className ?? ''} hover-beam-frame`.trim()}>
+  const content = (
+    <>
       {size.w > 0 && size.h > 0 ? (
         <BeamBorder
           className="beam hover-beam-svg"
@@ -79,6 +78,12 @@ export default function HoverBeamFrame({
         />
       ) : null}
       {children}
-    </Tag>
+    </>
   )
+
+  if (as === 'article') {
+    return <article ref={articleRef} className={`${className ?? ''} hover-beam-frame`.trim()}>{content}</article>
+  }
+
+  return <div ref={divRef} className={`${className ?? ''} hover-beam-frame`.trim()}>{content}</div>
 }
