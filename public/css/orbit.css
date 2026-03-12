@@ -465,25 +465,21 @@ code{ color: inherit; }
 
   .hover-beam-frame .hover-beam-svg{
     opacity: 0;
-    transition: opacity 200ms ease;
+    transition: opacity 170ms ease;
+    will-change: opacity;
   }
 
   .hover-beam-frame .beam-path{
-    stroke: rgba(239, 247, 253, 0.98);
-    opacity: 0.94;
-    animation-play-state: paused;
+    stroke: rgba(41, 33, 26, 0.96);
+    opacity: 0.90;
   }
 
   .hover-beam-frame .beam-path2{
-    opacity: 0.74;
+    opacity: 0.64;
   }
 
   .hover-beam-frame:hover .hover-beam-svg{
     opacity: 1;
-  }
-
-  .hover-beam-frame:hover .beam-path{
-    animation-play-state: running;
   }
 
   .service-card:hover,

@@ -73,8 +73,8 @@ export default function HoverBeamFrame({
           gap={gap}
           durationMs={isSafari ? Math.round(durationMs * 1.2) : durationMs}
           glow
-          glowBlur={1.8}
-          glowStrength={0.72}
+          glowBlur={1.15}
+          glowStrength={0.34}
         />
       ) : null}
       {children}
