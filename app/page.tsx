@@ -122,17 +122,17 @@ export default function Home() {
             </div>
 
             <div className="steps">
-              <article className="step">
+              <article className="step sand-card">
                 <div className="n">1</div>
                 <h3>Diagnose</h3>
                 <p>We verify root cause and what’s worth fixing.</p>
               </article>
-              <article className="step">
+              <article className="step sand-card">
                 <div className="n">2</div>
                 <h3>Approve</h3>
                 <p>You get a quote and options before work begins.</p>
               </article>
-              <article className="step">
+              <article className="step sand-card">
                 <div className="n">3</div>
                 <h3>Repair</h3>
                 <p>Careful repair, quality parts, and final testing.</p>
@@ -144,7 +144,7 @@ export default function Home() {
         <section id="contact-fast" className="section">
           <div className="container">
             <div className="split">
-              <div className="big">
+              <div className="big sand-card">
                 <h3>Need help deciding?</h3>
                 <p>Use Tech Helper first for fast triage. If it needs hands-on service, we’ll point you to the next move.</p>
                 <div className="actions" style={{ marginTop: '0.9rem' }}>
@@ -153,7 +153,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="big">
+              <div className="big sand-card">
                 <h3>Direct contact</h3>
                 <p>
                   <a href="tel:+12083666111">(208) 366-6111</a>
