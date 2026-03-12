@@ -445,16 +445,6 @@ code{ color: inherit; }
   font-weight: 720;
 }
 
-@keyframes cardBorderBeam{
-  from{ offset-distance: 0%; }
-  to{ offset-distance: 100%; }
-}
-
-@keyframes cardBorderBeamOffset{
-  from{ offset-distance: 50%; }
-  to{ offset-distance: 150%; }
-}
-
 @media (min-width: 981px) and (hover: hover) and (pointer: fine){
   .service-card,
   .step.sand-card,
@@ -466,63 +456,26 @@ code{ color: inherit; }
       background 220ms ease;
   }
 
-  .service-card::before,
-  .service-card::after,
-  .step.sand-card::before,
-  .step.sand-card::after,
-  .big.sand-card::before,
-  .big.sand-card::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 288px;
-    height: 16px;
-    border-radius: 999px;
-    pointer-events: none;
+  .hover-beam-frame .hover-beam-svg{
     opacity: 0;
-    z-index: 0;
-    background:
-      linear-gradient(
-        90deg,
-        rgba(92, 132, 176, 0.00) 0%,
-        rgba(92, 132, 176, 0.10) 8%,
-        rgba(124, 165, 210, 0.46) 18%,
-        rgba(242, 248, 253, 0.98) 50%,
-        rgba(124, 165, 210, 0.50) 82%,
-        rgba(92, 132, 176, 0.10) 92%,
-        rgba(92, 132, 176, 0.00) 100%
-      );
-    box-shadow:
-      0 0 8px rgba(167, 201, 232, 0.15),
-      0 0 22px rgba(124, 165, 210, 0.08);
     transition: opacity 200ms ease;
-    offset-path: border-box;
-    -webkit-offset-path: border-box;
-    offset-anchor: 100% 50%;
-    -webkit-offset-anchor: 100% 50%;
-    will-change: offset-distance, opacity;
   }
 
-  .service-card::before,
-  .step.sand-card::before,
-  .big.sand-card::before{
-    animation: cardBorderBeam 10.8s linear infinite paused;
+  .hover-beam-frame .beam-path{
+    stroke: rgba(239, 247, 253, 0.98);
+    opacity: 0.94;
+    animation-play-state: paused;
   }
 
-  .service-card::after,
-  .step.sand-card::after,
-  .big.sand-card::after{
-    animation: cardBorderBeamOffset 10.8s linear infinite paused;
+  .hover-beam-frame .beam-path2{
+    opacity: 0.74;
   }
 
-  .service-card:hover::before,
-  .service-card:hover::after,
-  .step.sand-card:hover::before,
-  .step.sand-card:hover::after,
-  .big.sand-card:hover::before,
-  .big.sand-card:hover::after{
-    opacity: 0.82;
+  .hover-beam-frame:hover .hover-beam-svg{
+    opacity: 1;
+  }
+
+  .hover-beam-frame:hover .beam-path{
     animation-play-state: running;
   }
 
@@ -892,15 +845,11 @@ textarea:focus{
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   .flow-label{ animation: none; }
-  .service-card::before,
-  .service-card::after,
-  .step.sand-card::before,
-  .step.sand-card::after,
-  .big.sand-card::before,
-  .big.sand-card::after{
+  .hover-beam-frame .hover-beam-svg{
     animation: none !important;
     opacity: 0 !important;
   }
+  .hover-beam-frame .beam-path{ animation: none !important; }
   .home-scroll-stage,
   .header{
     transition: none !important;

@@ -12,6 +12,8 @@ type BeamBorderProps = {
   gap?: number
   durationMs?: number
   glow?: boolean
+  glowBlur?: number
+  glowStrength?: number
   className?: string
 }
 
@@ -25,6 +27,8 @@ export default function BeamBorder({
   gap = 920,
   durationMs = 19000,
   glow = true,
+  glowBlur = 3.4,
+  glowStrength = 1.35,
   className,
 }: BeamBorderProps) {
   const [uid] = useState(() => Math.random().toString(36).slice(2))
@@ -65,11 +69,11 @@ export default function BeamBorder({
     >
       <defs>
         <filter id={`beamGlow-${uid}`} x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="3.4" result="b" />
+          <feGaussianBlur stdDeviation={glowBlur} result="b" />
           <feColorMatrix
             in="b"
             type="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1.35 0"
+            values={`1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 ${glowStrength} 0`}
             result="g"
           />
           <feMerge>

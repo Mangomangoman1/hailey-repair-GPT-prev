@@ -2,6 +2,7 @@ import Link from 'next/link'
 import FlowLabel from './components/FlowLabel'
 import ConsoleShellBeam from './components/ConsoleShellBeam'
 import HomeScrollMotion from './components/HomeScrollMotion'
+import HoverBeamFrame from './components/HoverBeamFrame'
 
 export default function Home() {
   return (
@@ -67,7 +68,7 @@ export default function Home() {
             </div>
 
             <div className="grid3">
-              <article className="card service-card">
+              <HoverBeamFrame as="article" className="card service-card" radius={18}>
                 <h3>Apple & Mac repair</h3>
                 <p>iPhone, iPad, and Mac-focused repair workflow and pre-check requirements.</p>
                 <div className="pills">
@@ -79,9 +80,9 @@ export default function Home() {
                 <div className="actions" style={{ marginTop: '0.9rem' }}>
                   <Link className="btn btn-primary" href="/prep#apple">Open Apple & Mac prep</Link>
                 </div>
-              </article>
+              </HoverBeamFrame>
 
-              <article className="card service-card">
+              <HoverBeamFrame as="article" className="card service-card" radius={18}>
                 <h3>Android repair</h3>
                 <p>Samsung, Pixel, and other Android devices with model-specific prep steps.</p>
                 <div className="pills">
@@ -93,9 +94,9 @@ export default function Home() {
                 <div className="actions" style={{ marginTop: '0.9rem' }}>
                   <Link className="btn btn-primary" href="/prep#android">Open Android prep</Link>
                 </div>
-              </article>
+              </HoverBeamFrame>
 
-              <article className="card service-card">
+              <HoverBeamFrame as="article" className="card service-card" radius={18}>
                 <h3>Laptop + IT help</h3>
                 <p>Performance, OS issues, startup failures, account recovery, and troubleshooting prep.</p>
                 <div className="pills">
@@ -107,7 +108,7 @@ export default function Home() {
                 <div className="actions" style={{ marginTop: '0.9rem' }}>
                   <Link className="btn btn-primary" href="/prep#laptop-it">Open Laptop + IT prep</Link>
                 </div>
-              </article>
+              </HoverBeamFrame>
             </div>
           </div>
         </section>
@@ -122,21 +123,21 @@ export default function Home() {
             </div>
 
             <div className="steps">
-              <article className="step sand-card">
+              <HoverBeamFrame as="article" className="step sand-card" radius={18}>
                 <div className="n">1</div>
                 <h3>Diagnose</h3>
                 <p>We verify root cause and what’s worth fixing.</p>
-              </article>
-              <article className="step sand-card">
+              </HoverBeamFrame>
+              <HoverBeamFrame as="article" className="step sand-card" radius={18}>
                 <div className="n">2</div>
                 <h3>Approve</h3>
                 <p>You get a quote and options before work begins.</p>
-              </article>
-              <article className="step sand-card">
+              </HoverBeamFrame>
+              <HoverBeamFrame as="article" className="step sand-card" radius={18}>
                 <div className="n">3</div>
                 <h3>Repair</h3>
                 <p>Careful repair, quality parts, and final testing.</p>
-              </article>
+              </HoverBeamFrame>
             </div>
           </div>
         </section>
@@ -144,16 +145,16 @@ export default function Home() {
         <section id="contact-fast" className="section">
           <div className="container">
             <div className="split">
-              <div className="big sand-card">
+              <HoverBeamFrame className="big sand-card" radius={26}>
                 <h3>Need help deciding?</h3>
                 <p>Use Tech Helper first for fast triage. If it needs hands-on service, we’ll point you to the next move.</p>
                 <div className="actions" style={{ marginTop: '0.9rem' }}>
                   <Link className="btn btn-primary" href="/chat">Open Tech Helper</Link>
                   <Link className="btn" href="/faq">Read FAQ</Link>
                 </div>
-              </div>
+              </HoverBeamFrame>
 
-              <div className="big sand-card">
+              <HoverBeamFrame className="big sand-card" radius={26}>
                 <h3>Direct contact</h3>
                 <p>
                   <a href="tel:+12083666111">(208) 366-6111</a>
@@ -164,7 +165,7 @@ export default function Home() {
                   <Link className="btn" href="/contact">Request repair</Link>
                   <a className="btn btn-ghost" href="sms:+12083666111">Text now</a>
                 </div>
-              </div>
+              </HoverBeamFrame>
             </div>
           </div>
         </section>
