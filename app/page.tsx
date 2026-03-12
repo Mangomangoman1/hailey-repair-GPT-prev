@@ -67,7 +67,7 @@ export default function Home() {
             </div>
 
             <div className="grid3">
-              <article className="card">
+              <article className="card service-card">
                 <h3>Apple & Mac repair</h3>
                 <p>iPhone, iPad, and Mac-focused repair workflow and pre-check requirements.</p>
                 <div className="pills">
@@ -81,7 +81,7 @@ export default function Home() {
                 </div>
               </article>
 
-              <article className="card">
+              <article className="card service-card">
                 <h3>Android repair</h3>
                 <p>Samsung, Pixel, and other Android devices with model-specific prep steps.</p>
                 <div className="pills">
@@ -95,7 +95,7 @@ export default function Home() {
                 </div>
               </article>
 
-              <article className="card">
+              <article className="card service-card">
                 <h3>Laptop + IT help</h3>
                 <p>Performance, OS issues, startup failures, account recovery, and troubleshooting prep.</p>
                 <div className="pills">
