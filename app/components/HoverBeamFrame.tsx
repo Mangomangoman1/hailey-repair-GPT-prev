@@ -28,8 +28,12 @@ export default function HoverBeamFrame({
 }: HoverBeamFrameProps) {
   const divRef = useRef<HTMLDivElement | null>(null)
   const articleRef = useRef<HTMLElement | null>(null)
+  const beamUnmountTimerRef = useRef<number | null>(null)
+  const beamActivateRafRef = useRef<number | null>(null)
   const [size, setSize] = useState({ w: 0, h: 0 })
   const [isSafari, setIsSafari] = useState(false)
+  const [isBeamMounted, setIsBeamMounted] = useState(false)
+  const [isBeamActive, setIsBeamActive] = useState(false)
 
   useEffect(() => {
     const ua = navigator.userAgent
@@ -59,9 +63,49 @@ export default function HoverBeamFrame({
     }
   }, [as])
 
+  useEffect(() => {
+    return () => {
+      if (beamUnmountTimerRef.current !== null) {
+        window.clearTimeout(beamUnmountTimerRef.current)
+      }
+      if (beamActivateRafRef.current !== null) {
+        cancelAnimationFrame(beamActivateRafRef.current)
+      }
+    }
+  }, [])
+
+  const handlePointerEnter = () => {
+    if (beamUnmountTimerRef.current !== null) {
+      window.clearTimeout(beamUnmountTimerRef.current)
+      beamUnmountTimerRef.current = null
+    }
+    if (beamActivateRafRef.current !== null) {
+      cancelAnimationFrame(beamActivateRafRef.current)
+    }
+
+    setIsBeamMounted(true)
+    beamActivateRafRef.current = requestAnimationFrame(() => {
+      setIsBeamActive(true)
+      beamActivateRafRef.current = null
+    })
+  }
+
+  const handlePointerLeave = () => {
+    if (beamActivateRafRef.current !== null) {
+      cancelAnimationFrame(beamActivateRafRef.current)
+      beamActivateRafRef.current = null
+    }
+
+    setIsBeamActive(false)
+    beamUnmountTimerRef.current = window.setTimeout(() => {
+      setIsBeamMounted(false)
+      beamUnmountTimerRef.current = null
+    }, 180)
+  }
+
   const content = (
     <>
-      {size.w > 0 && size.h > 0 ? (
+      {isBeamMounted && size.w > 0 && size.h > 0 ? (
         <BeamBorder
           className="beam hover-beam-svg"
           width={size.w}
@@ -73,8 +117,8 @@ export default function HoverBeamFrame({
           gap={gap}
           durationMs={isSafari ? Math.round(durationMs * 1.2) : durationMs}
           glow
-          glowBlur={1.15}
-          glowStrength={0.34}
+          glowBlur={isSafari ? 0.8 : 1.15}
+          glowStrength={isSafari ? 0.18 : 0.34}
         />
       ) : null}
       {children}
@@ -82,8 +126,26 @@ export default function HoverBeamFrame({
   )
 
   if (as === 'article') {
-    return <article ref={articleRef} className={`${className ?? ''} hover-beam-frame`.trim()}>{content}</article>
+    return (
+      <article
+        ref={articleRef}
+        className={`${className ?? ''} hover-beam-frame${isBeamActive ? ' is-beam-active' : ''}`.trim()}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+      >
+        {content}
+      </article>
+    )
   }
 
-  return <div ref={divRef} className={`${className ?? ''} hover-beam-frame`.trim()}>{content}</div>
+  return (
+    <div
+      ref={divRef}
+      className={`${className ?? ''} hover-beam-frame${isBeamActive ? ' is-beam-active' : ''}`.trim()}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+    >
+      {content}
+    </div>
+  )
 }

@@ -478,7 +478,7 @@ code{ color: inherit; }
     opacity: 0.64;
   }
 
-  .hover-beam-frame:hover .hover-beam-svg{
+  .hover-beam-frame.is-beam-active .hover-beam-svg{
     opacity: 1;
   }
 
