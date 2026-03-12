@@ -476,22 +476,26 @@ code{ color: inherit; }
     position: absolute;
     top: 0;
     left: 0;
-    width: 275px;
-    height: 42px;
+    width: 288px;
+    height: 16px;
     border-radius: 999px;
     pointer-events: none;
     opacity: 0;
     z-index: 0;
     background:
-      radial-gradient(
-        100% 100% at right center,
-        rgba(255, 251, 246, 0.92) 0%,
-        rgba(215, 232, 247, 0.80) 14%,
-        rgba(124, 165, 210, 0.62) 42%,
-        rgba(92, 132, 176, 0.22) 62%,
-        rgba(92, 132, 176, 0.00) 82%
+      linear-gradient(
+        90deg,
+        rgba(92, 132, 176, 0.00) 0%,
+        rgba(92, 132, 176, 0.10) 8%,
+        rgba(124, 165, 210, 0.46) 18%,
+        rgba(242, 248, 253, 0.98) 50%,
+        rgba(124, 165, 210, 0.50) 82%,
+        rgba(92, 132, 176, 0.10) 92%,
+        rgba(92, 132, 176, 0.00) 100%
       );
-    filter: blur(8px);
+    box-shadow:
+      0 0 8px rgba(167, 201, 232, 0.15),
+      0 0 22px rgba(124, 165, 210, 0.08);
     transition: opacity 200ms ease;
     offset-path: border-box;
     -webkit-offset-path: border-box;
@@ -503,13 +507,13 @@ code{ color: inherit; }
   .service-card::before,
   .step.sand-card::before,
   .big.sand-card::before{
-    animation: cardBorderBeam 7.2s linear infinite paused;
+    animation: cardBorderBeam 10.8s linear infinite paused;
   }
 
   .service-card::after,
   .step.sand-card::after,
   .big.sand-card::after{
-    animation: cardBorderBeamOffset 7.2s linear infinite paused;
+    animation: cardBorderBeamOffset 10.8s linear infinite paused;
   }
 
   .service-card:hover::before,
