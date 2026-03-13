@@ -97,9 +97,9 @@ const CARD_BORDER = '#c79868'
 const ICON_COLOR = '#dfba8e'
 const EDGE_COLOR = 0xc79868
 const STAGE_HEIGHT = 640
-const SECTION_HEIGHT = 1240
-const TRANSITION_RANGE = 1080
-const HERO_PROGRESS_OFFSET = 120
+const SECTION_HEIGHT = 1080
+const TRANSITION_RANGE = 900
+const HERO_PROGRESS_OFFSET = 210
 const HANDOFF_PLANE_Z = 0
 
 function clamp(value: number, min: number, max: number) {
@@ -509,9 +509,9 @@ export default function DeviceCubeHero() {
     let rafId: number | null = null
 
     const setSectionStyles = (progress: number) => {
-      const headingReveal = easedPhase(progress, 0.62, 0.78)
-      const cardsReveal = easedPhase(progress, 0.76, 0.9)
-      const sceneOpacity = 1 - easedPhase(progress, 0.9, 1)
+      const headingReveal = easedPhase(progress, 0.5, 0.64)
+      const cardsReveal = easedPhase(progress, 0.6, 0.76)
+      const sceneOpacity = 1 - easedPhase(progress, 0.8, 0.94)
 
       section.style.setProperty('--services-heading-opacity', headingReveal.toFixed(4))
       section.style.setProperty('--services-heading-y', `${(1 - headingReveal) * 18}px`)
@@ -519,7 +519,7 @@ export default function DeviceCubeHero() {
       section.style.setProperty('--services-cards-y', `${(1 - cardsReveal) * 24}px`)
       section.style.setProperty('--services-cards-scale', `${0.96 + cardsReveal * 0.04}`)
       stage.style.setProperty('--device-scene-opacity', sceneOpacity.toFixed(4))
-      section.classList.toggle('services-live', progress >= 0.88)
+      section.classList.toggle('services-live', progress >= 0.72)
     }
 
     const resize = () => {
@@ -583,12 +583,12 @@ export default function DeviceCubeHero() {
     const renderFrame = () => {
       const stageTop = stage.getBoundingClientRect().top + window.scrollY
       const progress = clamp((window.scrollY - (stageTop - HERO_PROGRESS_OFFSET)) / TRANSITION_RANGE, 0, 1)
-      const assembleAmount = easedPhase(progress, 0, 0.28)
-      const completionAmount = peakPhase(progress, 0.28, 0.34, 0.4)
-      const morphAmount = easedPhase(progress, 0.4, 0.54)
-      const unfoldAmount = easedPhase(progress, 0.54, 0.8)
-      const handoffAmount = easedPhase(progress, 0.76, 0.9)
-      const disposableFade = 1 - easedPhase(progress, 0.58, 0.7)
+      const assembleAmount = easedPhase(progress, 0, 0.24)
+      const completionAmount = peakPhase(progress, 0.24, 0.32, 0.38)
+      const morphAmount = easedPhase(progress, 0.38, 0.5)
+      const unfoldAmount = easedPhase(progress, 0.5, 0.68)
+      const handoffAmount = easedPhase(progress, 0.58, 0.74)
+      const disposableFade = 1 - easedPhase(progress, 0.52, 0.64)
 
       setSectionStyles(progress)
 
@@ -604,11 +604,11 @@ export default function DeviceCubeHero() {
         const cubeQuaternion = panel.cubeQuaternion.clone()
         const target = hasValidTargets ? measuredTargets[panel.targetKey] : null
 
-        if (progress <= 0.28) {
+        if (progress <= 0.24) {
           panel.group.position.copy(panel.startPosition).lerp(cubePosition, assembleAmount)
           panel.group.quaternion.copy(panel.startQuaternion).slerp(cubeQuaternion, assembleAmount)
           panel.group.scale.setScalar(1)
-        } else if (progress <= 0.54 || !target) {
+        } else if (progress <= 0.5 || !target) {
           panel.group.position.copy(cubePosition)
           panel.group.quaternion.copy(cubeQuaternion)
           panel.group.scale.setScalar(1)
