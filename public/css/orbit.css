@@ -539,9 +539,10 @@ code{ color: inherit; }
   transform-style: preserve-3d;
   will-change: transform;
   transform:
-    rotateX(calc(9deg + var(--cube-settle) * -29deg))
-    rotateY(calc(-9deg + var(--cube-settle) * -39deg))
-    scale(calc(0.96 + var(--cube-gather) * 0.09 - var(--cube-fade) * 0.06));
+    rotateX(calc(1deg + var(--cube-settle) * -22deg))
+    rotateY(calc(-2deg + var(--cube-settle) * -44deg))
+    rotateZ(calc(-2deg + var(--cube-gather) * 4deg - var(--cube-settle) * 2deg))
+    scale(calc(0.985 + var(--cube-gather) * 0.025 + var(--cube-settle) * 0.045 - var(--cube-fade) * 0.06));
 }
 .device-card{
   aspect-ratio: 1 / 1;
@@ -555,10 +556,15 @@ code{ color: inherit; }
   width: 92px;
   height: 92px;
   color: rgba(43, 34, 24, 0.94);
+  opacity: calc(1 - var(--cube-shell) * 0.92);
+  transform: scale(calc(1 - var(--cube-shell) * 0.08));
+  will-change: opacity, transform;
 }
 .device-face{
   --face-start-x: 0px;
   --face-start-y: 0px;
+  --face-start-z: 0px;
+  --face-start-rotate-z: 0deg;
   --face-rotate-x: 0deg;
   --face-rotate-y: 0deg;
   --face-fold: 0;
@@ -574,8 +580,9 @@ code{ color: inherit; }
     translate3d(
       calc(-50% + (var(--face-start-x) * (1 - var(--cube-gather)))),
       calc(-50% + (var(--face-start-y) * (1 - var(--cube-gather)))),
-      0px
+      calc(var(--face-start-z) * (1 - var(--cube-gather)))
     )
+    rotateZ(calc(var(--face-start-rotate-z) * (1 - var(--cube-gather))))
     rotateX(calc(var(--face-rotate-x) * var(--face-fold)))
     rotateY(calc(var(--face-rotate-y) * var(--face-fold)))
     translateZ(calc(var(--cube-depth) * var(--face-fold)));
@@ -585,25 +592,33 @@ code{ color: inherit; }
   will-change: transform, opacity;
 }
 .device-face-front{
-  --face-start-x: calc((var(--cube-size) + var(--cube-gap)) * -0.54);
-  --face-start-y: calc((var(--cube-size) + var(--cube-gap)) * 0.54);
+  --face-start-x: calc(var(--cube-size) * -0.12);
+  --face-start-y: calc(var(--cube-size) * 0.18);
+  --face-start-z: 74px;
+  --face-start-rotate-z: -2deg;
   --face-fold: var(--cube-front);
 }
 .device-face-right{
-  --face-start-x: calc((var(--cube-size) + var(--cube-gap)) * 0.54);
-  --face-start-y: calc((var(--cube-size) + var(--cube-gap)) * 0.54);
+  --face-start-x: calc(var(--cube-size) * 0.48);
+  --face-start-y: calc(var(--cube-size) * 0.04);
+  --face-start-z: -8px;
+  --face-start-rotate-z: 7deg;
   --face-rotate-y: 90deg;
   --face-fold: var(--cube-right);
 }
 .device-face-top{
-  --face-start-x: calc((var(--cube-size) + var(--cube-gap)) * 0.54);
-  --face-start-y: calc((var(--cube-size) + var(--cube-gap)) * -0.54);
+  --face-start-x: calc(var(--cube-size) * 0.1);
+  --face-start-y: calc(var(--cube-size) * -0.3);
+  --face-start-z: -18px;
+  --face-start-rotate-z: -3deg;
   --face-rotate-x: 90deg;
   --face-fold: var(--cube-top);
 }
 .device-face-left{
-  --face-start-x: calc((var(--cube-size) + var(--cube-gap)) * -0.54);
-  --face-start-y: calc((var(--cube-size) + var(--cube-gap)) * -0.54);
+  --face-start-x: calc(var(--cube-size) * -0.42);
+  --face-start-y: calc(var(--cube-size) * -0.02);
+  --face-start-z: -28px;
+  --face-start-rotate-z: -8deg;
   --face-rotate-y: -90deg;
   --face-fold: var(--cube-left);
 }
