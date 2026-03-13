@@ -9,10 +9,21 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))
 }
 
+function segment(value: number, start: number, end: number) {
+  return clamp((value - start) / (end - start), 0, 1)
+}
+
+function easeInOut(value: number) {
+  return value < 0.5
+    ? 4 * value * value * value
+    : 1 - Math.pow(-2 * value + 2, 3) / 2
+}
+
 export default function HomeScrollMotion() {
   useEffect(() => {
     const root = document.documentElement
     const body = document.body
+    const cubeStage = document.querySelector<HTMLElement>('.device-cube-stage')
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     let enabled = false
@@ -25,6 +36,22 @@ export default function HomeScrollMotion() {
       root.style.removeProperty('--home-header-blur')
       root.style.removeProperty('--home-main-scale')
       root.style.removeProperty('--home-main-translate')
+    }
+
+    const clearCubeVars = () => {
+      if (!cubeStage) return
+      cubeStage.removeAttribute('data-cube-active')
+      cubeStage.style.removeProperty('--cube-progress')
+      cubeStage.style.removeProperty('--cube-gather')
+      cubeStage.style.removeProperty('--cube-front')
+      cubeStage.style.removeProperty('--cube-right')
+      cubeStage.style.removeProperty('--cube-top')
+      cubeStage.style.removeProperty('--cube-left')
+      cubeStage.style.removeProperty('--cube-rear')
+      cubeStage.style.removeProperty('--cube-bottom')
+      cubeStage.style.removeProperty('--cube-shell')
+      cubeStage.style.removeProperty('--cube-settle')
+      cubeStage.style.removeProperty('--cube-fade')
     }
 
     const applyProgress = () => {
@@ -40,11 +67,47 @@ export default function HomeScrollMotion() {
       root.style.setProperty('--home-main-translate', `${-16 * eased}px`)
     }
 
+    const applyCubeProgress = () => {
+      if (!enabled || !cubeStage) return
+
+      const rect = cubeStage.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      const travel = Math.max(rect.height - viewportHeight * 0.38, 1)
+      const progress = clamp((viewportHeight * 0.14 - rect.top) / travel, 0, 1)
+
+      const gather = easeInOut(segment(progress, 0.02, 0.28))
+      const front = easeInOut(segment(progress, 0.14, 0.42))
+      const right = easeInOut(segment(progress, 0.22, 0.5))
+      const top = easeInOut(segment(progress, 0.34, 0.62))
+      const left = easeInOut(segment(progress, 0.44, 0.74))
+      const rear = easeInOut(segment(progress, 0.52, 0.78))
+      const bottom = easeInOut(segment(progress, 0.38, 0.68))
+      const shell = easeInOut(segment(progress, 0.48, 0.78))
+      const settle = easeInOut(segment(progress, 0.58, 0.86))
+      const fade = easeInOut(segment(progress, 0.82, 1))
+
+      cubeStage.setAttribute('data-cube-active', 'true')
+      cubeStage.style.setProperty('--cube-progress', `${progress}`)
+      cubeStage.style.setProperty('--cube-gather', `${gather}`)
+      cubeStage.style.setProperty('--cube-front', `${front}`)
+      cubeStage.style.setProperty('--cube-right', `${right}`)
+      cubeStage.style.setProperty('--cube-top', `${top}`)
+      cubeStage.style.setProperty('--cube-left', `${left}`)
+      cubeStage.style.setProperty('--cube-rear', `${rear}`)
+      cubeStage.style.setProperty('--cube-bottom', `${bottom}`)
+      cubeStage.style.setProperty('--cube-shell', `${shell}`)
+      cubeStage.style.setProperty('--cube-settle', `${settle}`)
+      cubeStage.style.setProperty('--cube-fade', `${fade}`)
+    }
+
     const updateEnabled = () => {
       const nextEnabled = window.innerWidth >= DESKTOP_MIN_WIDTH && !prefersReduced.matches
 
       if (nextEnabled === enabled) {
-        if (enabled) applyProgress()
+        if (enabled) {
+          applyProgress()
+          applyCubeProgress()
+        }
         return
       }
 
@@ -52,17 +115,22 @@ export default function HomeScrollMotion() {
 
       if (!enabled) {
         clearVars()
+        clearCubeVars()
         return
       }
 
       body.setAttribute('data-home-scroll', 'active')
       applyProgress()
+      applyCubeProgress()
     }
 
     const onScroll = () => {
       if (!enabled) return
       window.cancelAnimationFrame(frame)
-      frame = window.requestAnimationFrame(applyProgress)
+      frame = window.requestAnimationFrame(() => {
+        applyProgress()
+        applyCubeProgress()
+      })
     }
 
     const onResize = () => updateEnabled()
@@ -79,6 +147,7 @@ export default function HomeScrollMotion() {
       window.removeEventListener('resize', onResize)
       prefersReduced.removeEventListener('change', updateEnabled)
       clearVars()
+      clearCubeVars()
     }
   }, [])
 

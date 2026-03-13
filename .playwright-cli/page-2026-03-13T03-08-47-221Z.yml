@@ -1,0 +1,146 @@
+- generic [ref=e3]:
+  - banner [ref=e5]:
+    - link "Home" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img "Code Wiki logo" [ref=e7]
+    - generic:
+      - textbox "Find open source repos"
+      - button "Search" [disabled]:
+        - img: search
+    - button "Toggle theme" [ref=e12] [cursor=pointer]:
+      - img [ref=e13]: dark_mode
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - heading "Code Wiki" [level=1] [ref=e18]
+      - paragraph [ref=e19]: A new perspective on development for the agentic era. Gemini-generated documentation, always up-to-date.
+      - generic [ref=e20]:
+        - textbox "Find open source repos" [ref=e21]
+        - button "Search" [disabled]:
+          - img: search
+    - generic [ref=e23]:
+      - heading "Featured Repositories" [level=2] [ref=e24]
+      - generic [ref=e25]:
+        - link "gemini-cli google-gemini An open-source AI agent that brings the power of Gemini directly into your terminal. 92.7k" [ref=e26] [cursor=pointer]:
+          - /url: /github.com/google-gemini/gemini-cli
+          - generic [ref=e27]:
+            - generic [ref=e28]:
+              - heading "gemini-cli" [level=3] [ref=e29]
+              - img "google-gemini" [ref=e30]
+            - paragraph [ref=e31]: An open-source AI agent that brings the power of Gemini directly into your terminal.
+            - generic [ref=e32]:
+              - img [ref=e33]: star
+              - text: 92.7k
+        - link "go golang The Go programming language 132.1k" [ref=e34] [cursor=pointer]:
+          - /url: /github.com/golang/go
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - heading "go" [level=3] [ref=e37]
+              - img "golang" [ref=e38]
+            - paragraph [ref=e39]: The Go programming language
+            - generic [ref=e40]:
+              - img [ref=e41]: star
+              - text: 132.1k
+        - link "flutter flutter Flutter makes it easy and fast to build beautiful apps for mobile and beyond 174.8k" [ref=e42] [cursor=pointer]:
+          - /url: /github.com/flutter/flutter
+          - generic [ref=e43]:
+            - generic [ref=e44]:
+              - heading "flutter" [level=3] [ref=e45]
+              - img "flutter" [ref=e46]
+            - paragraph [ref=e47]: Flutter makes it easy and fast to build beautiful apps for mobile and beyond
+            - generic [ref=e48]:
+              - img [ref=e49]: star
+              - text: 174.8k
+        - link "kubernetes kubernetes Production-Grade Container Scheduling and Management 120.1k" [ref=e50] [cursor=pointer]:
+          - /url: /github.com/kubernetes/kubernetes
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - heading "kubernetes" [level=3] [ref=e53]
+              - img "kubernetes" [ref=e54]
+            - paragraph [ref=e55]: Production-Grade Container Scheduling and Management
+            - generic [ref=e56]:
+              - img [ref=e57]: star
+              - text: 120.1k
+        - link "react facebook The library for web and native user interfaces. 242.5k" [ref=e58] [cursor=pointer]:
+          - /url: /github.com/facebook/react
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - heading "react" [level=3] [ref=e61]
+              - img "facebook" [ref=e62]
+            - paragraph [ref=e63]: The library for web and native user interfaces.
+            - generic [ref=e64]:
+              - img [ref=e65]: star
+              - text: 242.5k
+        - link "python-sdk modelcontextprotocol The official Python SDK for Model Context Protocol servers and clients 21.4k" [ref=e66] [cursor=pointer]:
+          - /url: /github.com/modelcontextprotocol/python-sdk
+          - generic [ref=e67]:
+            - generic [ref=e68]:
+              - heading "python-sdk" [level=3] [ref=e69]
+              - img "modelcontextprotocol" [ref=e70]
+            - paragraph [ref=e71]: The official Python SDK for Model Context Protocol servers and clients
+            - generic [ref=e72]:
+              - img [ref=e73]: star
+              - text: 21.4k
+    - generic [ref=e76]:
+      - generic [ref=e79]:
+        - heading "Try it with your own private repository Coming Soon" [level=2] [ref=e80]:
+          - text: Try it with your own private repository
+          - generic [ref=e82]: Coming Soon
+        - paragraph [ref=e83]: Stop documenting. Start understanding. Connect your repository and get a fully interactive Code Wiki that stays perfectly in sync with every change. No more stale docs. Ever.
+        - link "Notify me when available arrow_outward" [ref=e84] [cursor=pointer]:
+          - /url: https://developers.google.com/profile/badges/community/sdlcagents/gca-agents
+          - heading "Notify me when available arrow_outward" [level=3] [ref=e86]:
+            - img [ref=e87]
+            - text: Notify me when available arrow_outward
+      - generic [ref=e91]:
+        - heading "Read your app for the first time" [level=2] [ref=e92]
+        - paragraph [ref=e93]: Code documentation that works for you, not the other way around.
+        - list [ref=e94]:
+          - listitem [ref=e95]:
+            - text: grid_view
+            - generic [ref=e96]: Understand your code section by section
+            - paragraph [ref=e97]: Focus on the code you care about. Pick a section and dive deeper to see exactly how it works.
+          - listitem [ref=e98]:
+            - text: bolt
+            - generic [ref=e99]: Generated automatically
+            - paragraph [ref=e100]: Our AI agent automatically generates and maintains a rich, interactive knowledge base from your code.
+          - listitem [ref=e101]:
+            - text: rotate_left
+            - generic [ref=e102]: Always up-to-date
+            - paragraph [ref=e103]: Every time a pull request is merged, the relevant documentation is automatically updated.
+          - listitem [ref=e104]:
+            - text: code
+            - generic [ref=e105]: Linked back to your code
+            - paragraph [ref=e106]: Instantly jump from an architectural overview to the exact service, or from a function's description to its definition in the repository.
+          - listitem [ref=e107]:
+            - text: account_tree
+            - generic [ref=e108]:
+              - img [ref=e109]: account_tree
+              - heading "Diagrams" [level=3] [ref=e110]
+              - paragraph [ref=e111]: Instead of piecing together complex systems in your head, watch as your code is transformed into clear, intuitive visuals that bring your architecture to life.
+      - generic [ref=e114]:
+        - heading "Talk to your codebase" [level=2] [ref=e115]
+        - paragraph [ref=e116]: Ask questions about your architecture, find function definitions, and understand complex logic in natural language. It's like having an engineer on call, 24/7.
+        - list [ref=e117]:
+          - listitem [ref=e118]: chat_bubble_outline Chat with your codebase
+          - listitem [ref=e119]: search Find what you need instantly
+          - listitem [ref=e120]: speed Low latency, high-quality
+    - generic [ref=e122]:
+      - heading "Add the missing dimensions to your software" [level=2] [ref=e123]
+      - link "See Code Wiki in action" [ref=e127] [cursor=pointer]:
+        - /url: /github.com/google-gemini/gemini-cli
+        - generic [ref=e128]:
+          - img [ref=e129]
+          - paragraph [ref=e131]: See Code Wiki in action
+          - img [ref=e132]: arrow_outward
+  - contentinfo [ref=e142]:
+    - img "Google for developers logo" [ref=e143]:
+      - img [ref=e144]
+      - img [ref=e151]
+    - link "FAQ" [ref=e165] [cursor=pointer]:
+      - /url: /faq
+    - link "Feedback" [ref=e166] [cursor=pointer]:
+      - /url: mailto:codewiki-feedback@google.com
+    - link "Terms" [ref=e167] [cursor=pointer]:
+      - /url: https://policies.google.com/terms
+    - link "Privacy" [ref=e168] [cursor=pointer]:
+      - /url: https://policies.google.com/privacy
