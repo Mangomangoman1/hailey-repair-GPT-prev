@@ -299,10 +299,49 @@ textarea{
 }
 .btn-ghost{ background: transparent; }
 .btn-call{
-  background: linear-gradient(135deg, var(--brand4), var(--brand5));
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  background:
+    linear-gradient(135deg, rgba(92, 117, 140, 0.96), rgba(79, 101, 121, 0.94));
   color: #fbf7ef;
-  border-color: rgba(95, 115, 130, 0.22);
-  box-shadow: 0 12px 28px rgba(95, 115, 130, 0.18);
+  border-color: rgba(95, 115, 130, 0.34);
+  box-shadow:
+    0 12px 28px rgba(95, 115, 130, 0.18),
+    inset 0 1px 0 rgba(212, 228, 243, 0.16);
+}
+.btn-call::before,
+.btn-call::after{
+  content: "";
+  position: absolute;
+  width: 160px;
+  aspect-ratio: 3 / 1;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      100% 100% at right,
+      rgba(88, 111, 132, 0.00),
+      rgba(255, 255, 255, 0.98) 5%,
+      rgba(203, 223, 241, 0.58) 40%,
+      rgba(99, 131, 160, 0.00) 80%
+    );
+  filter: blur(12px);
+  offset-distance: 0%;
+  offset-path: border-box;
+  -webkit-offset-path: border-box;
+  offset-anchor: 100% 50%;
+  -webkit-offset-anchor: 100% 50%;
+  will-change: offset-distance;
+}
+.btn-call::before{
+  opacity: 0.5;
+  animation: textPillShimmer 15s linear infinite;
+}
+.btn-call::after{
+  opacity: 0.92;
+  animation: textPillShimmerOffset 15s linear infinite;
+  offset-distance: 50%;
 }
 .btn-primary:hover,
 .btn-call:hover{
@@ -666,60 +705,17 @@ textarea:focus{
 
 .text-first-pill{
   display:inline-flex;
-  position: relative;
-  isolation: isolate;
-  overflow: visible;
   align-items:center;
   gap:.5rem;
   padding:.45rem .8rem;
   border-radius: 12px;
-  border:1px solid rgba(156, 140, 118, 0.32);
-  background:
-    linear-gradient(115deg, rgba(251, 246, 239, 0.97), rgba(238, 229, 217, 0.92));
+  border:1px solid rgba(171, 124, 77, 0.22);
+  background: rgba(255, 247, 236, 0.88);
   color: rgba(61, 48, 34, 0.92);
   font-weight: 850;
   letter-spacing: .01em;
-  box-shadow:
-    0 14px 30px rgba(171, 124, 77, 0.08),
-    inset 0 1px 0 rgba(255, 253, 248, 0.76);
+  box-shadow: 0 14px 30px rgba(171, 124, 77, 0.10);
   backdrop-filter: blur(10px);
-}
-.text-first-pill > *{
-  position: relative;
-  z-index: 1;
-}
-.text-first-pill::before,
-.text-first-pill::after{
-  content: "";
-  position: absolute;
-  width: 200px;
-  aspect-ratio: 3 / 1;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(
-      100% 100% at right,
-      rgba(251, 246, 239, 0.98),
-      rgba(255, 255, 255, 0.96) 5%,
-      rgba(207, 218, 228, 0.56) 40%,
-      rgba(207, 218, 228, 0.00) 80%
-    );
-  offset-distance: 0%;
-  transition: opacity .2s ease;
-  filter: blur(12px);
-  offset-path: border-box;
-  -webkit-offset-path: border-box;
-  offset-anchor: 100% 50%;
-  -webkit-offset-anchor: 100% 50%;
-  will-change: offset-distance;
-}
-.text-first-pill::before{
-  opacity: 0.5;
-  animation: textPillShimmer 15s linear infinite;
-}
-.text-first-pill::after{
-  animation: textPillShimmerOffset 15s linear infinite;
-  offset-distance: 50%;
 }
 
 @keyframes textPillShimmer{
@@ -909,8 +905,8 @@ textarea:focus{
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   .flow-label{ animation: none; }
-  .text-first-pill::before,
-  .text-first-pill::after{
+  .btn-call::before,
+  .btn-call::after{
     animation: none !important;
     opacity: 0 !important;
   }
