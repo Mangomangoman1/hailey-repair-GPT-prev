@@ -56,65 +56,9 @@ export default function Home() {
                 </div>
               </div>
             </ConsoleShellBeam>
-
-            <DeviceCubeHero />
           </div>
         </section>
-
-        <section id="services" className="section">
-          <div className="container">
-            <div className="section-head">
-              <div>
-                <h2>Services</h2>
-                <p>Start with the category that matches your issue. If you're unsure, use Tech Helper and we’ll route you.</p>
-              </div>
-            </div>
-
-            <div className="grid3">
-              <HoverBeamFrame as="article" className="card service-card" radius={18}>
-                <h3>Apple & Mac repair</h3>
-                <p>iPhone, iPad, and Mac-focused repair workflow and pre-check requirements.</p>
-                <div className="pills">
-                  <span className="pill">Screens</span>
-                  <span className="pill">Batteries</span>
-                  <span className="pill">Charging</span>
-                  <span className="pill">Mac diagnostics</span>
-                </div>
-                <div className="actions" style={{ marginTop: '0.9rem' }}>
-                  <Link className="btn btn-primary" href="/prep#apple">Open Apple & Mac prep</Link>
-                </div>
-              </HoverBeamFrame>
-
-              <HoverBeamFrame as="article" className="card service-card" radius={18}>
-                <h3>Android repair</h3>
-                <p>Samsung, Pixel, and other Android devices with model-specific prep steps.</p>
-                <div className="pills">
-                  <span className="pill">Screens</span>
-                  <span className="pill">Batteries</span>
-                  <span className="pill">Charging ports</span>
-                  <span className="pill">Data-safe intake</span>
-                </div>
-                <div className="actions" style={{ marginTop: '0.9rem' }}>
-                  <Link className="btn btn-primary" href="/prep#android">Open Android prep</Link>
-                </div>
-              </HoverBeamFrame>
-
-              <HoverBeamFrame as="article" className="card service-card" radius={18}>
-                <h3>Laptop + IT help</h3>
-                <p>Performance, OS issues, startup failures, account recovery, and troubleshooting prep.</p>
-                <div className="pills">
-                  <span className="pill">Performance</span>
-                  <span className="pill">OS issues</span>
-                  <span className="pill">Startup errors</span>
-                  <span className="pill">Account/login</span>
-                </div>
-                <div className="actions" style={{ marginTop: '0.9rem' }}>
-                  <Link className="btn btn-primary" href="/prep#laptop-it">Open Laptop + IT prep</Link>
-                </div>
-              </HoverBeamFrame>
-            </div>
-          </div>
-        </section>
+        <DeviceCubeHero />
 
         <section id="process" className="section">
           <div className="container">

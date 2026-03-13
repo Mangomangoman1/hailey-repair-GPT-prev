@@ -1,34 +1,93 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import HoverBeamFrame from './HoverBeamFrame'
 
 type DeviceKind = 'phone' | 'laptop' | 'tablet' | 'watch'
+type FaceKey = 'left' | 'front' | 'right' | 'back'
+
+type ServiceCardConfig = {
+  id: string
+  faceKey: Exclude<FaceKey, 'back'>
+  title: string
+  previewTitle: string
+  description: string
+  pills: string[]
+  ctaHref: string
+  ctaLabel: string
+}
 
 type PanelConfig = {
   kind: DeviceKind
   startPosition: [number, number, number]
   startRotationY: number
-  targetKey: 'left' | 'right' | 'back' | 'front'
+  targetKey: FaceKey
   renderOrder: number
+  serviceId?: string
+  isDisposable?: boolean
 }
 
 type PanelMeshes = {
   group: THREE.Group
   faceMaterial: THREE.MeshBasicMaterial
   iconMaterial: THREE.MeshBasicMaterial
+  previewMaterial: THREE.MeshBasicMaterial | null
   edgeMaterial: THREE.LineBasicMaterial
+  iconTexture: THREE.Texture
+  previewTexture: THREE.Texture | null
   startPosition: THREE.Vector3
   startQuaternion: THREE.Quaternion
-  targetPosition: THREE.Vector3
-  targetQuaternion: THREE.Quaternion
+  cubePosition: THREE.Vector3
+  cubeQuaternion: THREE.Quaternion
+  targetKey: FaceKey
+  isDisposable: boolean
 }
 
+type TargetMeasurement = {
+  position: THREE.Vector3
+  scale: THREE.Vector3
+}
+
+const SERVICE_CARDS: ServiceCardConfig[] = [
+  {
+    id: 'apple',
+    faceKey: 'left',
+    title: 'Apple & Mac repair',
+    previewTitle: 'Apple & Mac',
+    description: 'iPhone, iPad, and Mac-focused repair workflow and pre-check requirements.',
+    pills: ['Screens', 'Batteries', 'Charging', 'Mac diagnostics'],
+    ctaHref: '/prep#apple',
+    ctaLabel: 'Open Apple & Mac prep',
+  },
+  {
+    id: 'android',
+    faceKey: 'front',
+    title: 'Android repair',
+    previewTitle: 'Android',
+    description: 'Samsung, Pixel, and other Android devices with model-specific prep steps.',
+    pills: ['Screens', 'Batteries', 'Charging ports', 'Data-safe intake'],
+    ctaHref: '/prep#android',
+    ctaLabel: 'Open Android prep',
+  },
+  {
+    id: 'laptop-it',
+    faceKey: 'right',
+    title: 'Laptop + IT help',
+    previewTitle: 'Laptop + IT',
+    description: 'Performance, OS issues, startup failures, account recovery, and troubleshooting prep.',
+    pills: ['Performance', 'OS issues', 'Startup errors', 'Account/login'],
+    ctaHref: '/prep#laptop-it',
+    ctaLabel: 'Open Laptop + IT prep',
+  },
+]
+
 const PANEL_CONFIGS: PanelConfig[] = [
-  { kind: 'phone', startPosition: [-1.35, 0.125, -0.5], startRotationY: 0, targetKey: 'left', renderOrder: -3 },
-  { kind: 'laptop', startPosition: [1.35, 0, 0.5], startRotationY: Math.PI, targetKey: 'right', renderOrder: -2 },
-  { kind: 'tablet', startPosition: [0.65, 0.25, -0.5], startRotationY: Math.PI, targetKey: 'back', renderOrder: -4 },
-  { kind: 'watch', startPosition: [-0.23, -0.125, 0.5], startRotationY: 0, targetKey: 'front', renderOrder: -1 },
+  { kind: 'phone', startPosition: [-1.35, 0.125, -0.5], startRotationY: 0, targetKey: 'left', renderOrder: -3, serviceId: 'apple' },
+  { kind: 'laptop', startPosition: [1.35, 0, 0.5], startRotationY: Math.PI, targetKey: 'right', renderOrder: -2, serviceId: 'laptop-it' },
+  { kind: 'tablet', startPosition: [0.65, 0.25, -0.5], startRotationY: Math.PI, targetKey: 'front', renderOrder: -4, serviceId: 'android' },
+  { kind: 'watch', startPosition: [-0.23, -0.125, 0.5], startRotationY: 0, targetKey: 'back', renderOrder: -1, isDisposable: true },
 ]
 
 const CARD_BG_DARK = '#041324'
@@ -38,9 +97,10 @@ const CARD_BORDER = '#2d7dff'
 const ICON_COLOR = '#4f8eff'
 const EDGE_COLOR = 0x2d7dff
 const STAGE_HEIGHT = 640
-const STICKY_HEIGHT = 1100
+const SECTION_HEIGHT = 1700
+const TRANSITION_RANGE = 1080
 const HERO_PROGRESS_OFFSET = 120
-const HERO_FADE_DISTANCE = 1400
+const HANDOFF_PLANE_Z = 0
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))
@@ -50,8 +110,31 @@ function heroEase(value: number) {
   return 0.5 * (1 - Math.sin(Math.PI * (0.5 - value)))
 }
 
+function phaseValue(progress: number, start: number, end: number) {
+  return clamp((progress - start) / (end - start), 0, 1)
+}
+
+function easedPhase(progress: number, start: number, end: number) {
+  return heroEase(phaseValue(progress, start, end))
+}
+
+function peakPhase(progress: number, start: number, peak: number, end: number) {
+  if (progress <= start || progress >= end) return 0
+  if (progress <= peak) return heroEase(phaseValue(progress, start, peak))
+  return 1 - heroEase(phaseValue(progress, peak, end))
+}
+
 function svgDataUrl(svg: string) {
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+}
+
+function escapeXml(text: string) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
 }
 
 function iconMarkup(kind: DeviceKind) {
@@ -121,6 +204,92 @@ function buildIconTexture(kind: DeviceKind) {
   `)
 }
 
+function buildServicePreviewTexture(card: ServiceCardConfig) {
+  const pills = card.pills.slice(0, 3)
+  const pillMarkup = pills
+    .map((pill, index) => {
+      const x = 88 + index * 108
+      return `
+        <rect x="${x}" y="248" width="88" height="28" rx="14" fill="rgba(248,240,226,0.92)" stroke="rgba(119,90,53,0.14)" stroke-width="1.4" />
+        <text x="${x + 44}" y="266" text-anchor="middle" fill="#6a5337" font-size="13" font-weight="700">${escapeXml(pill)}</text>
+      `
+    })
+    .join('')
+
+  return svgDataUrl(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="sandCard" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f3e6d2" />
+          <stop offset="100%" stop-color="#e9d5b7" />
+        </linearGradient>
+        <radialGradient id="sandGlow" cx="15%" cy="10%" r="80%">
+          <stop offset="0%" stop-color="rgba(227, 238, 248, 0.42)" />
+          <stop offset="100%" stop-color="rgba(227, 238, 248, 0)" />
+        </radialGradient>
+        <pattern id="sandDots" width="14" height="14" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="0.9" fill="rgba(91, 69, 42, 0.08)" />
+        </pattern>
+      </defs>
+      <rect width="512" height="512" fill="none" />
+      <rect x="46" y="70" width="420" height="336" rx="34" fill="url(#sandCard)" stroke="rgba(126,94,52,0.18)" stroke-width="2.2" />
+      <rect x="46" y="70" width="420" height="336" rx="34" fill="url(#sandGlow)" opacity="0.72" />
+      <rect x="46" y="70" width="420" height="336" rx="34" fill="url(#sandDots)" opacity="0.6" />
+      <text x="88" y="150" fill="#2f2417" font-size="28" font-weight="800">${escapeXml(card.previewTitle)}</text>
+      <text x="88" y="190" fill="#7a6450" font-size="17">Repair pathway</text>
+      ${pillMarkup}
+      <rect x="88" y="318" width="192" height="52" rx="26" fill="#caa16f" />
+      <text x="184" y="349" text-anchor="middle" fill="#2f2112" font-size="19" font-weight="800">Open prep</text>
+    </svg>
+  `)
+}
+
+function isSafariBrowser() {
+  const ua = navigator.userAgent
+  return /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/CriOS\//.test(ua) && !/FxiOS\//.test(ua)
+}
+
+function screenPointToWorldOnPlane(
+  camera: THREE.PerspectiveCamera,
+  canvasRect: DOMRect,
+  clientX: number,
+  clientY: number,
+  planeZ: number,
+) {
+  const pointer = new THREE.Vector3(
+    ((clientX - canvasRect.left) / canvasRect.width) * 2 - 1,
+    -(((clientY - canvasRect.top) / canvasRect.height) * 2 - 1),
+    0.5,
+  )
+
+  pointer.unproject(camera)
+
+  const direction = pointer.sub(camera.position).normalize()
+  const distance = (planeZ - camera.position.z) / direction.z
+
+  return camera.position.clone().add(direction.multiplyScalar(distance))
+}
+
+function rectToWorldTarget(
+  rect: DOMRect,
+  camera: THREE.PerspectiveCamera,
+  canvasRect: DOMRect,
+  planeZ: number,
+) {
+  const centerX = rect.left + rect.width / 2
+  const centerY = rect.top + rect.height / 2
+  const worldCenter = screenPointToWorldOnPlane(camera, canvasRect, centerX, centerY, planeZ)
+  const worldLeft = screenPointToWorldOnPlane(camera, canvasRect, rect.left, centerY, planeZ)
+  const worldRight = screenPointToWorldOnPlane(camera, canvasRect, rect.right, centerY, planeZ)
+  const worldTop = screenPointToWorldOnPlane(camera, canvasRect, centerX, rect.top, planeZ)
+  const worldBottom = screenPointToWorldOnPlane(camera, canvasRect, centerX, rect.bottom, planeZ)
+
+  return {
+    position: worldCenter,
+    scale: new THREE.Vector3(worldRight.distanceTo(worldLeft), worldTop.distanceTo(worldBottom), 1),
+  }
+}
+
 function DeviceIcon({ kind }: { kind: DeviceKind }) {
   if (kind === 'phone') {
     return (
@@ -169,17 +338,24 @@ function DeviceCard({ kind, label }: { kind: DeviceKind; label: string }) {
 }
 
 export default function DeviceCubeHero() {
-  const stageRef = useRef<HTMLElement | null>(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const stageRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLDivElement | null>(null)
+  const headingRef = useRef<HTMLDivElement | null>(null)
+  const serviceSlotRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
+    const section = sectionRef.current
     const stage = stageRef.current
     const canvasHost = canvasRef.current
 
-    if (!stage || !canvasHost) return
+    if (!section || !stage || !canvasHost) return
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (prefersReduced.matches || window.innerWidth < 1024) return
+
+    const isSafari = isSafariBrowser()
+    const serviceCardMap = new Map(SERVICE_CARDS.map((card) => [card.id, card]))
 
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(30, 1, 0.5, 50)
@@ -187,9 +363,9 @@ export default function DeviceCubeHero() {
     camera.position.z = 4
     camera.lookAt(scene.position)
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
     renderer.setClearColor(0x000000, 0)
-    renderer.setPixelRatio(window.devicePixelRatio)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSafari ? 1.5 : 2))
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.domElement.style.display = 'block'
     renderer.domElement.style.margin = '0 auto'
@@ -252,6 +428,25 @@ export default function DeviceCubeHero() {
         toneMapped: false,
       })
 
+      const previewTexture = panel.serviceId
+        ? textureLoader.load(buildServicePreviewTexture(serviceCardMap.get(panel.serviceId)!))
+        : null
+
+      if (previewTexture) {
+        previewTexture.colorSpace = THREE.SRGBColorSpace
+      }
+
+      const previewMaterial = previewTexture
+        ? new THREE.MeshBasicMaterial({
+            map: previewTexture,
+            transparent: true,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            toneMapped: false,
+            opacity: 0,
+          })
+        : null
+
       const faceMesh = new THREE.Mesh(planeGeometry, faceMaterial)
       faceMesh.renderOrder = panel.renderOrder
       group.add(faceMesh)
@@ -261,6 +456,13 @@ export default function DeviceCubeHero() {
       iconMesh.renderOrder = panel.renderOrder + 0.01
       group.add(iconMesh)
 
+      if (previewMaterial) {
+        const previewMesh = new THREE.Mesh(planeGeometry, previewMaterial)
+        previewMesh.position.z = 0.0035
+        previewMesh.renderOrder = panel.renderOrder + 0.015
+        group.add(previewMesh)
+      }
+
       const edgeMaterial = new THREE.LineBasicMaterial({
         color: EDGE_COLOR,
         transparent: true,
@@ -269,19 +471,16 @@ export default function DeviceCubeHero() {
       })
 
       const edges = new THREE.LineSegments(edgeGeometry, edgeMaterial)
-      edges.position.z = 0.004
+      edges.position.z = 0.0045
       edges.renderOrder = panel.renderOrder + 0.02
       group.add(edges)
 
       const startPosition = new THREE.Vector3(...panel.startPosition)
-      const startQuaternion = new THREE.Quaternion().setFromEuler(
-        new THREE.Euler(0, panel.startRotationY, 0),
-      )
-
-      const targetPosition = new THREE.Vector3()
-      const targetQuaternion = new THREE.Quaternion()
-      targetFaces[panel.targetKey].getWorldPosition(targetPosition)
-      targetFaces[panel.targetKey].getWorldQuaternion(targetQuaternion)
+      const startQuaternion = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, panel.startRotationY, 0))
+      const cubePosition = new THREE.Vector3()
+      const cubeQuaternion = new THREE.Quaternion()
+      targetFaces[panel.targetKey].getWorldPosition(cubePosition)
+      targetFaces[panel.targetKey].getWorldQuaternion(cubeQuaternion)
 
       group.position.copy(startPosition)
       group.quaternion.copy(startQuaternion)
@@ -291,99 +490,226 @@ export default function DeviceCubeHero() {
         group,
         faceMaterial,
         iconMaterial,
+        previewMaterial,
         edgeMaterial,
+        iconTexture,
+        previewTexture,
         startPosition,
         startQuaternion,
-        targetPosition,
-        targetQuaternion,
+        cubePosition,
+        cubeQuaternion,
+        targetKey: panel.targetKey,
+        isDisposable: Boolean(panel.isDisposable),
       }
     })
 
+    let measuredTargets: Partial<Record<FaceKey, TargetMeasurement>> = {}
+    let hasValidTargets = false
+    let observerActive = false
+    let rafId: number | null = null
+
+    const setSectionStyles = (progress: number) => {
+      const headingReveal = easedPhase(progress, 0.62, 0.78)
+      const cardsReveal = easedPhase(progress, 0.76, 0.9)
+      const sceneOpacity = 1 - easedPhase(progress, 0.9, 1)
+
+      section.style.setProperty('--services-heading-opacity', headingReveal.toFixed(4))
+      section.style.setProperty('--services-heading-y', `${(1 - headingReveal) * 18}px`)
+      section.style.setProperty('--services-cards-opacity', cardsReveal.toFixed(4))
+      section.style.setProperty('--services-cards-y', `${(1 - cardsReveal) * 24}px`)
+      section.style.setProperty('--services-cards-scale', `${0.96 + cardsReveal * 0.04}`)
+      stage.style.setProperty('--device-scene-opacity', sceneOpacity.toFixed(4))
+      section.classList.toggle('services-live', progress >= 0.88)
+    }
+
     const resize = () => {
       const width = Math.min(1200, canvasHost.offsetWidth)
-      const pixelRatio = window.devicePixelRatio
       camera.aspect = width / STAGE_HEIGHT
       camera.updateProjectionMatrix()
-      renderer.setPixelRatio(pixelRatio)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSafari ? 1.5 : 2))
       renderer.setSize(width, STAGE_HEIGHT, false)
     }
 
-    let active = false
+    const measureTargets = () => {
+      const canvasRect = canvasHost.getBoundingClientRect()
+      const headingRect = headingRef.current?.getBoundingClientRect()
 
-    const getStageTop = () => stage.getBoundingClientRect().top + window.scrollY
+      if (
+        canvasRect.width <= 0 ||
+        canvasRect.height <= 0 ||
+        !headingRect ||
+        headingRect.width <= 0 ||
+        headingRect.height <= 0
+      ) {
+        hasValidTargets = false
+        return
+      }
+
+      const nextTargets: Partial<Record<FaceKey, TargetMeasurement>> = {}
+
+      for (const card of SERVICE_CARDS) {
+        const slotIndex = SERVICE_CARDS.findIndex((candidate) => candidate.id === card.id)
+        const slot = serviceSlotRefs.current[slotIndex]
+
+        if (!slot) {
+          hasValidTargets = false
+          return
+        }
+
+        const rect = slot.getBoundingClientRect()
+        if (rect.width <= 0 || rect.height <= 0) {
+          hasValidTargets = false
+          return
+        }
+
+        nextTargets[card.faceKey] = rectToWorldTarget(rect, camera, canvasRect, HANDOFF_PLANE_Z)
+      }
+
+      const rightTarget = nextTargets.right
+      if (!rightTarget) {
+        hasValidTargets = false
+        return
+      }
+
+      nextTargets.back = {
+        position: rightTarget.position.clone().add(new THREE.Vector3(rightTarget.scale.x + 0.22, 0.02, -0.08)),
+        scale: rightTarget.scale.clone(),
+      }
+
+      measuredTargets = nextTargets
+      hasValidTargets = true
+    }
 
     const renderFrame = () => {
-      const stageTop = getStageTop()
-      const rawProgress = clamp((window.scrollY - (stageTop - HERO_PROGRESS_OFFSET)) / STAGE_HEIGHT, 0, 1)
-      const easedProgress = heroEase(rawProgress)
-      const fadeStart = stageTop + STAGE_HEIGHT * 0.8
-      const fadeProgress = clamp((window.scrollY - fadeStart) / HERO_FADE_DISTANCE, 0, 1)
-      const panelAlpha = Math.sin((1 - fadeProgress) * Math.PI * 0.5)
-      const iconAlpha = Math.sin((1 - easedProgress) * Math.PI * 0.5) * panelAlpha
+      const stageTop = stage.getBoundingClientRect().top + window.scrollY
+      const progress = clamp((window.scrollY - (stageTop - HERO_PROGRESS_OFFSET)) / TRANSITION_RANGE, 0, 1)
+      const assembleAmount = easedPhase(progress, 0, 0.28)
+      const completionAmount = peakPhase(progress, 0.28, 0.34, 0.4)
+      const morphAmount = easedPhase(progress, 0.4, 0.54)
+      const unfoldAmount = easedPhase(progress, 0.54, 0.8)
+      const handoffAmount = easedPhase(progress, 0.76, 0.9)
+      const disposableFade = 1 - easedPhase(progress, 0.58, 0.7)
 
-      viewRoot.position.x = -0.22 * (1 - easedProgress)
-      viewRoot.rotation.x = THREE.MathUtils.lerp(
-        THREE.MathUtils.degToRad(-10),
-        THREE.MathUtils.degToRad(5),
-        fadeProgress,
+      setSectionStyles(progress)
+
+      viewRoot.position.x = -0.22 * (1 - assembleAmount)
+      viewRoot.rotation.set(
+        THREE.MathUtils.degToRad(-6 * completionAmount),
+        THREE.MathUtils.degToRad(-12 * completionAmount),
+        THREE.MathUtils.degToRad(4 * completionAmount),
       )
 
       panelMeshes.forEach((panel) => {
-        panel.group.position.copy(panel.startPosition).lerp(panel.targetPosition, easedProgress)
-        panel.group.quaternion.copy(panel.startQuaternion).slerp(panel.targetQuaternion, easedProgress)
+        const cubePosition = panel.cubePosition.clone()
+        const cubeQuaternion = panel.cubeQuaternion.clone()
+        const target = hasValidTargets ? measuredTargets[panel.targetKey] : null
 
-        const visible = panelAlpha > 0.001
-        panel.group.visible = visible
-        panel.faceMaterial.opacity = panelAlpha
+        if (progress <= 0.28) {
+          panel.group.position.copy(panel.startPosition).lerp(cubePosition, assembleAmount)
+          panel.group.quaternion.copy(panel.startQuaternion).slerp(cubeQuaternion, assembleAmount)
+          panel.group.scale.setScalar(1)
+        } else if (progress <= 0.54 || !target) {
+          panel.group.position.copy(cubePosition)
+          panel.group.quaternion.copy(cubeQuaternion)
+          panel.group.scale.setScalar(1)
+        } else {
+          panel.group.position.copy(cubePosition).lerp(target.position, unfoldAmount)
+          panel.group.quaternion.copy(cubeQuaternion).slerp(new THREE.Quaternion(), unfoldAmount)
+          panel.group.scale.set(
+            THREE.MathUtils.lerp(1, target.scale.x, unfoldAmount),
+            THREE.MathUtils.lerp(1, target.scale.y, unfoldAmount),
+            1,
+          )
+        }
+
+        const handoffFade = 1 - handoffAmount
+        const faceAlpha = panel.isDisposable
+          ? handoffFade * disposableFade
+          : handoffFade * (1 - morphAmount * 0.74)
+        const previewAlpha = panel.isDisposable ? 0 : handoffFade * morphAmount
+        const iconAlpha = handoffFade * (1 - morphAmount)
+        const edgeAlpha = panel.isDisposable ? handoffFade * disposableFade * 0.72 : handoffFade * (0.88 - morphAmount * 0.12)
+
+        panel.faceMaterial.opacity = faceAlpha
         panel.iconMaterial.opacity = iconAlpha
-        panel.edgeMaterial.opacity = panelAlpha
+        panel.edgeMaterial.opacity = edgeAlpha
+        if (panel.previewMaterial) {
+          panel.previewMaterial.opacity = previewAlpha
+        }
+
+        panel.group.visible = Math.max(faceAlpha, previewAlpha, iconAlpha, edgeAlpha) > 0.001
       })
 
       renderer.render(scene, camera)
     }
 
+    const scheduleRender = () => {
+      if (!observerActive || rafId !== null) return
+      rafId = window.requestAnimationFrame(() => {
+        rafId = null
+        measureTargets()
+        renderFrame()
+      })
+    }
+
+    const onScroll = () => {
+      scheduleRender()
+    }
+
+    const onResize = () => {
+      if (window.innerWidth < 1024 || prefersReduced.matches) {
+        stage.style.setProperty('--device-scene-opacity', '0')
+        section.style.setProperty('--services-heading-opacity', '1')
+        section.style.setProperty('--services-heading-y', '0px')
+        section.style.setProperty('--services-cards-opacity', '1')
+        section.style.setProperty('--services-cards-y', '0px')
+        section.style.setProperty('--services-cards-scale', '1')
+        section.classList.add('services-live')
+        return
+      }
+
+      resize()
+      measureTargets()
+      renderFrame()
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!active) {
-            active = true
-            resize()
-            renderer.setAnimationLoop(renderFrame)
-          }
-          return
+        observerActive = entry.isIntersecting
+        if (observerActive) {
+          resize()
+          measureTargets()
+          renderFrame()
+        } else if (rafId !== null) {
+          window.cancelAnimationFrame(rafId)
+          rafId = null
         }
-
-        active = false
-        renderer.setAnimationLoop(null)
       },
       { threshold: 0 },
     )
 
     observer.observe(stage)
-    resize()
-    renderFrame()
-
-    const onResize = () => {
-      if (window.innerWidth < 1024 || prefersReduced.matches) {
-        renderer.setAnimationLoop(null)
-        return
-      }
-
-      resize()
-      renderFrame()
-    }
-
     window.addEventListener('resize', onResize)
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    resize()
+    measureTargets()
+    renderFrame()
 
     return () => {
       observer.disconnect()
       window.removeEventListener('resize', onResize)
-      renderer.setAnimationLoop(null)
+      window.removeEventListener('scroll', onScroll)
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId)
+      }
 
       panelMeshes.forEach((panel) => {
         panel.faceMaterial.dispose()
-        panel.iconMaterial.map?.dispose()
+        panel.iconTexture.dispose()
         panel.iconMaterial.dispose()
+        panel.previewTexture?.dispose()
+        panel.previewMaterial?.dispose()
         panel.edgeMaterial.dispose()
       })
 
@@ -396,20 +722,58 @@ export default function DeviceCubeHero() {
   }, [])
 
   return (
-    <>
-      <section ref={stageRef} className="device-cube-stage" aria-hidden="true">
-        <div className="device-cube-pin">
-          <div className="device-cube-ground" />
-          <div ref={canvasRef} className="device-cube-canvas" />
-        </div>
-      </section>
+    <section ref={sectionRef} id="services" className="section device-services-transition">
+      <div className="container">
+        <div ref={stageRef} className="device-services-stage">
+          <div className="device-cube-pin" aria-hidden="true">
+            <div className="device-cube-visual">
+              <div className="device-cube-ground" />
+              <div ref={canvasRef} className="device-cube-canvas" />
+            </div>
+          </div>
 
-      <div className="device-grid device-grid-mobile" aria-label="Supported devices">
-        <DeviceCard kind="phone" label="Phone repair" />
-        <DeviceCard kind="laptop" label="Laptop repair" />
-        <DeviceCard kind="tablet" label="Tablet repair" />
-        <DeviceCard kind="watch" label="Smartwatch repair" />
+          <div className="device-grid device-grid-mobile" aria-label="Supported devices">
+            <DeviceCard kind="phone" label="Phone repair" />
+            <DeviceCard kind="laptop" label="Laptop repair" />
+            <DeviceCard kind="tablet" label="Tablet repair" />
+            <DeviceCard kind="watch" label="Smartwatch repair" />
+          </div>
+
+          <div className="device-services-copy">
+            <div ref={headingRef} className="section-head transition-services-head">
+              <div>
+                <h2>Services</h2>
+                <p>Start with the category that matches your issue. If you&apos;re unsure, use Tech Helper and we&apos;ll route you.</p>
+              </div>
+            </div>
+
+            <div className="grid3 device-services-grid">
+              {SERVICE_CARDS.map((card, index) => (
+                <div
+                  key={card.id}
+                  ref={(node) => {
+                    serviceSlotRefs.current[index] = node
+                  }}
+                  className="transition-service-slot"
+                >
+                  <HoverBeamFrame as="article" className="card service-card transition-service-card" radius={18}>
+                    <h3>{card.title}</h3>
+                    <p>{card.description}</p>
+                    <div className="pills">
+                      {card.pills.map((pill) => (
+                        <span key={pill} className="pill">{pill}</span>
+                      ))}
+                    </div>
+                    <div className="actions" style={{ marginTop: '0.9rem' }}>
+                      <Link className="btn btn-primary" href={card.ctaHref}>{card.ctaLabel}</Link>
+                    </div>
+                  </HoverBeamFrame>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+    </section>
   )
 }
