@@ -1,70 +1,16 @@
 import Link from 'next/link'
 import FlowLabel from './components/FlowLabel'
 import ConsoleShellBeam from './components/ConsoleShellBeam'
+import DeviceCubeHero from './components/DeviceCubeHero'
 import HomeScrollMotion from './components/HomeScrollMotion'
 import HoverBeamFrame from './components/HoverBeamFrame'
-
-function DeviceCard({
-  kind,
-  label,
-  className,
-}: {
-  kind: 'phone' | 'laptop' | 'tablet' | 'watch'
-  label: string
-  className?: string
-}) {
-  return (
-    <article className={['card', 'device-card', className].filter(Boolean).join(' ')} aria-label={label}>
-      <DeviceIcon kind={kind} />
-    </article>
-  )
-}
-
-function DeviceIcon({ kind }: { kind: 'phone' | 'laptop' | 'tablet' | 'watch' }) {
-  if (kind === 'phone') {
-    return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="19" y="7" width="26" height="50" rx="7" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <line x1="27" y1="14" x2="37" y2="14" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="32" cy="49.5" r="2.4" fill="currentColor" />
-      </svg>
-    )
-  }
-
-  if (kind === 'laptop') {
-    return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="14" y="14" width="36" height="24" rx="3.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <path d="M9 44h46l-4 7H13z" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" />
-      </svg>
-    )
-  }
-
-  if (kind === 'tablet') {
-    return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="14" y="9" width="36" height="46" rx="6.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <circle cx="32" cy="48.5" r="2.2" fill="currentColor" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M26 9c0-2 1.6-3.5 3.5-3.5h5c1.9 0 3.5 1.5 3.5 3.5v7H26z" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" />
-      <rect x="17" y="14" width="30" height="36" rx="9" fill="none" stroke="currentColor" strokeWidth="3.5" />
-      <rect x="24" y="21" width="16" height="22" rx="4.5" fill="none" stroke="currentColor" strokeWidth="3" />
-      <path d="M26 50v6.5c0 2 1.6 3.5 3.5 3.5h5c1.9 0 3.5-1.5 3.5-3.5V50" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" />
-    </svg>
-  )
-}
 
 export default function Home() {
   return (
     <>
       <HomeScrollMotion />
       <div className="home-scroll-stage">
-        <section className="section concept concept-a" style={{ paddingTop: '5rem' }}>
+        <section className="section concept concept-a home-hero-section" style={{ paddingTop: '5rem' }}>
           <div className="container">
             <div className="concept-label">
               <FlowLabel text="Hailey Device Repair // 7 days a week" />
@@ -111,28 +57,7 @@ export default function Home() {
               </div>
             </ConsoleShellBeam>
 
-            <section className="device-cube-stage" aria-label="Supported devices">
-              <div className="device-cube-pin">
-                <div className="device-cube-scene">
-                  <div className="device-cube-shadow" aria-hidden="true" />
-                  <div className="device-cube-object">
-                    <DeviceCard kind="phone" label="Phone repair" className="device-face device-face-front" />
-                    <DeviceCard kind="laptop" label="Laptop repair" className="device-face device-face-right" />
-                    <DeviceCard kind="tablet" label="Tablet repair" className="device-face device-face-top" />
-                    <DeviceCard kind="watch" label="Smartwatch repair" className="device-face device-face-left" />
-                    <div className="device-face device-face-back device-face-filler" aria-hidden="true" />
-                    <div className="device-face device-face-bottom device-face-filler" aria-hidden="true" />
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <div className="device-grid device-grid-mobile" aria-label="Supported devices">
-              <DeviceCard kind="phone" label="Phone repair" />
-              <DeviceCard kind="laptop" label="Laptop repair" />
-              <DeviceCard kind="tablet" label="Tablet repair" />
-              <DeviceCard kind="watch" label="Smartwatch repair" />
-            </div>
+            <DeviceCubeHero />
           </div>
         </section>
 
