@@ -120,12 +120,6 @@ function easedPhase(progress: number, start: number, end: number) {
   return heroEase(phaseValue(progress, start, end))
 }
 
-function peakPhase(progress: number, start: number, peak: number, end: number) {
-  if (progress <= start || progress >= end) return 0
-  if (progress <= peak) return heroEase(phaseValue(progress, start, peak))
-  return 1 - heroEase(phaseValue(progress, peak, end))
-}
-
 function svgDataUrl(svg: string) {
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
 }
@@ -623,7 +617,6 @@ export default function DeviceCubeHero() {
       const stageTop = stage.getBoundingClientRect().top + window.scrollY
       const progress = clamp((window.scrollY - (stageTop - HERO_PROGRESS_OFFSET)) / TRANSITION_RANGE, 0, 1)
       const assembleAmount = easedPhase(progress, 0, 0.24)
-      const completionAmount = peakPhase(progress, 0.24, 0.32, 0.38)
       const morphAmount = easedPhase(progress, 0.38, 0.5)
       const surfaceMorphAmount = easedPhase(progress, 0.42, 0.56)
       const contentRevealAmount = easedPhase(progress, 0.5, 0.64)
@@ -634,11 +627,7 @@ export default function DeviceCubeHero() {
       setSectionStyles(progress)
 
       viewRoot.position.x = -0.22 * (1 - assembleAmount)
-      viewRoot.rotation.set(
-        THREE.MathUtils.degToRad(-6 * completionAmount),
-        THREE.MathUtils.degToRad(-12 * completionAmount),
-        THREE.MathUtils.degToRad(4 * completionAmount),
-      )
+      viewRoot.rotation.set(0, 0, 0)
 
       panelMeshes.forEach((panel) => {
         const cubePosition = panel.cubePosition.clone()
