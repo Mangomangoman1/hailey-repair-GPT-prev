@@ -302,19 +302,22 @@ textarea{
 }
 .btn-ghost{ background: transparent; }
 .btn-call{
+  --shine-surface: #08111b;
+  --shine-on-accent: #ffffff;
+  --shine-accent: #4aa1ff;
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-width: 7rem;
-  padding-inline: 1.35rem;
+  min-width: 6.8rem;
+  padding-inline: 1.25rem;
+  padding-block: 0.72rem;
+  border: 1px solid rgba(64, 102, 157, 0.52);
   background:
-    linear-gradient(115deg, rgba(40, 58, 79, 0.98), rgba(8, 15, 24, 0.98));
+    linear-gradient(115deg, rgba(43, 67, 93, 0.92), rgba(16, 28, 41, 0.96));
   color: #f7f7f3;
-  border-color: rgba(69, 112, 173, 0.58);
   box-shadow:
-    inset 0 0 0 1px rgba(72, 116, 178, 0.22),
-    inset 0 1px 0 rgba(194, 220, 247, 0.14),
-    0 12px 28px rgba(18, 28, 40, 0.20);
+    inset 0 1px 0 rgba(173, 207, 242, 0.12),
+    0 12px 28px rgba(18, 28, 40, 0.18);
 }
 .shine{
   position: relative;
@@ -348,21 +351,30 @@ textarea{
 .shine::after{
   animation: trail-offset 15s linear infinite;
 }
-.tag.shine::before,
-.tag.shine::after{
-  width: 75px;
-  aspect-ratio: 2 / 1;
-}
-.btn-call.shine::before{
-  opacity: 0.5;
+.btn-call.shine::before,
+.btn-call.shine::after{
+  width: 108px;
+  aspect-ratio: 2.4 / 1;
 }
 .btn-call.shine::after{
-  opacity: 1;
+  opacity: 0.92;
   offset-distance: 50%;
+}
+.btn-call-core{
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  z-index: 2;
+  background:
+    linear-gradient(115deg, rgba(37, 59, 82, 0.98), rgba(10, 17, 27, 0.99));
+  box-shadow:
+    inset 0 1px 0 rgba(182, 213, 245, 0.10),
+    inset 0 -1px 0 rgba(4, 9, 15, 0.42);
 }
 .btn-call-label{
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  letter-spacing: 0.01em;
 }
 .btn-primary:hover,
 .btn-call:hover{

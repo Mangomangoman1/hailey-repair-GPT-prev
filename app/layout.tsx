@@ -63,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <div className="cta">
               <a className="btn btn-call shine tag" href="sms:+12083666111">
+                <span className="btn-call-core" aria-hidden="true" />
                 <span className="btn-call-label">Text</span>
               </a>
             </div>
