@@ -86,8 +86,8 @@ const SERVICE_CARDS: ServiceCardConfig[] = [
 const PANEL_CONFIGS: PanelConfig[] = [
   { kind: 'phone', startPosition: [-1.35, 0.125, -0.5], startRotationY: 0, targetKey: 'left', renderOrder: -3, serviceId: 'apple' },
   { kind: 'laptop', startPosition: [1.35, 0, 0.5], startRotationY: Math.PI, targetKey: 'right', renderOrder: -2, serviceId: 'laptop-it' },
-  { kind: 'tablet', startPosition: [0.65, 0.25, -0.5], startRotationY: Math.PI, targetKey: 'front', renderOrder: -4, serviceId: 'android' },
-  { kind: 'watch', startPosition: [-0.23, -0.125, 0.5], startRotationY: 0, targetKey: 'back', renderOrder: -1, isDisposable: true },
+  { kind: 'tablet', startPosition: [0.65, 0.25, -0.5], startRotationY: Math.PI, targetKey: 'back', renderOrder: -4, isDisposable: true },
+  { kind: 'watch', startPosition: [-0.23, -0.125, 0.5], startRotationY: 0, targetKey: 'front', renderOrder: -1, serviceId: 'android' },
 ]
 
 const CARD_BG_DARK = '#041324'
