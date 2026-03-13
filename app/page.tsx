@@ -4,6 +4,44 @@ import ConsoleShellBeam from './components/ConsoleShellBeam'
 import HomeScrollMotion from './components/HomeScrollMotion'
 import HoverBeamFrame from './components/HoverBeamFrame'
 
+function DeviceIcon({ kind }: { kind: 'phone' | 'laptop' | 'tablet' | 'watch' }) {
+  if (kind === 'phone') {
+    return (
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="20" y="8" width="24" height="48" rx="6" fill="none" stroke="currentColor" strokeWidth="3.5" />
+        <line x1="27" y1="14" x2="37" y2="14" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="32" cy="49" r="2.5" fill="currentColor" />
+      </svg>
+    )
+  }
+
+  if (kind === 'laptop') {
+    return (
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="16" y="14" width="32" height="24" rx="3.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
+        <path d="M11 44h42l-3 6H14z" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" />
+      </svg>
+    )
+  }
+
+  if (kind === 'tablet') {
+    return (
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="15" y="10" width="34" height="44" rx="5.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
+        <circle cx="32" cy="47.5" r="2.3" fill="currentColor" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <rect x="23" y="19" width="18" height="22" rx="5" fill="none" stroke="currentColor" strokeWidth="3.5" />
+      <path d="M29 15v-5M35 15v-5M26 41v13M38 41v13" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+      <path d="M22 24h-5M47 24h-5" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export default function Home() {
   return (
     <>
@@ -55,6 +93,25 @@ export default function Home() {
                 </div>
               </div>
             </ConsoleShellBeam>
+
+            <div className="device-grid" aria-label="Supported devices">
+              <article className="card device-card">
+                <DeviceIcon kind="phone" />
+                <h3>Phone</h3>
+              </article>
+              <article className="card device-card">
+                <DeviceIcon kind="laptop" />
+                <h3>Laptop</h3>
+              </article>
+              <article className="card device-card">
+                <DeviceIcon kind="tablet" />
+                <h3>Tablet</h3>
+              </article>
+              <article className="card device-card">
+                <DeviceIcon kind="watch" />
+                <h3>Smartwatch</h3>
+              </article>
+            </div>
           </div>
         </section>
 
