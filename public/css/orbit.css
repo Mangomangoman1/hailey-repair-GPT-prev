@@ -20,6 +20,9 @@
   --cool-glow-soft: rgba(143, 162, 178, 0.11);
   --crimson-glow: rgba(150, 10, 46, 0.54);
   --crimson-glow-deep: rgba(90, 3, 24, 0.40);
+  --shine-surface: #0a0f16;
+  --shine-on-accent: #ffffff;
+  --shine-accent: #4aa1ff;
 
   --brand1: #efdfc5;
   --brand2: #d1ad7a;
@@ -302,10 +305,10 @@ textarea{
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-width: 7.4rem;
+  min-width: 7rem;
   padding-inline: 1.35rem;
   background:
-    linear-gradient(115deg, rgba(40, 58, 79, 0.98), rgba(13, 23, 35, 0.98));
+    linear-gradient(115deg, rgba(40, 58, 79, 0.98), rgba(8, 15, 24, 0.98));
   color: #f7f7f3;
   border-color: rgba(69, 112, 173, 0.58);
   box-shadow:
@@ -313,39 +316,48 @@ textarea{
     inset 0 1px 0 rgba(194, 220, 247, 0.14),
     0 12px 28px rgba(18, 28, 40, 0.20);
 }
-.btn-call::before,
-.btn-call::after{
+.shine{
+  position: relative;
+  overflow: hidden;
+}
+.shine::before,
+.shine::after{
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 200px;
-  aspect-ratio: 3 / 1;
-  pointer-events: none;
-  z-index: 1;
-  background:
-    radial-gradient(
-      100% 100% at right,
-      rgba(24, 40, 58, 0.00),
-      rgba(255, 255, 255, 0.98) 5%,
-      rgba(113, 166, 236, 0.90) 40%,
-      rgba(113, 166, 236, 0.00) 80%
-    );
-  filter: blur(12px);
-  offset-distance: 0%;
+  background: radial-gradient(
+    100% 100% at right,
+    var(--shine-surface),
+    var(--shine-on-accent) 5%,
+    var(--shine-accent) 40%,
+    transparent 80%
+  );
   offset-path: border-box;
   -webkit-offset-path: border-box;
   offset-anchor: 100% 50%;
   -webkit-offset-anchor: 100% 50%;
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity .2s ease;
   will-change: offset-distance;
 }
-.btn-call::before{
+.shine::before{
+  animation: trail 15s linear infinite;
   opacity: 0.5;
-  animation: textPillShimmer 15s linear infinite;
 }
-.btn-call::after{
+.shine::after{
+  animation: trail-offset 15s linear infinite;
+}
+.tag.shine::before,
+.tag.shine::after{
+  width: 75px;
+  aspect-ratio: 2 / 1;
+}
+.btn-call.shine::before{
+  opacity: 0.5;
+}
+.btn-call.shine::after{
   opacity: 1;
-  animation: textPillShimmerOffset 15s linear infinite;
   offset-distance: 50%;
 }
 .btn-call-label{
@@ -727,14 +739,13 @@ textarea:focus{
   backdrop-filter: blur(10px);
 }
 
-@keyframes textPillShimmer{
-  from{ offset-distance: 0%; }
-  to{ offset-distance: 100%; }
+@keyframes trail{
+  100% { offset-distance: 100%; }
 }
 
-@keyframes textPillShimmerOffset{
-  from{ offset-distance: 50%; }
-  to{ offset-distance: 150%; }
+@keyframes trail-offset{
+  0% { offset-distance: 50%; }
+  100% { offset-distance: 150%; }
 }
 
 .text-first-pill a{
@@ -914,8 +925,8 @@ textarea:focus{
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   .flow-label{ animation: none; }
-  .btn-call::before,
-  .btn-call::after{
+  .shine::before,
+  .shine::after{
     animation: none !important;
     opacity: 0 !important;
   }
