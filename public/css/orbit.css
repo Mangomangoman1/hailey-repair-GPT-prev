@@ -490,6 +490,24 @@ code{ color: inherit; }
   position: relative;
   min-height: 1080px;
 }
+.device-services-stage::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top: 170px;
+  width:min(760px, 82vw);
+  height: 520px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle at center,
+      rgba(218, 174, 118, 0.20) 0%,
+      rgba(178, 126, 92, 0.12) 34%,
+      rgba(178, 126, 92, 0.04) 54%,
+      transparent 76%);
+  filter: blur(38px);
+  pointer-events:none;
+  z-index: 0;
+}
 .device-cube-pin{
   position: sticky;
   top: 0;
