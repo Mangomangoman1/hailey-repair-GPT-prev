@@ -494,17 +494,22 @@ code{ color: inherit; }
   content:"";
   position:absolute;
   left:50%;
-  top: 170px;
-  width:min(760px, 82vw);
-  height: 520px;
+  top: 128px;
+  width:min(980px, 94vw);
+  height: 660px;
   transform: translateX(-50%);
   background:
     radial-gradient(circle at center,
-      rgba(218, 174, 118, 0.20) 0%,
-      rgba(178, 126, 92, 0.12) 34%,
-      rgba(178, 126, 92, 0.04) 54%,
-      transparent 76%);
-  filter: blur(38px);
+      rgba(221, 178, 116, 0.34) 0%,
+      rgba(188, 136, 93, 0.22) 24%,
+      rgba(164, 110, 82, 0.12) 42%,
+      rgba(164, 110, 82, 0.05) 58%,
+      transparent 76%),
+    radial-gradient(circle at center 68%,
+      rgba(210, 150, 102, 0.20) 0%,
+      rgba(210, 150, 102, 0.08) 34%,
+      transparent 64%);
+  filter: blur(56px);
   pointer-events:none;
   z-index: 0;
 }
