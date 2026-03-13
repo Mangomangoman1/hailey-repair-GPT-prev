@@ -90,14 +90,14 @@ const PANEL_CONFIGS: PanelConfig[] = [
   { kind: 'watch', startPosition: [-0.23, -0.125, 0.5], startRotationY: 0, targetKey: 'front', renderOrder: -1, serviceId: 'android' },
 ]
 
-const CARD_BG_DARK = '#041324'
-const CARD_BG_MID = '#0d3471'
-const CARD_BG_GLOW = '#134792'
-const CARD_BORDER = '#2d7dff'
-const ICON_COLOR = '#4f8eff'
-const EDGE_COLOR = 0x2d7dff
+const CARD_BG_DARK = '#17110d'
+const CARD_BG_MID = '#2f2218'
+const CARD_BG_GLOW = '#5b4330'
+const CARD_BORDER = '#c79868'
+const ICON_COLOR = '#dfba8e'
+const EDGE_COLOR = 0xc79868
 const STAGE_HEIGHT = 640
-const SECTION_HEIGHT = 1700
+const SECTION_HEIGHT = 1420
 const TRANSITION_RANGE = 1080
 const HERO_PROGRESS_OFFSET = 120
 const HANDOFF_PLANE_Z = 0
@@ -178,12 +178,12 @@ function buildCardTexture() {
           <stop offset="100%" stop-color="${CARD_BG_DARK}" stop-opacity="1" />
         </radialGradient>
         <radialGradient id="cardBloom" cx="50%" cy="50%" r="65%">
-          <stop offset="0%" stop-color="#0f4ea4" stop-opacity="0.18" />
-          <stop offset="100%" stop-color="#0f4ea4" stop-opacity="0" />
+          <stop offset="0%" stop-color="#d5a26d" stop-opacity="0.16" />
+          <stop offset="100%" stop-color="#d5a26d" stop-opacity="0" />
         </radialGradient>
         <linearGradient id="edgeFade" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#081a33" stop-opacity="0.85" />
-          <stop offset="100%" stop-color="#051121" stop-opacity="0.4" />
+          <stop offset="0%" stop-color="#26180f" stop-opacity="0.82" />
+          <stop offset="100%" stop-color="#140d08" stop-opacity="0.38" />
         </linearGradient>
       </defs>
       <rect width="512" height="512" fill="url(#cardGlow)" />

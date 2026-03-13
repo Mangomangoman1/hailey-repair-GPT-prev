@@ -488,7 +488,7 @@ code{ color: inherit; }
 }
 .device-services-stage{
   position: relative;
-  min-height: 1700px;
+  min-height: 1420px;
 }
 .device-cube-pin{
   position: sticky;
@@ -515,7 +515,7 @@ code{ color: inherit; }
   height: 88%;
   transform: translateX(-50%);
   background:
-    radial-gradient(circle at center, rgba(28, 108, 227, 0.18), rgba(28, 108, 227, 0.06) 32%, transparent 58%);
+    radial-gradient(circle at center, rgba(199, 152, 104, 0.20), rgba(132, 79, 57, 0.10) 34%, transparent 60%);
   filter: blur(26px);
   pointer-events: none;
   z-index: 0;
