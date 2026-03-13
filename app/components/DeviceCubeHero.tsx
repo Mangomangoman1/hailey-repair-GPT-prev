@@ -175,7 +175,6 @@ export default function DeviceCubeHero() {
   useEffect(() => {
     const stage = stageRef.current
     const canvasHost = canvasRef.current
-    const heroSection = document.querySelector<HTMLElement>('.home-hero-section')
 
     if (!stage || !canvasHost) return
 
@@ -311,11 +310,14 @@ export default function DeviceCubeHero() {
 
     let active = false
 
+    const getStageTop = () => stage.getBoundingClientRect().top + window.scrollY
+
     const renderFrame = () => {
-      const heroHeight = heroSection?.offsetHeight ?? stage.offsetTop
-      const rawProgress = clamp((window.scrollY - (heroHeight - HERO_PROGRESS_OFFSET)) / STAGE_HEIGHT, 0, 1)
+      const stageTop = getStageTop()
+      const rawProgress = clamp((window.scrollY - (stageTop - HERO_PROGRESS_OFFSET)) / STAGE_HEIGHT, 0, 1)
       const easedProgress = heroEase(rawProgress)
-      const fadeProgress = clamp((window.scrollY - heroHeight) / HERO_FADE_DISTANCE, 0, 1)
+      const fadeStart = stageTop + STAGE_HEIGHT * 0.8
+      const fadeProgress = clamp((window.scrollY - fadeStart) / HERO_FADE_DISTANCE, 0, 1)
       const panelAlpha = Math.sin((1 - fadeProgress) * Math.PI * 0.5)
       const iconAlpha = Math.sin((1 - easedProgress) * Math.PI * 0.5) * panelAlpha
 
