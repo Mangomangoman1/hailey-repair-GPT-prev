@@ -488,7 +488,7 @@ code{ color: inherit; }
 }
 .device-services-stage{
   position: relative;
-  min-height: 1420px;
+  min-height: 1240px;
 }
 .device-cube-pin{
   position: sticky;
@@ -529,7 +529,7 @@ code{ color: inherit; }
 .device-services-copy{
   position: relative;
   z-index: 2;
-  margin-top: 110px;
+  margin-top: 40px;
 }
 .transition-services-head{
   opacity: var(--services-heading-opacity);
