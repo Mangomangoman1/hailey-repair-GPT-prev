@@ -32,9 +32,11 @@ type PanelConfig = {
 type PanelMeshes = {
   group: THREE.Group
   faceMaterial: THREE.MeshBasicMaterial
+  surfaceMaterial: THREE.MeshBasicMaterial | null
   iconMaterial: THREE.MeshBasicMaterial
   previewMaterial: THREE.MeshBasicMaterial | null
   edgeMaterial: THREE.LineBasicMaterial
+  surfaceTexture: THREE.Texture | null
   iconTexture: THREE.Texture
   previewTexture: THREE.Texture | null
   startPosition: THREE.Vector3
@@ -208,38 +210,50 @@ function buildServicePreviewTexture(card: ServiceCardConfig) {
   const pills = card.pills.slice(0, 3)
   const pillMarkup = pills
     .map((pill, index) => {
-      const x = 88 + index * 108
+      const x = 72 + index * 122
       return `
-        <rect x="${x}" y="248" width="88" height="28" rx="14" fill="rgba(248,240,226,0.92)" stroke="rgba(119,90,53,0.14)" stroke-width="1.4" />
-        <text x="${x + 44}" y="266" text-anchor="middle" fill="#6a5337" font-size="13" font-weight="700">${escapeXml(pill)}</text>
+        <rect x="${x}" y="262" width="102" height="30" rx="15" fill="rgba(248,240,226,0.94)" stroke="rgba(119,90,53,0.14)" stroke-width="1.4" />
+        <text x="${x + 51}" y="281" text-anchor="middle" fill="#6a5337" font-size="14" font-weight="700">${escapeXml(pill)}</text>
       `
     })
     .join('')
 
   return svgDataUrl(`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <rect width="512" height="512" fill="none" />
+      <text x="72" y="126" fill="#2f2417" font-size="34" font-weight="800">${escapeXml(card.previewTitle)}</text>
+      <text x="72" y="170" fill="#7a6450" font-size="20">Repair pathway</text>
+      ${pillMarkup}
+      <rect x="72" y="336" width="224" height="58" rx="29" fill="#caa16f" />
+      <text x="184" y="371" text-anchor="middle" fill="#2f2112" font-size="22" font-weight="800">Open prep</text>
+    </svg>
+  `)
+}
+
+function buildServiceSurfaceTexture() {
+  return svgDataUrl(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       <defs>
-        <linearGradient id="sandCard" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#f3e6d2" />
-          <stop offset="100%" stop-color="#e9d5b7" />
+        <linearGradient id="sandFill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f5ead8" />
+          <stop offset="100%" stop-color="#ead8bc" />
         </linearGradient>
-        <radialGradient id="sandGlow" cx="15%" cy="10%" r="80%">
-          <stop offset="0%" stop-color="rgba(227, 238, 248, 0.42)" />
-          <stop offset="100%" stop-color="rgba(227, 238, 248, 0)" />
+        <radialGradient id="sandCool" cx="12%" cy="10%" r="76%">
+          <stop offset="0%" stop-color="rgba(214, 228, 239, 0.34)" />
+          <stop offset="100%" stop-color="rgba(214, 228, 239, 0)" />
+        </radialGradient>
+        <radialGradient id="sandWarm" cx="88%" cy="92%" r="60%">
+          <stop offset="0%" stop-color="rgba(181, 126, 84, 0.12)" />
+          <stop offset="100%" stop-color="rgba(181, 126, 84, 0)" />
         </radialGradient>
         <pattern id="sandDots" width="14" height="14" patternUnits="userSpaceOnUse">
           <circle cx="2" cy="2" r="0.9" fill="rgba(91, 69, 42, 0.08)" />
         </pattern>
       </defs>
-      <rect width="512" height="512" fill="none" />
-      <rect x="46" y="70" width="420" height="336" rx="34" fill="url(#sandCard)" stroke="rgba(126,94,52,0.18)" stroke-width="2.2" />
-      <rect x="46" y="70" width="420" height="336" rx="34" fill="url(#sandGlow)" opacity="0.72" />
-      <rect x="46" y="70" width="420" height="336" rx="34" fill="url(#sandDots)" opacity="0.6" />
-      <text x="88" y="150" fill="#2f2417" font-size="28" font-weight="800">${escapeXml(card.previewTitle)}</text>
-      <text x="88" y="190" fill="#7a6450" font-size="17">Repair pathway</text>
-      ${pillMarkup}
-      <rect x="88" y="318" width="192" height="52" rx="26" fill="#caa16f" />
-      <text x="184" y="349" text-anchor="middle" fill="#2f2112" font-size="19" font-weight="800">Open prep</text>
+      <rect width="512" height="512" fill="url(#sandFill)" />
+      <rect width="512" height="512" fill="url(#sandCool)" />
+      <rect width="512" height="512" fill="url(#sandWarm)" />
+      <rect width="512" height="512" fill="url(#sandDots)" opacity="0.56" />
     </svg>
   `)
 }
@@ -428,6 +442,22 @@ export default function DeviceCubeHero() {
         toneMapped: false,
       })
 
+      const surfaceTexture = panel.serviceId ? textureLoader.load(buildServiceSurfaceTexture()) : null
+      if (surfaceTexture) {
+        surfaceTexture.colorSpace = THREE.SRGBColorSpace
+      }
+
+      const surfaceMaterial = surfaceTexture
+        ? new THREE.MeshBasicMaterial({
+            map: surfaceTexture,
+            transparent: true,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            toneMapped: false,
+            opacity: 0,
+          })
+        : null
+
       const previewTexture = panel.serviceId
         ? textureLoader.load(buildServicePreviewTexture(serviceCardMap.get(panel.serviceId)!))
         : null
@@ -455,6 +485,13 @@ export default function DeviceCubeHero() {
       iconMesh.position.z = 0.002
       iconMesh.renderOrder = panel.renderOrder + 0.01
       group.add(iconMesh)
+
+      if (surfaceMaterial) {
+        const surfaceMesh = new THREE.Mesh(planeGeometry, surfaceMaterial)
+        surfaceMesh.position.z = 0.0015
+        surfaceMesh.renderOrder = panel.renderOrder + 0.008
+        group.add(surfaceMesh)
+      }
 
       if (previewMaterial) {
         const previewMesh = new THREE.Mesh(planeGeometry, previewMaterial)
@@ -489,9 +526,11 @@ export default function DeviceCubeHero() {
       return {
         group,
         faceMaterial,
+        surfaceMaterial,
         iconMaterial,
         previewMaterial,
         edgeMaterial,
+        surfaceTexture,
         iconTexture,
         previewTexture,
         startPosition,
@@ -586,6 +625,8 @@ export default function DeviceCubeHero() {
       const assembleAmount = easedPhase(progress, 0, 0.24)
       const completionAmount = peakPhase(progress, 0.24, 0.32, 0.38)
       const morphAmount = easedPhase(progress, 0.38, 0.5)
+      const surfaceMorphAmount = easedPhase(progress, 0.42, 0.56)
+      const contentRevealAmount = easedPhase(progress, 0.5, 0.64)
       const unfoldAmount = easedPhase(progress, 0.5, 0.68)
       const handoffAmount = easedPhase(progress, 0.58, 0.74)
       const disposableFade = 1 - easedPhase(progress, 0.52, 0.64)
@@ -625,19 +666,25 @@ export default function DeviceCubeHero() {
         const handoffFade = 1 - handoffAmount
         const faceAlpha = panel.isDisposable
           ? handoffFade * disposableFade
-          : handoffFade * (1 - morphAmount * 0.74)
-        const previewAlpha = panel.isDisposable ? 0 : handoffFade * morphAmount
+          : handoffFade * (1 - surfaceMorphAmount)
+        const surfaceAlpha = panel.isDisposable ? 0 : handoffFade * surfaceMorphAmount
+        const previewAlpha = panel.isDisposable ? 0 : handoffFade * contentRevealAmount
         const iconAlpha = handoffFade * (1 - morphAmount)
-        const edgeAlpha = panel.isDisposable ? handoffFade * disposableFade * 0.72 : handoffFade * (0.88 - morphAmount * 0.12)
+        const edgeAlpha = panel.isDisposable
+          ? handoffFade * disposableFade * 0.72
+          : handoffFade * (1 - easedPhase(progress, 0.46, 0.62) * 0.92)
 
         panel.faceMaterial.opacity = faceAlpha
+        if (panel.surfaceMaterial) {
+          panel.surfaceMaterial.opacity = surfaceAlpha
+        }
         panel.iconMaterial.opacity = iconAlpha
         panel.edgeMaterial.opacity = edgeAlpha
         if (panel.previewMaterial) {
           panel.previewMaterial.opacity = previewAlpha
         }
 
-        panel.group.visible = Math.max(faceAlpha, previewAlpha, iconAlpha, edgeAlpha) > 0.001
+        panel.group.visible = Math.max(faceAlpha, surfaceAlpha, previewAlpha, iconAlpha, edgeAlpha) > 0.001
       })
 
       renderer.render(scene, camera)
@@ -706,6 +753,8 @@ export default function DeviceCubeHero() {
 
       panelMeshes.forEach((panel) => {
         panel.faceMaterial.dispose()
+        panel.surfaceTexture?.dispose()
+        panel.surfaceMaterial?.dispose()
         panel.iconTexture.dispose()
         panel.iconMaterial.dispose()
         panel.previewTexture?.dispose()
