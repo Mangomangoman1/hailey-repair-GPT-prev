@@ -768,24 +768,7 @@ textarea:focus{
 .text-first-pill a:hover{ text-decoration-thickness: 2px; }
 .flow-label{
   display: inline-block;
-  background: linear-gradient(
-    100deg,
-    #171311 0%,
-    #2a221b 12%,
-    #eadbc6 22%,
-    #1d1916 34%,
-    #11100f 48%,
-    #8395a4 60%,
-    #1b1714 74%,
-    #f3e9db 86%,
-    #171311 100%
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  will-change: background-position;
+  color: rgba(24, 19, 15, 0.96);
 }
 .concept{ border-top: 1px solid var(--line2); }
 
