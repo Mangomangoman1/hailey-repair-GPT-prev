@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import HeaderTextButton from './components/HeaderTextButton'
 import ParticleField from './components/ParticleField'
 import './globals.css'
 
@@ -62,10 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
 
             <div className="cta">
-              <a className="btn btn-call shine tag" href="sms:+12083666111">
-                <span className="btn-call-core" aria-hidden="true" />
-                <span className="btn-call-label">Text</span>
-              </a>
+              <HeaderTextButton />
             </div>
           </div>
         </header>
