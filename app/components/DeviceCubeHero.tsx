@@ -92,12 +92,12 @@ const PANEL_CONFIGS: PanelConfig[] = [
   { kind: 'watch', startPosition: [-0.23, -0.125, 0.5], startRotationY: 0, targetKey: 'front', renderOrder: -1, serviceId: 'android' },
 ]
 
-const CARD_BG_DARK = '#17110d'
-const CARD_BG_MID = '#2f2218'
-const CARD_BG_GLOW = '#5b4330'
-const CARD_BORDER = '#c79868'
-const ICON_COLOR = '#dfba8e'
-const EDGE_COLOR = 0xc79868
+const CARD_BG_DARK = '#271c15'
+const CARD_BG_MID = '#4a3829'
+const CARD_BG_GLOW = '#85664a'
+const CARD_BORDER = '#d8b289'
+const ICON_COLOR = '#f0d7b5'
+const EDGE_COLOR = 0xd8b289
 const ICON_TEXTURE_SIZE = 1024
 const STAGE_HEIGHT = 640
 const SECTION_HEIGHT = 1080
@@ -170,23 +170,23 @@ function buildCardTexture() {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       <defs>
         <radialGradient id="cardGlow" cx="50%" cy="44%" r="72%">
-          <stop offset="0%" stop-color="${CARD_BG_GLOW}" stop-opacity="0.95" />
-          <stop offset="54%" stop-color="${CARD_BG_MID}" stop-opacity="0.9" />
-          <stop offset="100%" stop-color="${CARD_BG_DARK}" stop-opacity="1" />
+          <stop offset="0%" stop-color="${CARD_BG_GLOW}" stop-opacity="0.78" />
+          <stop offset="54%" stop-color="${CARD_BG_MID}" stop-opacity="0.7" />
+          <stop offset="100%" stop-color="${CARD_BG_DARK}" stop-opacity="0.78" />
         </radialGradient>
         <radialGradient id="cardBloom" cx="50%" cy="50%" r="65%">
-          <stop offset="0%" stop-color="#d5a26d" stop-opacity="0.16" />
+          <stop offset="0%" stop-color="#e0bb8f" stop-opacity="0.2" />
           <stop offset="100%" stop-color="#d5a26d" stop-opacity="0" />
         </radialGradient>
         <linearGradient id="edgeFade" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#26180f" stop-opacity="0.82" />
-          <stop offset="100%" stop-color="#140d08" stop-opacity="0.38" />
+          <stop offset="0%" stop-color="#362418" stop-opacity="0.34" />
+          <stop offset="100%" stop-color="#1c120c" stop-opacity="0.1" />
         </linearGradient>
       </defs>
       <rect width="512" height="512" fill="url(#cardGlow)" />
       <rect width="512" height="512" fill="url(#cardBloom)" />
-      <rect width="512" height="512" fill="url(#edgeFade)" opacity="0.55" />
-      <rect x="1.5" y="1.5" width="509" height="509" fill="none" stroke="${CARD_BORDER}" stroke-width="3" />
+      <rect width="512" height="512" fill="url(#edgeFade)" opacity="0.34" />
+      <rect x="1.5" y="1.5" width="509" height="509" fill="none" stroke="${CARD_BORDER}" stroke-opacity="0.92" stroke-width="3" />
     </svg>
   `)
 }
