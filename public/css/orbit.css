@@ -311,12 +311,11 @@ textarea{
   color: #f7f7f3;
 }
 .btn-call--paper{
-  border: 1px solid rgba(64, 102, 157, 0.52);
-  background:
-    linear-gradient(115deg, rgba(43, 67, 93, 0.92), rgba(16, 28, 41, 0.96));
+  border: none;
+  background: transparent;
   box-shadow:
-    inset 0 1px 0 rgba(173, 207, 242, 0.12),
-    0 12px 28px rgba(18, 28, 40, 0.18);
+    0 10px 26px rgba(18, 28, 40, 0.10),
+    inset 0 1px 0 rgba(215, 232, 247, 0.18);
 }
 .btn-call-paper-bg{
   position: absolute;
@@ -332,16 +331,9 @@ textarea{
   width: 100%;
   height: 100%;
   border-radius: inherit;
-  opacity: 0.92;
-  transform: scale(1.06);
-}
-.btn-call-paper-veil{
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    radial-gradient(circle at 22% 36%, rgba(159, 212, 255, 0.28), transparent 38%),
-    linear-gradient(120deg, rgba(54, 81, 109, 0.80), rgba(10, 18, 28, 0.92) 78%);
+  opacity: 1;
+  outline: 1px solid rgba(176, 212, 245, 0.96);
+  mix-blend-mode: multiply;
 }
 .btn-call--legacy{
   --shine-surface: #08111b;
@@ -410,6 +402,8 @@ textarea{
   position: relative;
   z-index: 3;
   letter-spacing: 0.01em;
+  color: #f7fbff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.22);
 }
 .btn-primary:hover,
 .btn-call:hover{

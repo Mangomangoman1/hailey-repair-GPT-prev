@@ -33,6 +33,7 @@ export default function HeaderTextButton() {
           type="2x2"
           size={1.9}
           scale={1}
+          frame={5929.724999967142}
           colorBack="#00000000"
           colorFront="#00B2FF"
           width="100%"
@@ -41,7 +42,6 @@ export default function HeaderTextButton() {
           className="btn-call-paper-noise"
           style={{ backgroundImage: paperGradient }}
         />
-        <span className="btn-call-paper-veil" />
       </span>
       <span className="btn-call-label">Text</span>
     </a>
