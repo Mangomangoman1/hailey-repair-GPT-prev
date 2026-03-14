@@ -5,6 +5,7 @@ import { Dithering } from '@paper-design/shaders-react'
 
 const paperGradient =
   'linear-gradient(in oklab 180deg, oklab(0% 0 0) -9.59%, oklab(29.2% 0 0) 63.46%, oklab(32.8% 0 0) 72.45%, oklab(36.1% 0 0) 81.43%, oklab(40% 0 0) 90.41%)'
+const logoBlue = '#A3B6C9'
 
 export default function HeaderTextButton() {
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -35,7 +36,7 @@ export default function HeaderTextButton() {
           scale={1}
           frame={5929.724999967142}
           colorBack="#00000000"
-          colorFront="#00B2FF"
+          colorFront={logoBlue}
           width="100%"
           height="100%"
           maxPixelCount={32000}
