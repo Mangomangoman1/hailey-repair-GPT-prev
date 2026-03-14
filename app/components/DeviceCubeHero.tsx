@@ -98,6 +98,7 @@ const CARD_BG_GLOW = '#5b4330'
 const CARD_BORDER = '#c79868'
 const ICON_COLOR = '#dfba8e'
 const EDGE_COLOR = 0xc79868
+const ICON_TEXTURE_SIZE = 1024
 const STAGE_HEIGHT = 640
 const SECTION_HEIGHT = 1080
 const TRANSITION_RANGE = 900
@@ -136,31 +137,31 @@ function escapeXml(text: string) {
 function iconMarkup(kind: DeviceKind) {
   if (kind === 'phone') {
     return `
-      <rect x="19" y="7" width="26" height="50" rx="7" fill="none" stroke="${ICON_COLOR}" stroke-width="3.5" />
-      <line x1="27" y1="14" x2="37" y2="14" stroke="${ICON_COLOR}" stroke-width="3" stroke-linecap="round" />
-      <circle cx="32" cy="49.5" r="2.4" fill="${ICON_COLOR}" />
+      <rect x="84" y="36" width="88" height="184" rx="24" fill="none" stroke="${ICON_COLOR}" stroke-width="14" />
+      <line x1="110" y1="60" x2="146" y2="60" stroke="${ICON_COLOR}" stroke-width="11" stroke-linecap="round" />
+      <circle cx="128" cy="192" r="8" fill="${ICON_COLOR}" />
     `
   }
 
   if (kind === 'laptop') {
     return `
-      <rect x="14" y="14" width="36" height="24" rx="3.5" fill="none" stroke="${ICON_COLOR}" stroke-width="3.5" />
-      <path d="M9 44h46l-4 7H13z" fill="none" stroke="${ICON_COLOR}" stroke-width="3.5" stroke-linejoin="round" />
+      <rect x="58" y="74" width="140" height="90" rx="12" fill="none" stroke="${ICON_COLOR}" stroke-width="14" />
+      <path d="M42 186h172l-15 28H57z" fill="none" stroke="${ICON_COLOR}" stroke-width="14" stroke-linejoin="round" />
     `
   }
 
   if (kind === 'tablet') {
     return `
-      <rect x="14" y="9" width="36" height="46" rx="6.5" fill="none" stroke="${ICON_COLOR}" stroke-width="3.5" />
-      <circle cx="32" cy="48.5" r="2.2" fill="${ICON_COLOR}" />
+      <rect x="58" y="30" width="140" height="196" rx="26" fill="none" stroke="${ICON_COLOR}" stroke-width="14" />
+      <circle cx="128" cy="198" r="7" fill="${ICON_COLOR}" />
     `
   }
 
   return `
-    <path d="M26 9c0-2 1.6-3.5 3.5-3.5h5c1.9 0 3.5 1.5 3.5 3.5v7H26z" fill="none" stroke="${ICON_COLOR}" stroke-width="3.5" stroke-linejoin="round" />
-    <rect x="17" y="14" width="30" height="36" rx="9" fill="none" stroke="${ICON_COLOR}" stroke-width="3.5" />
-    <rect x="24" y="21" width="16" height="22" rx="4.5" fill="none" stroke="${ICON_COLOR}" stroke-width="3" />
-    <path d="M26 50v6.5c0 2 1.6 3.5 3.5 3.5h5c1.9 0 3.5-1.5 3.5-3.5V50" fill="none" stroke="${ICON_COLOR}" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M103 36c0-6 4.7-11 10.5-11h29c5.8 0 10.5 5 10.5 11v32h-50z" fill="none" stroke="${ICON_COLOR}" stroke-width="14" stroke-linejoin="round" />
+    <rect x="72" y="68" width="112" height="120" rx="34" fill="none" stroke="${ICON_COLOR}" stroke-width="14" />
+    <rect x="94" y="94" width="68" height="68" rx="18" fill="none" stroke="${ICON_COLOR}" stroke-width="12" />
+    <path d="M103 188v32c0 6 4.7 11 10.5 11h29c5.8 0 10.5-5 10.5-11v-32" fill="none" stroke="${ICON_COLOR}" stroke-width="14" stroke-linejoin="round" />
   `
 }
 
@@ -192,8 +193,8 @@ function buildCardTexture() {
 
 function buildIconTexture(kind: DeviceKind) {
   return svgDataUrl(`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-      <g transform="translate(256 256) scale(4.8) translate(-32 -32)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="${ICON_TEXTURE_SIZE}" height="${ICON_TEXTURE_SIZE}" viewBox="0 0 256 256" shape-rendering="geometricPrecision">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
         ${iconMarkup(kind)}
       </g>
     </svg>
@@ -301,38 +302,38 @@ function rectToWorldTarget(
 function DeviceIcon({ kind }: { kind: DeviceKind }) {
   if (kind === 'phone') {
     return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="19" y="7" width="26" height="50" rx="7" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <line x1="27" y1="14" x2="37" y2="14" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="32" cy="49.5" r="2.4" fill="currentColor" />
+      <svg viewBox="0 0 256 256" aria-hidden="true">
+        <rect x="84" y="36" width="88" height="184" rx="24" fill="none" stroke="currentColor" strokeWidth="14" />
+        <line x1="110" y1="60" x2="146" y2="60" stroke="currentColor" strokeWidth="11" strokeLinecap="round" />
+        <circle cx="128" cy="192" r="8" fill="currentColor" />
       </svg>
     )
   }
 
   if (kind === 'laptop') {
     return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="14" y="14" width="36" height="24" rx="3.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <path d="M9 44h46l-4 7H13z" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" />
+      <svg viewBox="0 0 256 256" aria-hidden="true">
+        <rect x="58" y="74" width="140" height="90" rx="12" fill="none" stroke="currentColor" strokeWidth="14" />
+        <path d="M42 186h172l-15 28H57z" fill="none" stroke="currentColor" strokeWidth="14" strokeLinejoin="round" />
       </svg>
     )
   }
 
   if (kind === 'tablet') {
     return (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="14" y="9" width="36" height="46" rx="6.5" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <circle cx="32" cy="48.5" r="2.2" fill="currentColor" />
+      <svg viewBox="0 0 256 256" aria-hidden="true">
+        <rect x="58" y="30" width="140" height="196" rx="26" fill="none" stroke="currentColor" strokeWidth="14" />
+        <circle cx="128" cy="198" r="7" fill="currentColor" />
       </svg>
     )
   }
 
   return (
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M26 9c0-2 1.6-3.5 3.5-3.5h5c1.9 0 3.5 1.5 3.5 3.5v7H26z" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" />
-      <rect x="17" y="14" width="30" height="36" rx="9" fill="none" stroke="currentColor" strokeWidth="3.5" />
-      <rect x="24" y="21" width="16" height="22" rx="4.5" fill="none" stroke="currentColor" strokeWidth="3" />
-      <path d="M26 50v6.5c0 2 1.6 3.5 3.5 3.5h5c1.9 0 3.5-1.5 3.5-3.5V50" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" />
+    <svg viewBox="0 0 256 256" aria-hidden="true">
+      <path d="M103 36c0-6 4.7-11 10.5-11h29c5.8 0 10.5 5 10.5 11v32h-50z" fill="none" stroke="currentColor" strokeWidth="14" strokeLinejoin="round" />
+      <rect x="72" y="68" width="112" height="120" rx="34" fill="none" stroke="currentColor" strokeWidth="14" />
+      <rect x="94" y="94" width="68" height="68" rx="18" fill="none" stroke="currentColor" strokeWidth="12" />
+      <path d="M103 188v32c0 6 4.7 11 10.5 11h29c5.8 0 10.5-5 10.5-11v-32" fill="none" stroke="currentColor" strokeWidth="14" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -383,6 +384,7 @@ export default function DeviceCubeHero() {
     canvasHost.appendChild(renderer.domElement)
 
     const textureLoader = new THREE.TextureLoader()
+    const maxAnisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy())
     const cardTexture = textureLoader.load(buildCardTexture())
     cardTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -427,6 +429,7 @@ export default function DeviceCubeHero() {
 
       const iconTexture = textureLoader.load(buildIconTexture(panel.kind))
       iconTexture.colorSpace = THREE.SRGBColorSpace
+      iconTexture.anisotropy = maxAnisotropy
 
       const iconMaterial = new THREE.MeshBasicMaterial({
         map: iconTexture,
