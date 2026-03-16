@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import FlowLabel from './components/FlowLabel'
 import ConsoleShellBeam from './components/ConsoleShellBeam'
-import DeviceCubeHero from './components/DeviceCubeHero'
+import HomeServicesSection from './components/HomeServicesSection'
 import HomeScrollMotion from './components/HomeScrollMotion'
 import HoverBeamFrame from './components/HoverBeamFrame'
 
@@ -58,7 +58,7 @@ export default function Home() {
             </ConsoleShellBeam>
           </div>
         </section>
-        <DeviceCubeHero />
+        <HomeServicesSection />
 
         <section id="process" className="section">
           <div className="container">

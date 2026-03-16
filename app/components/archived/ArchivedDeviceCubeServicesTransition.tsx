@@ -1,9 +1,14 @@
 'use client'
 
+// Archived on 2026-03-16.
+// This is the full homepage cube-to-services transition that was removed from
+// production without being deleted. To reuse it, import this component into
+// app/page.tsx and render it where the static homepage services section sits.
+
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import HoverBeamFrame from './HoverBeamFrame'
+import HoverBeamFrame from '../HoverBeamFrame'
 
 type DeviceKind = 'phone' | 'laptop' | 'tablet' | 'watch'
 type FaceKey = 'left' | 'front' | 'right' | 'back'
