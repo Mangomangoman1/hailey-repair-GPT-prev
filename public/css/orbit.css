@@ -1059,6 +1059,10 @@ textarea:focus{
 }
 
 @media (max-width: 980px){
+  .particle-field,
+  .hero-particle-morph{
+    display: none;
+  }
   .hero-grid,
   .grid3,
   .steps,

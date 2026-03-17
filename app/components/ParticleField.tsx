@@ -1,13 +1,33 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type Dot = { x: number; y: number; vx: number; vy: number; r: number; a: number }
 
+const MOBILE_MEDIA_QUERY = '(max-width: 980px)'
+
 export default function ParticleField() {
+  const [enabled, setEnabled] = useState(true)
   const ref = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
+    const media = window.matchMedia(MOBILE_MEDIA_QUERY)
+    const sync = () => setEnabled(!media.matches)
+
+    sync()
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', sync)
+      return () => media.removeEventListener('change', sync)
+    }
+
+    media.addListener(sync)
+    return () => media.removeListener(sync)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return
+
     const canvas = ref.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
@@ -138,7 +158,8 @@ export default function ParticleField() {
       window.removeEventListener('pointerleave', onLeave)
       window.removeEventListener('resize', resize)
     }
-  }, [])
+  }, [enabled])
 
+  if (!enabled) return null
   return <canvas ref={ref} className="particle-field" aria-hidden="true" />
 }

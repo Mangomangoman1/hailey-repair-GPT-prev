@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type ShapeName = 'phone' | 'laptop' | 'watch' | 'text'
 
@@ -29,6 +29,7 @@ const PARTICLE_COUNT = 14000
 const SHAPES: ShapeName[] = ['phone', 'laptop', 'watch', 'text']
 const SHAPE_HOLD = 1600
 const MORPH_DURATION = 2400
+const MOBILE_MEDIA_QUERY = '(max-width: 980px)'
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))
@@ -359,10 +360,28 @@ function curlNoise(x: number, y: number, z: number, strength: number) {
 }
 
 export default function HeroParticleMorph() {
+  const [enabled, setEnabled] = useState(true)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const hostRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
+    const media = window.matchMedia(MOBILE_MEDIA_QUERY)
+    const sync = () => setEnabled(!media.matches)
+
+    sync()
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', sync)
+      return () => media.removeEventListener('change', sync)
+    }
+
+    media.addListener(sync)
+    return () => media.removeListener(sync)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return
+
     const canvas = canvasRef.current
     const host = hostRef.current
     if (!canvas || !host) return
@@ -537,8 +556,9 @@ export default function HeroParticleMorph() {
       resizeObserver.disconnect()
       if (rafId) window.cancelAnimationFrame(rafId)
     }
-  }, [])
+  }, [enabled])
 
+  if (!enabled) return null
   return (
     <div ref={hostRef} className="hero-particle-morph" aria-hidden="true">
       <canvas ref={canvasRef} />
