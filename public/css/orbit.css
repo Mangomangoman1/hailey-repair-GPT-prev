@@ -883,17 +883,16 @@ textarea:focus{
   margin-bottom: .8rem;
 }
 .concept-label--morph{
-  display:grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items:end;
-  gap: 0.65rem 1rem;
-  margin-bottom: 1rem;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
 }
 .hero-particle-morph{
-  grid-column: 1 / -1;
-  justify-self: center;
-  width: min(760px, 100%);
-  height: clamp(132px, 16vw, 176px);
+  flex: 0 0 auto;
+  width: min(360px, 44vw);
+  height: clamp(74px, 7vw, 98px);
   pointer-events: none;
 }
 .hero-particle-morph canvas{
@@ -917,7 +916,7 @@ textarea:focus{
   backdrop-filter: blur(10px);
 }
 .concept-label--morph .text-first-pill{
-  justify-self: end;
+  margin-left: auto;
 }
 
 @keyframes trail{
@@ -1097,11 +1096,11 @@ textarea:focus{
     align-items: flex-start;
   }
   .concept-label--morph{
-    grid-template-columns: 1fr;
-    justify-items: start;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .concept-label--morph .text-first-pill{
-    justify-self: start;
+    margin-left: 0;
   }
 }
 

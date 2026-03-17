@@ -397,7 +397,7 @@ export default function HeroParticleMorph() {
       canvas.style.height = `${height}px`
       context.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      shapeScale = clamp(1.4 * Math.min(width / 1500, height / 350), 0.45, 0.82)
+      shapeScale = clamp(1.4 * Math.min(width / 1500, height / 350), 0.24, 0.82)
       shapeData = [genPhone(shapeScale), genLaptop(shapeScale), genWatch(shapeScale), genText(width, height)]
 
       if (!particles.length) {
