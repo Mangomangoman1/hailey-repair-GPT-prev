@@ -397,7 +397,7 @@ export default function HeroParticleMorph() {
       canvas.style.height = `${height}px`
       context.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      shapeScale = clamp(1.4 * Math.min(width / 1500, height / 350), 0.24, 0.82)
+      shapeScale = clamp(1.4 * Math.min(width / 980, height / 250), 0.34, 0.98)
       shapeData = [genPhone(shapeScale), genLaptop(shapeScale), genWatch(shapeScale), genText(width, height)]
 
       if (!particles.length) {
@@ -502,7 +502,8 @@ export default function HeroParticleMorph() {
 
         const perspective = 600
         const scale = perspective / (perspective + rotatedZ + 200)
-        const screenX = width / 2 + rotatedX * scale
+        const anchorX = width * 0.37
+        const screenX = anchorX + rotatedX * scale
         const screenY = height / 2 + rotatedY * scale
 
         const depthFactor = (rotatedZ + 200) / 400
