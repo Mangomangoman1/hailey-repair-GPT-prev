@@ -27,7 +27,7 @@ type Particle = {
 
 const PARTICLE_COUNT = 14000
 const SHAPES: ShapeName[] = ['phone', 'laptop', 'watch', 'text']
-const SHAPE_HOLD = 3200
+const SHAPE_HOLD = 1600
 const MORPH_DURATION = 2400
 
 function clamp(value: number, min: number, max: number) {
@@ -502,7 +502,7 @@ export default function HeroParticleMorph() {
 
         const perspective = 600
         const scale = perspective / (perspective + rotatedZ + 200)
-        const anchorX = width * 0.39
+        const anchorX = width * 0.31
         const screenX = anchorX + rotatedX * scale
         const screenY = height / 2 + rotatedY * scale
 
