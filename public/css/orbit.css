@@ -890,10 +890,10 @@ textarea:focus{
   margin-bottom: 0.7rem;
 }
 .hero-particle-morph{
-  flex: 0 1 560px;
-  width: min(560px, 58vw);
+  flex: 0 1 680px;
+  width: min(680px, 66vw);
   max-width: 100%;
-  height: clamp(86px, 7.6vw, 112px);
+  height: clamp(96px, 8.4vw, 126px);
   pointer-events: none;
 }
 .hero-particle-morph canvas{
