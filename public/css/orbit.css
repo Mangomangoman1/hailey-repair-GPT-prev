@@ -882,6 +882,25 @@ textarea:focus{
   font-family: ui-monospace, Menlo, Consolas, monospace;
   margin-bottom: .8rem;
 }
+.concept-label--morph{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items:end;
+  gap: 0.65rem 1rem;
+  margin-bottom: 1rem;
+}
+.hero-particle-morph{
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(760px, 100%);
+  height: clamp(132px, 16vw, 176px);
+  pointer-events: none;
+}
+.hero-particle-morph canvas{
+  display:block;
+  width:100%;
+  height:100%;
+}
 
 .text-first-pill{
   display:inline-flex;
@@ -896,6 +915,9 @@ textarea:focus{
   letter-spacing: .01em;
   box-shadow: 0 14px 30px rgba(171, 124, 77, 0.10);
   backdrop-filter: blur(10px);
+}
+.concept-label--morph .text-first-pill{
+  justify-self: end;
 }
 
 @keyframes trail{
@@ -1073,6 +1095,13 @@ textarea:focus{
   .concept-label{
     flex-direction: column;
     align-items: flex-start;
+  }
+  .concept-label--morph{
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .concept-label--morph .text-first-pill{
+    justify-self: start;
   }
 }
 

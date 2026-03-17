@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import FlowLabel from './components/FlowLabel'
 import ConsoleShellBeam from './components/ConsoleShellBeam'
+import HeroParticleMorph from './components/HeroParticleMorph'
 import HomeServicesSection from './components/HomeServicesSection'
 import HomeScrollMotion from './components/HomeScrollMotion'
 import HoverBeamFrame from './components/HoverBeamFrame'
@@ -12,8 +12,8 @@ export default function Home() {
       <div className="home-scroll-stage">
         <section className="section concept concept-a home-hero-section" style={{ paddingTop: '5rem' }}>
           <div className="container">
-            <div className="concept-label">
-              <FlowLabel text="Hailey Device Repair // 7 days a week" />
+            <div className="concept-label concept-label--morph">
+              <HeroParticleMorph />
               <div className="text-first-pill">
                 Texting is the fastest way to reach us: <a href="sms:+12083666111">(208) 366-6111</a>
               </div>
