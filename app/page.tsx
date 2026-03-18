@@ -30,7 +30,7 @@ export default function Home() {
               </aside>
 
               <div className="console-main" id="overview">
-                <h2>No appointment needed, text us today</h2>
+                <h2>The Valley&apos;s Device Repair Shop</h2>
                 <p>
                   Straight diagnostics, practical options, and careful repair for phones, laptops, and tablets in the Wood River Valley.
                 </p>
