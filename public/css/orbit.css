@@ -318,6 +318,57 @@ textarea{
     inset 0 1px 0 rgba(255, 255, 255, 0.7),
     0 10px 24px rgba(82, 62, 38, 0.10);
 }
+.btn-call--glitch{
+  min-width: 11rem;
+  padding-inline: 1.2rem;
+  padding-block: 0.74rem;
+  border: 1px solid rgba(0, 188, 212, 0.78);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(11, 25, 43, 0.98), rgba(13, 31, 52, 0.96));
+  color: #9eefff;
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow:
+    0 10px 26px rgba(8, 23, 38, 0.18),
+    inset 0 1px 0 rgba(122, 238, 255, 0.08);
+  animation: btnIdleFlicker 4s infinite;
+}
+.btn-call--glitch::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 188, 212, 0.03) 0px,
+    rgba(0, 188, 212, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.btn-call--glitch::after{
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 1px solid rgba(0, 188, 212, 0.78);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.btn-call--glitch:hover{
+  background: linear-gradient(180deg, rgba(11, 25, 43, 0.98), rgba(13, 31, 52, 0.96));
+  box-shadow:
+    0 0 10px rgba(0, 188, 212, 0.30),
+    0 0 30px rgba(0, 188, 212, 0.10),
+    inset 0 0 10px rgba(0, 188, 212, 0.05);
+}
+.btn-call--glitch:hover::after{
+  animation: borderGlitch 0.3s ease-in-out infinite;
+}
 .btn-call--paper{
   border: none;
   background: transparent;
@@ -413,9 +464,45 @@ textarea{
   color: #f7fbff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.22);
 }
+.btn-call-label--glitch{
+  letter-spacing: 0.16em;
+  color: #9eefff;
+  text-shadow: none;
+  white-space: nowrap;
+}
+.btn-call-cursor{
+  position: relative;
+  z-index: 3;
+  width: 0.52rem;
+  height: 1.08rem;
+  background: #00bcd4;
+  opacity: 0;
+  animation: btnCursorBlink 0.8s step-end infinite;
+}
+.btn-call-cursor.is-visible{
+  opacity: 1;
+}
 .btn-primary:hover,
 .btn-call:hover{
   filter: saturate(1.03) brightness(1.02);
+}
+
+@keyframes btnIdleFlicker {
+  0%, 92%, 94%, 96%, 100% { opacity: 1; }
+  93% { opacity: 0.8; }
+  95% { opacity: 0.9; }
+}
+
+@keyframes borderGlitch {
+  0%, 100% { opacity: 0.5; transform: translate(0, 0); }
+  25% { opacity: 1; transform: translate(-2px, 1px); }
+  50% { opacity: 0.3; transform: translate(2px, -1px); }
+  75% { opacity: 0.8; transform: translate(-1px, -1px); }
+}
+
+@keyframes btnCursorBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 
 .hero{ padding: 5.2rem 0 2.6rem; }
@@ -1123,11 +1210,21 @@ textarea:focus{
     width: 64px;
     height: 64px;
   }
+  .btn-call--glitch{
+    min-width: 9.5rem;
+    padding-inline: 1rem;
+    letter-spacing: 0.12em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   .flow-label{ animation: none; }
+  .btn-call--glitch,
+  .btn-call--glitch:hover::after,
+  .btn-call-cursor{
+    animation: none;
+  }
   .device-cube-pin{
     display: none;
   }
