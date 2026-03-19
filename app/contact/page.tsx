@@ -23,7 +23,7 @@ export default function Contact() {
     <section className="page">
       <div className="container">
         <h2>Contact</h2>
-        <p className="lead2">Tell us your device model and what’s happening. This form opens your email app—nothing is stored on the website.</p>
+        <p className="lead2">Tell me your device model and what’s happening. This form opens your email app—nothing is stored on the website.</p>
 
         <div className="split">
           <div className="card">
@@ -82,7 +82,7 @@ export default function Contact() {
             <div className="big">
               <h3>Fast contact</h3>
               <p>
-                Text us: <a href="sms:+12083666111">(208) 366-6111</a>
+                Text me: <a href="sms:+12083666111">(208) 366-6111</a>
                 <br />
                 Email: <a href="mailto:samuel@haileyrepair.com">samuel@haileyrepair.com</a>
               </p>
@@ -103,7 +103,7 @@ export default function Contact() {
             </div>
 
             <div className="big" style={{ marginTop: '1rem' }}>
-              <h3>What we’ll ask</h3>
+              <h3>What I’ll ask</h3>
               <p>Just enough detail to quote accurately and order the right part.</p>
               <p className="note" style={{ marginTop: '0.6rem' }}>
                 Tip: If your priority is data recovery, say that up front.

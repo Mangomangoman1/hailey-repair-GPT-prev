@@ -37,7 +37,7 @@ export default function PrepPage() {
             <li><strong>Back up photos/messages:</strong> Google backup or manual copy.</li>
             <li><strong>Know Google account credentials:</strong> needed if device requests verification after service.</li>
             <li><strong>Disable screen lock only when asked:</strong> allows final function testing.</li>
-            <li><strong>Tell us exact model/storage:</strong> Android parts vary by sub-model.</li>
+            <li><strong>Tell me exact model/storage:</strong> Android parts vary by sub-model.</li>
             <li><strong>Note prior repairs/water exposure:</strong> prevents avoidable risk during disassembly.</li>
           </ul>
           <div className="actions">

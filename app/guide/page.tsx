@@ -17,15 +17,15 @@ export default function Guide() {
             <p>Exact model = correct parts + better quotes the first time.</p>
           </article>
           <article className="card">
-            <h3>3) Tell us the goal</h3>
-            <p>If data recovery is the priority, say that up front so we optimize for it.</p>
+            <h3>3) Tell me the goal</h3>
+            <p>If data recovery is the priority, say that up front so I optimize for it.</p>
           </article>
         </div>
 
         <div className="split" style={{ marginTop: '1rem' }}>
           <div className="big">
             <h3>Quick contact</h3>
-            <p>Send the model + what happened and we’ll reply with next steps.</p>
+            <p>Send the model + what happened and I’ll reply with next steps.</p>
             <div className="actions" style={{ marginTop: '0.9rem' }}>
               <Link className="btn btn-primary" href="/contact">Request repair</Link>
               <a className="btn" href="sms:+12083666111">Text (208) 366-6111</a>

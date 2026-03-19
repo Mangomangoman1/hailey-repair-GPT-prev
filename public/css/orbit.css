@@ -311,12 +311,16 @@ textarea{
   color: #f7f7f3;
 }
 .btn-call--plain{
-  border: 1px solid rgba(109, 88, 60, 0.18);
-  background: linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(243, 235, 222, 0.90));
+  border: 1px solid rgba(109, 88, 60, 0.28);
+  background: linear-gradient(180deg, rgba(255, 254, 251, 0.98), rgba(240, 229, 213, 0.94));
   color: var(--ink);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 10px 24px rgba(82, 62, 38, 0.10);
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    0 12px 28px rgba(82, 62, 38, 0.12);
+}
+.btn-call--plain .btn-call-label{
+  color: var(--ink);
+  text-shadow: none;
 }
 .btn-call--glitch{
   min-width: 11rem;

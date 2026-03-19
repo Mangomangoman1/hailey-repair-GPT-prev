@@ -3,7 +3,7 @@ import Link from 'next/link'
 const faqs = [
   {
     q: 'How much does repair cost?',
-    a: 'It depends on the exact model and the failure. We’ll confirm what’s going on first, then give you a clear quote before any work starts.'
+    a: 'It depends on the exact model and the failure. I’ll confirm what’s going on first, then give you a clear quote before any work starts.'
   },
   {
     q: 'How long does it take?',
@@ -15,11 +15,11 @@ const faqs = [
   },
   {
     q: 'Do you use OEM parts?',
-    a: 'When possible, yes. If multiple quality tiers exist, we’ll explain options and pricing.'
+    a: 'When possible, yes. If multiple quality tiers exist, I’ll explain options and pricing.'
   },
   {
     q: 'Can you help with “my device is slow”?',
-    a: 'Yes. Try Tech Helper first for quick steps, or contact us for hands-on support.'
+    a: 'Yes. Try Tech Helper first for quick steps, or contact me for hands-on support.'
   }
 ]
 

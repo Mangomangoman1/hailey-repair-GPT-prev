@@ -35,7 +35,7 @@ export default function HomeServicesSection() {
         <div className="section-head">
           <div>
             <h2>Services</h2>
-            <p>Start with the category that matches your issue. If you&apos;re unsure, use Tech Helper and we&apos;ll route you.</p>
+            <p>Start with the category that matches your issue. If you&apos;re unsure, use Tech Helper and I&apos;ll route you.</p>
           </div>
         </div>
 

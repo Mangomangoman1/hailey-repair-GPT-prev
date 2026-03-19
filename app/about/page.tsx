@@ -12,7 +12,7 @@ export default function About() {
 
         <div className="grid3">
           <article className="card">
-            <h3>What we fix</h3>
+            <h3>What I fix</h3>
             <p>Phones, laptops, tablets, and accessories — screens, batteries, charging, troubleshooting, and practical IT help.</p>
             <div className="linkrow">
               <Link className="btn" href="/contact">Request repair</Link>
@@ -21,8 +21,8 @@ export default function About() {
           </article>
 
           <article className="card">
-            <h3>How we work</h3>
-            <p>Diagnosis first, then a clear quote. No work starts until you approve. We test before it leaves.</p>
+            <h3>How I work</h3>
+            <p>Diagnosis first, then a clear quote. No work starts until you approve. I test before it leaves.</p>
           </article>
 
           <article className="card">

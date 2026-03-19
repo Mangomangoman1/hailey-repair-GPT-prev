@@ -15,7 +15,7 @@ export default function Home() {
             <div className="concept-label concept-label--morph">
               <HeroParticleMorph />
               <div className="text-first-pill">
-                Texting is the fastest way to reach us: <a href="sms:+12083666111">(208) 366-6111</a>
+                Texting is the fastest way to reach me: <a href="sms:+12083666111">(208) 366-6111</a>
               </div>
             </div>
             <ConsoleShellBeam>
@@ -73,7 +73,7 @@ export default function Home() {
               <HoverBeamFrame as="article" className="step sand-card" radius={18}>
                 <div className="n">1</div>
                 <h3>Diagnose</h3>
-                <p>We verify root cause and what’s worth fixing.</p>
+                <p>I verify root cause and what’s worth fixing.</p>
               </HoverBeamFrame>
               <HoverBeamFrame as="article" className="step sand-card" radius={18}>
                 <div className="n">2</div>
@@ -94,7 +94,7 @@ export default function Home() {
             <div className="split">
               <HoverBeamFrame className="big sand-card" radius={26}>
                 <h3>Need help deciding?</h3>
-                <p>Use Tech Helper first for fast triage. If it needs hands-on service, we’ll point you to the next move.</p>
+                <p>Use Tech Helper first for fast triage. If it needs hands-on service, I&apos;ll point you to the next move.</p>
                 <div className="actions" style={{ marginTop: '0.9rem' }}>
                   <Link className="btn btn-primary" href="/chat">Open Tech Helper</Link>
                   <Link className="btn" href="/faq">Read FAQ</Link>
