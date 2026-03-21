@@ -1,12 +1,16 @@
 'use client'
 
+// Archived on 2026-03-21 after the ambient floating background particles were
+// removed from the live site. Restore by importing this component into
+// `app/layout.tsx` and rendering it near the top of `<body>`.
+
 import { useEffect, useRef, useState } from 'react'
 
 type Dot = { x: number; y: number; vx: number; vy: number; r: number; a: number }
 
 const MOBILE_MEDIA_QUERY = '(max-width: 980px)'
 
-export default function ParticleField() {
+export default function ArchivedParticleField() {
   const [enabled, setEnabled] = useState(true)
   const ref = useRef<HTMLCanvasElement | null>(null)
 
@@ -55,7 +59,6 @@ export default function ParticleField() {
       canvas.style.height = `${h}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      // Safari struggles with lots of particles + connections; keep it lighter there.
       const countBase = Math.floor((w * h) / (isSafari ? 23500 : 17400))
       const count = Math.min(isSafari ? 96 : 142, Math.max(isSafari ? 42 : 66, countBase))
       dots = Array.from({ length: count }).map(() => ({
@@ -64,7 +67,6 @@ export default function ParticleField() {
         vx: -0.16 + Math.random() * 0.32,
         vy: -0.12 + Math.random() * 0.24,
         r: 0.7 + Math.random() * 1.6,
-        // ~30% brighter than last pass
         a: 0.18 + Math.random() * 0.36,
       }))
     }
@@ -79,7 +81,6 @@ export default function ParticleField() {
         ctx.fill()
       }
 
-      // very light near-line connections (Safari: fewer + smaller radius)
       const linkR2 = isSafari ? 3600 : 5600
       const linkOp = isSafari ? 0.045 : 0.06
       for (let i = 0; i < dots.length; i++) {
@@ -102,13 +103,10 @@ export default function ParticleField() {
       }
 
       for (const d of dots) {
-        // pointer influence (very subtle). If reduced-motion is enabled,
-        // keep pointer effect much lighter.
         if (mouse.active) {
           const dx = d.x - mouse.x
           const dy = d.y - mouse.y
           const dist2 = dx * dx + dy * dy
-          // ~35% larger pointer impact radius
           if (dist2 < 18900 && dist2 > 0.01) {
             const strength = reduce ? 0.025 : 0.08
             const f = (1 - dist2 / 18900) * strength
@@ -117,7 +115,6 @@ export default function ParticleField() {
           }
         }
 
-        // keep a tiny ambient drift so particles never fully "freeze"
         const driftX = reduce ? 0.008 : 0.015
         const driftY = reduce ? 0.006 : 0.012
         d.vx = d.vx * 0.998 + (-driftX + Math.random() * (driftX * 2))
@@ -139,6 +136,7 @@ export default function ParticleField() {
       mouse.y = e.clientY
       mouse.active = true
     }
+
     const onLeave = () => {
       mouse.active = false
       mouse.x = -9999
