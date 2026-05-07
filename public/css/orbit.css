@@ -909,113 +909,6 @@ textarea:focus{
 }
 .note{ color: var(--muted2); }
 
-.contact-hero{
-  display:grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(280px, .62fr);
-  gap: 1rem;
-  align-items: stretch;
-  margin-bottom: 1rem;
-}
-.contact-kicker{
-  display:inline-flex;
-  align-items:center;
-  margin-bottom: .55rem;
-  color: var(--brand3);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: .78rem;
-  font-weight: 900;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-.contact-page h1{
-  max-width: 12ch;
-  margin: 0 0 .65rem;
-  font-size: clamp(2.15rem, 7vw, 4.6rem);
-  line-height: .95;
-  letter-spacing: -.065em;
-  text-wrap: balance;
-}
-.contact-page .lead2{ max-width: 64ch; }
-.contact-hero-actions{ margin-top: 1rem; }
-.contact-risk{
-  margin: .68rem 0 0;
-  color: var(--muted2);
-  font-size: .92rem;
-  font-weight: 720;
-}
-.intake-ticket{
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(109, 88, 60, 0.18);
-  border-radius: var(--radius2);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.72), rgba(239,223,197,.80)),
-    repeating-linear-gradient(0deg, rgba(109,88,60,.045) 0 1px, transparent 1px 34px);
-  box-shadow: var(--shadow);
-  padding: 1.15rem;
-}
-.intake-ticket::before{
-  content:"";
-  position:absolute;
-  inset: 12px;
-  border: 1px dashed rgba(171, 124, 77, .24);
-  border-radius: calc(var(--radius2) - 10px);
-  pointer-events:none;
-}
-.ticket-topline{
-  position: relative;
-  z-index: 1;
-  display:flex;
-  justify-content:space-between;
-  gap: .8rem;
-  color: var(--muted2);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: .72rem;
-  font-weight: 900;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-.ticket-message{
-  position: relative;
-  z-index: 1;
-  margin: 1.3rem 0 1.1rem;
-  padding: 1rem;
-  border-left: 4px solid var(--brand3);
-  background: rgba(255, 251, 247, .74);
-  color: var(--ink);
-  font-weight: 780;
-  line-height: 1.45;
-}
-.ticket-checks{
-  position: relative;
-  z-index: 1;
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .55rem;
-}
-.ticket-checks span{
-  display:flex;
-  align-items:center;
-  gap: .45rem;
-  color: var(--muted);
-  font-size: .82rem;
-  font-weight: 800;
-}
-.ticket-checks span::before{
-  content:"";
-  width: .56rem;
-  height: .56rem;
-  border-radius: 3px;
-  background: rgba(171,124,77,.16);
-  border: 1px solid rgba(171,124,77,.30);
-}
-.contact-split{ align-items:start; }
-.contact-card h2,
-.contact-side h2{ margin: 0 0 .4rem; font-size: 1.2rem; }
-.contact-card-copy{ margin: 0 0 .9rem !important; }
-.contact-form textarea{ min-height: 190px; }
-.contact-form-actions{ margin-top: .15rem; }
-
 .badges{
   display:flex;
   flex-wrap:wrap;
@@ -1273,7 +1166,6 @@ textarea:focus{
   .grid3,
   .steps,
   .split,
-  .contact-hero,
   .footer-inner,
   .console-shell,
   .console-grid,
@@ -1322,29 +1214,6 @@ textarea:focus{
     width: 64px;
     height: 64px;
   }
-  .contact-page{ padding-top: 1.55rem; }
-  .header-inner{ gap: .45rem; }
-  .cta .btn-call--plain{
-    min-width: 6.1rem;
-    padding-inline: 1rem;
-  }
-  .contact-page h1{
-    max-width: 9.8ch;
-    font-size: clamp(2.25rem, 12vw, 3.1rem);
-  }
-  .contact-hero-actions,
-  .contact-form-actions{
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-  .contact-hero-actions .btn,
-  .contact-form-actions .btn{
-    width: 100%;
-    min-height: 52px;
-  }
-  .intake-ticket{ padding: .98rem; }
-  .ticket-topline{ font-size: .66rem; }
-  .ticket-checks{ grid-template-columns: 1fr; }
   .btn-call--glitch{
     min-width: 9.5rem;
     padding-inline: 1rem;

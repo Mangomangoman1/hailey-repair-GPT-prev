@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
           <div className="container footer-bottom">
-            <span>Hailey Device Repair — careful local repair for the Wood River Valley.</span>
+            <span>© {new Date().getFullYear()} Hailey Device Repair</span>
             <span>
               <Link href="/faq">FAQ</Link> • <Link href="/contact">Contact</Link> • <Link href="/chat">Tech Helper</Link>
             </span>
